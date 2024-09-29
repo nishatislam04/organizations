@@ -8,5 +8,11 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    assetsInclude: ['**/*.svg']
+    resolve: {
+        alias: {
+            '@': '/resources',
+        },
+    },
+    assetsInclude: ['**/*.svg', '**/*.png', '**/*.ico', '**/*.webmanifest'],
 });
+
