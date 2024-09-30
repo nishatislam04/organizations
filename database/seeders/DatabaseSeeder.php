@@ -26,13 +26,15 @@ class DatabaseSeeder extends Seeder {
             'email' => fake()->unique()->safeEmail(),
             'password' => Hash::make('password'),
             "role" => "admin",
+            "organization_id" => 1,
         ]);
-        User::factory(1)->create([
-            'username' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'password' => Hash::make('password'),
-            "role" => "member",
-        ]);
+        // User::factory(5)->create([
+        //     'username' => fake()->name(),
+        //     'email' => fake()->unique()->safeEmail(),
+        //     'password' => Hash::make('password'),
+        //     "role" => "member",
+        //     "organization_id" => 1,
+        // ]);
         Organization::factory(5)->create();
         Subscription::factory(3)->create();
     }

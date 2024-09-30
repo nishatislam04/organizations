@@ -2,7 +2,6 @@
 <html lang="en" class="dark">
 
 <head>
-  <script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
@@ -18,7 +17,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
 
-  @vite("resources/css/template.css")
+  @vite(["resources/css/template.css","resources/css/app.css", "resources/css/style.css", "resources/js/index.js",
+  "resources/js/app.js"])
 
   <link rel="apple-touch-icon" sizes="180x180"
     href="{{ Vite::asset('resources/icons/favicons/apple-touch-icon.png') }}">
@@ -68,7 +68,7 @@
           </button>
 
 
-          <a href="{{ route("home")}}" class="flex ml-2 md:mr-24">
+          <a href="#" class="flex ml-2 md:mr-24">
             <img src="{{ Vite::asset("resources/icons/logo.svg") }}" class="h-8 mr-3" alt="FlowBite Logo" />
             <span
               class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
@@ -195,7 +195,7 @@
                 </form>
               </li>
               <li>
-                <a href="{{ route("home")}}"
+                <a href="#"
                   class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
                   <svg
                     class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
@@ -2503,12 +2503,6 @@
     </div>
 
   </div>
-
-
-
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <script src="{{ Vite::asset("resources/js/app.bundle.js")}}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/datepicker.min.js"></script>
 </body>
 
 </html>

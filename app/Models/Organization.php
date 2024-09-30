@@ -17,4 +17,8 @@ class Organization extends Model {
     function subscriptions() {
         return $this->hasMany(Subscription::class);
     }
+
+    function joinedMembers() {
+        return $this->hasMany(User::class);
+    }
 }

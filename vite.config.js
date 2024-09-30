@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+import path from 'path';
 
 export default defineConfig({
     plugins: [
@@ -14,5 +15,10 @@ export default defineConfig({
         },
     },
     assetsInclude: ['**/*.svg', '**/*.png', '**/*.ico', '**/*.webmanifest'],
+    resolve: {
+        alias: {
+            '@': path.resolve(__dirname, 'resources'),
+        },
+    },
 });
 
