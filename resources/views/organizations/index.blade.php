@@ -4,14 +4,17 @@
     <main>
       <div
         class="p-4 bg-white block sm:flex items-center justify-between border-b border-gray-200 lg:mt-1.5 dark:bg-gray-800 dark:border-gray-700">
-        <div class="w-full mb-1">
+        <div class="relative w-full mb-1">
+
+          <x-flash />
+
           <div class="mb-4">
             <x-bread-crumb class="mb-10" />
             <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Organizations</h1>
           </div>
-          <div class="items-center justify-between block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+          <div class="items-center justify-end block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
 
-            <x-search showSearchIcon="false" />
+            {{-- <x-search showSearchIcon="false" /> --}}
 
             <x-button :href="route('organizations.create')" type="a" id="createProductButton"
               class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
@@ -101,7 +104,7 @@
                       {{ $organization->user->username}}
                     </td>
 
-                    <td class="flex flex-col gap-2 p-4">
+                    <td class="flex flex-col gap-2 p-2">
                       <x-button type="a" href="{{ route('organizations.edit', $organization->id)}}"
                         id="updateProductButton"
                         class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">

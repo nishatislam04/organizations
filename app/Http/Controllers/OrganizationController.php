@@ -28,7 +28,7 @@ class OrganizationController extends Controller {
      */
     public function store(Request $request) {
         $validated = $request->validate([
-            "name" => "required|string|min:3,max:254",
+            "name" => "required|string|min:3|max:254",
             "description" => "required|string",
             "max_members" => "required|integer|min_digits:1"
         ]);
@@ -36,7 +36,7 @@ class OrganizationController extends Controller {
 
         Organization::create($validated);
 
-        return redirect()->route("organizations.index")->with("sucess", "organization create success");
+        return redirect()->route("organizations.index")->with("success", "organization create success");
     }
 
     /**

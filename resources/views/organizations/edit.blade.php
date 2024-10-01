@@ -18,6 +18,7 @@
           <form action="{{ route("organizations.update", $organization->id) }}" method="POST">
             @csrf
             @method("PUT")
+
             <div class="grid grid-cols-6 gap-6 ">
 
               <x-form-field>

@@ -21,20 +21,26 @@
 
               <x-form-field>
                 <x-label for="name">Name </x-label>
-                <x-input id="name" name="name" type="text" placeholder="Enter Organization Name" />
+                <x-input id="name" name="name" type="text" value="{{ old('name') }}"
+                  placeholder="Enter Organization Name" />
+                <x-input-error key="name" />
               </x-form-field>
 
               <x-form-field>
                 <x-label for="description">Description </x-label>
-                <x-textarea id="description" name="description" placeholder="Enter Organization Description" />
+                <x-textarea id="description" name="description" placeholder="Enter Organization Description">
+                  {{ old('description') }}</x-textarea>
+                <x-input-error key="description" />
               </x-form-field>
 
               <x-form-field>
                 <x-label for="max_members">Max Members </x-label>
-                <x-input id="max_members" name="max_members" type="text" placeholder="Maximum member can join" />
+                <x-input id="max_members" name="max_members" type="text" value="{{ old('max_members') }}"
+                  placeholder="Maximum member can join" />
+                <x-input-error key="max_members" />
               </x-form-field>
 
-              <x-button type="submit" class="text-white text-sm px-5 py-2.5 text-center " value="Add user" />
+              <x-button type="submit" class="text-white text-sm px-2 py-2.5 text-center " value="Add Organization" />
             </div>
           </form>
         </div>

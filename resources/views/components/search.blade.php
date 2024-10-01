@@ -1,4 +1,4 @@
-<form action="#" method="GET" class="hidden lg:block lg:pl-3.5">
+<form action="#" method="GET" class="hidden lg:block ">
     <label for="topbar-search" class="sr-only">Search</label>
     <div class="relative mt-1 lg:w-96">
 
