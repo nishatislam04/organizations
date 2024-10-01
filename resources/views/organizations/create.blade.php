@@ -1,11 +1,11 @@
-<x-layout>
+<x-layout :showNav="false" :showAside="false">
 
-  <div class="fixed left-0 right-0 z-50 flex items-center justify-center top-4 md:inset-0 h-modal sm:h-full">
+  <div class="flex items-center justify-center w-full">
     <div class="relative w-9/12 p-10 px-4 md:h-auto">
-      <div class="relative h-screen overflow-y-scroll bg-white rounded-lg shadow dark:bg-gray-800">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
         <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
           <h3 class="text-xl font-semibold dark:text-white">
-            Add new user
+            Add a new organization
           </h3>
 
           <x-button type="a" href="{{ route('organizations.index') }}"
@@ -17,7 +17,7 @@
         <div class="p-6 space-y-6">
           <form action="#" method="POST">
             @csrf
-            <div class="grid grid-cols-6 gap-6">
+            <div class="grid grid-cols-6 gap-6 ">
 
               <x-form-field>
                 <x-label for="name">Name </x-label>

@@ -42,12 +42,20 @@
     </script>
 </head>
 
-<body class="bg-gray-50 dark:bg-gray-800">
+<body
+    {{ $attributes->merge(["class"=>"bg-gray-50 dark:bg-gray-800" . ($bodyOverflowHidden === "true" ? " overflow-hidden":"")])}}
+    class="">
+
+    @if ($showNav)
 
     <x-nav />
+    @endif
 
     <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+        @if ($showAside)
+
         <x-aside />
+        @endif
 
         <div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
 
