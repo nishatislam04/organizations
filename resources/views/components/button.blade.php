@@ -1,5 +1,5 @@
 {{-- anchor --}}
-@if ($type=== "a")
+@if ($type === "a")
 <a href="{{ $href ?? '#' }}" id="{{ $id }}" {{ $attributes->merge(['class'=>"font-medium rounded-lg $class"])}}>
     {!! $slot ?? '' !!}
 </a>
@@ -7,7 +7,8 @@
 
 {{-- button --}}
 @if ($type === "button")
-<button type="button" id="{{ $id }}" {{ $attributes->merge(['class'=>"font-medium rounded-lg $class"])}}>
+<button type="button" id="{{ $id }}" {{ $attributes->merge(['class'=>"font-medium rounded-lg $class"])}}
+    @if($attributes->has("disabled")) disabled @endif>
     {{ $slot }}
 </button>
 @endif

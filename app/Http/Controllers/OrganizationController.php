@@ -13,6 +13,8 @@ class OrganizationController extends Controller {
     public function index() {
         $organizations = Organization::with("user")->with("joinedMembers")->get();
 
+        $organizations = Organization::simplePaginate(5);
+
         return view("organizations.index", compact("organizations"));
     }
 
