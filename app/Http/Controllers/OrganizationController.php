@@ -20,6 +20,7 @@ class OrganizationController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create(Request $request) {
+        return view("organizations.create");
     }
 
     /**
@@ -41,8 +42,8 @@ class OrganizationController extends Controller {
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {
-        //
+    public function show(Organization $organization) {
+        return view("organizations.show", compact("organization"));
     }
 
     /**
