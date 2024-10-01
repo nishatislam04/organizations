@@ -25,9 +25,20 @@ Route::controller(AuthController::class)->group(function () {
 Route::get("/dashboard", [DashboardController::class, "dashboard"])->name("dashboard.index")->middleware(["auth", "role"]);
 
 Route::get("/organizations/", [OrganizationController::class, "index"])->name("organizations.index");
+
 Route::post("/organizations/store", [OrganizationController::class, "store"])->name("organizations.store");
+
 Route::get("/organizations/create", [OrganizationController::class, "create"])->name("organizations.create");
 
 Route::get("/organizations/{organization}", [OrganizationController::class, "show"])->name("organizations.show");
+
+Route::get("/organizations/{organization}/edit", [OrganizationController::class, "edit"])->name("organizations.edit");
+
+Route::put("/organizations/{organization}", [OrganizationController::class, "update"])->name("organizations.update");
+
+Route::get("/organizations/{organization}/delete", [OrganizationController::class, "deleteView"])->name("organizations.deleteView");
+
+Route::delete("/organizations/{organization}/delete", [OrganizationController::class, "destroy"])->name("organizations.destroy");
+
 
 Route::fallback(fn() => response()->view('errors.404', [], 404));

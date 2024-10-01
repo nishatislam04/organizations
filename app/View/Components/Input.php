@@ -15,7 +15,8 @@ class Input extends Component {
         public string $id = "",
         public string $name = "",
         public string $placeholder = "Enter Text",
-        public string $class = ""
+        public string $class = "",
+        public string $value = ""
     ) {
         //
     }

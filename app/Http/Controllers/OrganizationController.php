@@ -49,21 +49,38 @@ class OrganizationController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {
-        //
+    public function edit(Organization $organization) {
+        return view("organizations.edit", compact("organization"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) {
-        //
+    public function update(Request $request, Organization $organization) {
+        $validated = $request->validate([
+            "name" => "required|string|min:3|max:254",
+            "description" => "required|string",
+            "max_members" => "required|integer|min_digits:1"
+        ]);
+        $organization->name = $validated['name'];
+        $organization->description = $validated['description'];
+        $organization->max_members = $validated['max_members'];
+
+        $organization->save();
+
+        return redirect()->route("organizations.index")->with("success", "organization update success");
+    }
+
+    public function deleteView(Organization $organization) {
+        return view("organizations.delete", compact("organization"));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) {
-        //
+    public function destroy(Organization $organization) {
+        $organization->delete();
+
+        return redirect()->route("organizations.index")->with("success", "organization delete success");
     }
 }
