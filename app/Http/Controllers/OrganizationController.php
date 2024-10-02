@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use function PHPUnit\Framework\isNull;
 
 class OrganizationController extends Controller {
     /**
