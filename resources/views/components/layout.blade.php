@@ -43,7 +43,7 @@
 </head>
 
 <body
-    {{ $attributes->merge(["class"=>"bg-gray-50 dark:bg-gray-800" . ($bodyOverflowHidden === "true" ? " overflow-hidden":"")])}}
+    {{ $attributes->merge(["class"=>"bg-gray-50 dark:bg-gray-800 overflow-hidden" . ($bodyOverflowHidden === "true" ? " overflow-hidden":"")])}}
     class="">
 
     @if ($showNav)

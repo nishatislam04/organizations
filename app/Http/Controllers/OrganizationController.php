@@ -18,21 +18,23 @@ class OrganizationController extends Controller {
 
 
         if (empty($query)) {
+            $showPagination = true;
+
             session()->forget("search_result");
 
-            $organizations = Organization::with("user")->with("joinedMembers")->orderBy($sortBy, $sortDir)->simplePaginate(5);
-
-            // return view("organizations.index", compact("organizations"));
+            $organizations = Organization::with("user")->with("joinedMembers")->latest()->simplePaginate(5);
         } else {
+            $showPagination = false;
+
             $organizations = Organization::where("name", "like", "%" . $query . "%")
-                ->orWhere("description", "like", "%" . $query . "%")->with("user")->with("joinedMembers")->latest()->simplePaginate(5);
+                ->orWhere("description", "like", "%" . $query . "%")->with("user")->with("joinedMembers")->latest()->get();
             $count =
                 Organization::where("name", "like", "%" . $query . "%")
                 ->orWhere("description", "like", "%" . $query . "%")->with("user")->with("joinedMembers")->count();
 
             session()->flash("search_result", $count);
         }
-        return view("organizations.index", compact("organizations", "query", "sortBy", "sortDir"));
+        return view("organizations.index", compact("organizations", "query", "sortBy", "sortDir", "showPagination"));
     }
 
     /**

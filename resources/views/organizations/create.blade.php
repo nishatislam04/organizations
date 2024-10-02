@@ -2,7 +2,7 @@
 
   <div class="flex items-center justify-center w-full">
     <div class="relative w-9/12 p-10 px-4 md:h-auto">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+      <div class="relative overflow-y-scroll bg-white rounded-lg shadow h-96 dark:bg-gray-800">
         <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
           <h3 class="text-xl font-semibold dark:text-white">
             Add a new organization
