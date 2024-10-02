@@ -3,8 +3,13 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrganizationController;
-use App\Models\Organization;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
+Route::get("/", function () {
+  if (Auth::check()) return redirect()->route("dashboard.index");
+  else return redirect()->route("auth.login");
+});
 
 Route::controller(AuthController::class)->group(function () {
 
@@ -21,25 +26,29 @@ Route::controller(AuthController::class)->group(function () {
   Route::post("/logout", "logout")->name("logout");
 });
 
-
 Route::get("/dashboard", [DashboardController::class, "dashboard"])->name("dashboard.index")->middleware(["auth", "role"]);
 
-Route::get("/organizations/", [OrganizationController::class, "index"])->name("organizations.index");
+Route::middleware(["auth"])
+  ->prefix("organizations")
+  ->name("organizations.")
+  ->controller(OrganizationController::class)
+  ->group(function () {
 
-Route::post("/organizations/store", [OrganizationController::class, "store"])->name("organizations.store");
+    Route::get("", "index")->name("index");
 
-Route::get("/organizations/create", [OrganizationController::class, "create"])->name("organizations.create");
+    Route::post("/store", "store")->name("store");
 
-Route::get("/organizations/{organization}", [OrganizationController::class, "show"])->name("organizations.show");
+    Route::get("/create", "create")->name("create");
 
-Route::get("/organizations/{organization}/edit", [OrganizationController::class, "edit"])->name("organizations.edit");
+    Route::get("/{organization}", "show")->name("show");
 
-Route::put("/organizations/{organization}", [OrganizationController::class, "update"])->name("organizations.update");
+    Route::get("/{organization}/edit", "edit")->name("edit");
 
-Route::get("/organizations/{organization}/delete", [OrganizationController::class, "deleteView"])->name("organizations.deleteView");
+    Route::put("/{organization}", "update")->name("update");
 
-Route::delete("/organizations/{organization}/delete", [OrganizationController::class, "destroy"])->name("organizations.destroy");
+    Route::get("/{organization}/delete", "deleteView")->name("deleteView");
 
-// Route::get("/organizations/search", [OrganizationController::class, "search"])->name("organizations.search");
+    Route::delete("/{organization}/delete", "destroy")->name("destroy");
+  });
 
 Route::fallback(fn() => response()->view('errors.404', [], 404));

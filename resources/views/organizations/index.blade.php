@@ -114,13 +114,13 @@
                       {{ $organization->user->username}}
                     </td>
 
-                    <td class="flex p-2">
-                      {{-- <x-button type="a" href="{{ route('organizations.edit', $organization->id)}}"
-                      id="updateProductButton"
-                      class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                      <img src="{{ Vite::asset("resources/icons/edit.svg") }}" alt="" class="w-4 h-4 mr-2">
-                      Edit
-                      </x-button> --}}
+                    <td class="flex flex-col gap-2 p-2">
+                      <x-button type="a" href="{{ route('organizations.edit', $organization->id)}}"
+                        id="updateProductButton"
+                        class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <img src="{{ Vite::asset("resources/icons/edit.svg") }}" alt="" class="w-4 h-4 mr-2">
+                        Edit
+                      </x-button>
 
                       <x-button type="a" href="{{ route('organizations.deleteView', $organization->id)}}"
                         class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
