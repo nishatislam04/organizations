@@ -1,5 +1,3 @@
-@props(["query"])
-
 <!doctype html>
 <html lang="en" class="dark">
 
@@ -50,7 +48,7 @@
 
     @if ($showNav)
 
-    <x-nav :query="$query" />
+    <x-nav />
     @endif
 
     <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">

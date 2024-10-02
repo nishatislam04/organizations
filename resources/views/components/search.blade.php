@@ -1,5 +1,3 @@
-@props(["query"])
-
 <form action="{{ route("organizations.index")}}" method="GET" class="hidden lg:block ">
     @csrf
 

@@ -19,5 +19,9 @@ class AppServiceProvider extends ServiceProvider {
      * Bootstrap any application services.
      */
     public function boot(): void {
+        View::composer("*", function ($view) {
+            $query = request()->query("query", "");
+            $view->with("query", $query);
+        });
     }
 }
