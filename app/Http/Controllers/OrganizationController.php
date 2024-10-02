@@ -13,11 +13,14 @@ class OrganizationController extends Controller {
      */
     public function index(Request $request) {
         $query = $request->input("query") ?? "";
+        $sortBy = $request->input("sortBy") ?? "name";
+        $sortDir = $request->input("sortDir") ?? "asc";
+
 
         if (empty($query)) {
             session()->forget("search_result");
 
-            $organizations = Organization::with("user")->with("joinedMembers")->latest()->simplePaginate(5);
+            $organizations = Organization::with("user")->with("joinedMembers")->orderBy($sortBy, $sortDir)->simplePaginate(5);
 
             // return view("organizations.index", compact("organizations"));
         } else {
@@ -29,7 +32,7 @@ class OrganizationController extends Controller {
 
             session()->flash("search_result", $count);
         }
-        return view("organizations.index", compact("organizations", "query"));
+        return view("organizations.index", compact("organizations", "query", "sortBy", "sortDir"));
     }
 
     /**

@@ -41,16 +41,21 @@
 
                     </th>
                     <th scope="col"
-                      class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                      class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                       Name
+
+                      <x-sort sortBy="name" :sortDir="$sortDir" />
                     </th>
                     <th scope="col"
                       class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                       ID
                     </th>
                     <th scope="col"
-                      class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                      class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                       Description
+
+                      <x-sort sortBy="description" :sortDir="$sortDir" />
+
                     </th>
                     <th scope="col"
                       class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
