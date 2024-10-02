@@ -12,33 +12,41 @@ class OrganizationController extends Controller {
      */
     public function index(Request $request) {
         $query = $request->input("query") ?? "";
-        $sortBy = $request->input("sortBy");
-        $sortDir = $request->input("sortDir");
-
+        $sortBy = $request->input("sortBy", 'name'); // Default to 'name' if not set
+        $sortDir = $request->input("sortDir", 'asc'); // Default to 'asc' if not set
 
         if (empty($query)) {
-            $showPagination = true;
-
             session()->forget("search_result");
 
-            if (isset($sortBy) && isset($sortDir)) {
-                $organizations = Organization::with("user")->with("joinedMembers")->orderBy($sortBy, $sortDir)->simplePaginate(5);
+            // Sort the organizations if sorting parameters are present
+            if ($sortBy && $sortDir) {
+                $organizations = Organization::with("user", "joinedMembers")
+                    ->orderBy($sortBy, $sortDir)
+                    ->simplePaginate(5);
             } else {
-                $organizations = Organization::with("user")->with("joinedMembers")->latest()->simplePaginate(5);
+                // Default to latest if no sorting is provided
+                $organizations = Organization::with("user", "joinedMembers")
+                    ->latest()
+                    ->simplePaginate(5);
             }
         } else {
-            $showPagination = false;
-
+            // Search organizations by name or description
             $organizations = Organization::where("name", "like", "%" . $query . "%")
-                ->orWhere("description", "like", "%" . $query . "%")->with("user")->with("joinedMembers")->latest()->get();
-            $count =
-                Organization::where("name", "like", "%" . $query . "%")
-                ->orWhere("description", "like", "%" . $query . "%")->with("user")->with("joinedMembers")->count();
+                ->with("user", "joinedMembers")
+                ->orderBy($sortBy, $sortDir)
+                ->simplePaginate(5); // Paginate over search results
+
+            // Count the results for search feedback
+            $count = Organization::where("name", "like", "%" . $query . "%")
+                ->count();
 
             session()->flash("search_result", $count);
         }
-        return view("organizations.index", compact("organizations", "query", "sortBy", "sortDir", "showPagination"));
+
+        // Pass the query, sortBy, and sortDir to the view for pagination
+        return view("organizations.index", compact("organizations", "query", "sortBy", "sortDir"));
     }
+
 
     /**
      * Show the form for creating a new resource.

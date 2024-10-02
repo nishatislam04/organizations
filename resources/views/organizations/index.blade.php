@@ -1,5 +1,4 @@
 <x-layout>
-
   <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
     <main>
       <div
@@ -46,7 +45,7 @@
                       class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                       Name
 
-                      <x-sort sortBy="description" :sortDir="$sortDir ?? 'asc'" />
+                      <x-sort sortBy="name" :sortDir="$sortDir ?? 'asc'" />
                     </th>
                     <th scope="col"
                       class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
@@ -56,7 +55,7 @@
                       class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                       Description
 
-                      <x-sort sortBy="description" :sortDir="$sortDir ?? 'asc'" />
+                      {{-- <x-sort :sorted="$sortBy" sortBy="description" :sortDir="$sortDir ?? 'asc'" /> --}}
 
                     </th>
                     <th scope="col"
@@ -136,9 +135,8 @@
         </div>
       </div>
 
-      @if ($showPagination === true)
-      {{ $organizations->links() }}
-      @endif
+      {{-- {{ $organizations->appends(request()->query())->links() }} --}}
+      {{ $organizations->appends(['query' => $query])->links() }}
 
     </main>
   </div>
