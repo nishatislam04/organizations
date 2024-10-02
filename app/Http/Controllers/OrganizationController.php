@@ -13,8 +13,8 @@ class OrganizationController extends Controller {
      */
     public function index(Request $request) {
         $query = $request->input("query") ?? "";
-        $sortBy = $request->input("sortBy") ?? "name";
-        $sortDir = $request->input("sortDir") ?? "asc";
+        $sortBy = $request->input("sortBy");
+        $sortDir = $request->input("sortDir");
 
 
         if (empty($query)) {
@@ -22,7 +22,11 @@ class OrganizationController extends Controller {
 
             session()->forget("search_result");
 
-            $organizations = Organization::with("user")->with("joinedMembers")->latest()->simplePaginate(5);
+            if (isset($sortBy) && isset($sortDir)) {
+                $organizations = Organization::with("user")->with("joinedMembers")->orderBy($sortBy, $sortDir)->simplePaginate(5);
+            } else {
+                $organizations = Organization::with("user")->with("joinedMembers")->latest()->simplePaginate(5);
+            }
         } else {
             $showPagination = false;
 

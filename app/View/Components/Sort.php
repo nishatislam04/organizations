@@ -12,7 +12,7 @@ class Sort extends Component {
      */
     public function __construct(
         public string $sortBy = "name",
-        public string $sortDir = "desc",
+        public string $sortDir = "asc",
 
     ) {
         //
