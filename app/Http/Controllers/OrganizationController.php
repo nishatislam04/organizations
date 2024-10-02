@@ -5,15 +5,31 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use function PHPUnit\Framework\isNull;
 
 class OrganizationController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        $organizations = Organization::with("user")->with("joinedMembers")->latest()->simplePaginate(5);
+    public function index(Request $request) {
+        $query = $request->input("query") ?? "";
 
-        return view("organizations.index", compact("organizations"));
+        if (empty($query)) {
+            session()->forget("search_result");
+
+            $organizations = Organization::with("user")->with("joinedMembers")->latest()->simplePaginate(5);
+
+            // return view("organizations.index", compact("organizations"));
+        } else {
+            $organizations = Organization::where("name", "like", "%" . $query . "%")
+                ->orWhere("description", "like", "%" . $query . "%")->with("user")->with("joinedMembers")->latest()->simplePaginate(5);
+            $count =
+                Organization::where("name", "like", "%" . $query . "%")
+                ->orWhere("description", "like", "%" . $query . "%")->with("user")->with("joinedMembers")->count();
+
+            session()->flash("search_result", $count);
+        }
+        return view("organizations.index", compact("organizations", "query"));
     }
 
     /**

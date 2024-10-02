@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout :query="$query">
 
   <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
     <main>
@@ -12,12 +12,15 @@
             <x-bread-crumb class="mb-10" />
             <h1 class="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">All Organizations</h1>
           </div>
-          <div class="items-center justify-end block sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+          <div class="flex items-center justify-between sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
+
+            <x-search-result />
+
 
             {{-- <x-search showSearchIcon="false" /> --}}
 
             <x-button :href="route('organizations.create')" type="a" id="createProductButton"
-              class="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
+              class="text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
               Create a new Organization
             </x-button>
 

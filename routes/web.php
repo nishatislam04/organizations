@@ -40,5 +40,6 @@ Route::get("/organizations/{organization}/delete", [OrganizationController::clas
 
 Route::delete("/organizations/{organization}/delete", [OrganizationController::class, "destroy"])->name("organizations.destroy");
 
+// Route::get("/organizations/search", [OrganizationController::class, "search"])->name("organizations.search");
 
 Route::fallback(fn() => response()->view('errors.404', [], 404));
