@@ -11,9 +11,7 @@ class OrganizationController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $organizations = Organization::with("user")->with("joinedMembers")->get();
-
-        $organizations = Organization::simplePaginate(5);
+        $organizations = Organization::with("user")->with("joinedMembers")->latest()->simplePaginate(5);
 
         return view("organizations.index", compact("organizations"));
     }

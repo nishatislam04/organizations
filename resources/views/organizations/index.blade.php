@@ -127,7 +127,7 @@
         </div>
       </div>
 
-      <x-pagination :paginator="$organizations" />
+      {{ $organizations->links() }}
 
     </main>
   </div>
