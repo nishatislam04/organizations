@@ -123,7 +123,6 @@
                       </x-button> --}}
 
                       <x-button type="a" href="{{ route('organizations.deleteView', $organization->id)}}"
-                        id="deleteProductButton"
                         class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                         <img src="{{ Vite::asset("resources/icons/delete.svg")}}" alt="" class="w-4 h-4 mr-2">Delete
                       </x-button>
@@ -137,14 +136,13 @@
         </div>
       </div>
 
-
-
       @if ($showPagination === true)
       {{ $organizations->links() }}
       @endif
 
     </main>
   </div>
+
 
 
 </x-layout>
