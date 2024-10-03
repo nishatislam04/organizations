@@ -1,8 +1,8 @@
-<x-layout :showNav="false" :showAside="false">
+<x-layout>
 
-  <div class="flex items-center justify-center w-full">
-    <div class="relative w-9/12 p-10 px-4 md:h-auto">
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+  <div class="flex w-full mt-5 justify-stretch lg:ml-64">
+    <div class="relative w-full px-4 lg:w-9/12">
+      <div class="relative flex flex-col justify-center bg-white rounded-lg shadow dark:bg-gray-800">
         <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
           <h3 class="text-xl font-semibold dark:text-white">
             Update <span class="text-4xl font-normal">{{ $organization->name }} </span> informations
@@ -10,11 +10,12 @@
 
           <x-button type="a" href="{{ route('organizations.index') }}"
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white">
-            <img src="{{ Vite::asset('resources/icons/close-icon.svg')}}" alt="" class="w-5 h-5">
+            <img src="{{ Vite::asset('resources/icons/close-icon.svg') }}" alt="" class="w-5 h-5">
           </x-button>
         </div>
 
-        <div class="p-6 space-y-6">
+        <div class="p-6 pb-12 max-h-[500px] overflow-y-auto">
+          <!-- Enable scroll -->
           <form action="{{ route("organizations.update", $organization->id) }}" method="POST">
             @csrf
             @method("PUT")
