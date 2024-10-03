@@ -16,18 +16,13 @@ class DatabaseSeeder extends Seeder {
     public function run(): void {
         // User::factory(1)->create();
         User::factory(1)->create([
-            'username' => fake()->name(),
+            'username' => "nio",
             'email' => fake()->unique()->safeEmail(),
-            'password' => Hash::make('password'),
+            'password' => "1234",
             "role" => "super",
+            "organization_id" => "1",
         ]);
-        User::factory(1)->create([
-            'username' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'password' => Hash::make('password'),
-            "role" => "admin",
-            "organization_id" => 1,
-        ]);
+
         // User::factory(5)->create([
         //     'username' => fake()->name(),
         //     'email' => fake()->unique()->safeEmail(),

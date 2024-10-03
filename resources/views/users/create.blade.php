@@ -17,7 +17,7 @@
 
         <div class="p-6 pb-12 max-h-[500px] overflow-y-auto">
           <!-- Enable scroll -->
-          <form action="{{ route('organizations.store') }}" method="POST">
+          <form action="{{ route('users.store') }}" method="POST">
             @csrf
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-6">
 
@@ -44,11 +44,11 @@
               <x-form-field class="lg:col-span-3">
                 <x-label for="organization-listings">Assign to organization</x-label>
 
-                <x-form-select id="organization-listings">
+                <x-form-select id="organization-listings" name="organization_id">
                   <option selected>Choose a Organization</option>
 
                   @foreach ($organizations as $organization)
-                  <x-form-option value="{{ $organization->name }}">
+                  <x-form-option value="{{ $organization->id }}">
                     {{ $organization->name}}
                   </x-form-option>
                   @endforeach
