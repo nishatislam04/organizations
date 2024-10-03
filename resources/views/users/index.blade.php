@@ -9,7 +9,6 @@
 
           <div class="">
             <x-bread-crumb class="mb-10" />
-
             <h1 class="text-xl font-semibold text-gray-900 -translate-y-3 sm:text-2xl dark:text-white">All
               Organizations</h1>
           </div>

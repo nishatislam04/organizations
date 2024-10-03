@@ -46,8 +46,6 @@ Route::middleware(["auth"])
 
     Route::put("/{organization}", "update")->name("update");
 
-    Route::get("/{organization}/delete", "deleteView")->name("deleteView");
-
     Route::delete("/{organization}/delete", "destroy")->name("destroy");
   });
 

@@ -1,6 +1,6 @@
 const deleteBtn = document.addEventListener("click", function (ev) {
 
-  if (ev.target.closest("#organizations-actions")) {
+  if (ev.target.closest("#delete-organization")) {
 
     const item = ev.target;
     const id = item.dataset.itemId;
