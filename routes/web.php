@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -48,5 +49,7 @@ Route::middleware(["auth"])
 
     Route::delete("/{organization}/delete", "destroy")->name("destroy");
   });
+
+Route::get("/users", [UserController::class, "index"])->name("users.index");
 
 Route::fallback(fn() => response()->view('errors.404', [], 404));
