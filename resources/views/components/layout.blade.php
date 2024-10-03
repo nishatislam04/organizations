@@ -17,8 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    @vite(["resources/css/template.css","resources/css/app.css", "resources/css/style.css", "resources/js/index.js",
-    "resources/js/app.js"])
+    @vite(["resources/css/template.css","resources/css/app.css", "resources/css/style.css", "resources/js/index.js"])
 
     <link rel="apple-touch-icon" sizes="180x180"
         href="{{ Vite::asset('resources/icons/favicons/apple-touch-icon.png') }}">
@@ -58,6 +57,7 @@
         @endif
 
         <div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
+        <div id="modal-overlay" class="absolute inset-0 z-10 hidden bg-gray-900 bg-opacity-50"></div>
 
         {{ $slot }}
     </div>
