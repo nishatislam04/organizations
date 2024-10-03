@@ -12,10 +12,24 @@ class UserController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        $usersAndOrganizations = DB::table("users")
-            ->where("users.status", "=", "pending")
-            ->join("organizations", "users.organization_id", "=", "organizations.id")
-            ->select("users.*", "organizations.*")->get();
+        $usersAndOrganizations = DB::table('users')
+            ->where('users.status', '=', 'pending')
+            ->join('organizations', 'users.organization_id', '=', 'organizations.id')
+            ->select(
+                'users.id as user_id',
+                'users.username',
+                'users.email',
+                'users.password',
+                'users.role',
+                'users.status',
+                'users.organization_id',
+                'organizations.id as organization_id',
+                'organizations.name',
+                'organizations.description',
+                'organizations.max_members',
+            )
+            ->get();
+
 
         // $pendingUsers = User::where("status", "=", "pending")->get();
         return view("users.index", compact("usersAndOrganizations"));
@@ -82,5 +96,16 @@ class UserController extends Controller {
      */
     public function destroy(string $id) {
         //
+    }
+
+    function approve(User $user) {
+        $user->status = "passed";
+        $user->save();
+        return redirect()->route("users.index")->with("success", "user approve success");
+    }
+
+    function reject(User $user) {
+        $user->delete();
+        return redirect()->route("users.index")->with("success", "user reject success");
     }
 }

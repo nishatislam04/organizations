@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Organization;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -105,6 +106,9 @@ class OrganizationController extends Controller {
      * Remove the specified resource from storage.
      */
     public function destroy(Organization $organization) {
+        // what if the 'super' deleted a organization where 
+        //  already a user wanted to join or user already
+        // is admin over there
         $organization->delete();
 
         return redirect()->route("organizations.index")->with("success", "organization delete success");

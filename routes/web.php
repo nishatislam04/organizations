@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\UserController;
+use Database\Factories\UserFactory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -53,7 +54,8 @@ Route::middleware(["auth"])
 Route::get("/users", [UserController::class, "index"])->name("users.index");
 Route::get("/users/create", [UserController::class, "create"])->name("users.create");
 Route::post("/users/", [UserController::class, "store"])->name("users.store");
-
+Route::post("/users/{user}/approve", [UserController::class, "approve"])->name("users.approve");
+Route::post("/users/{user}/reject", [UserController::class, "reject"])->name("users.reject");
 
 
 

@@ -88,7 +88,7 @@
                     </td>
 
                     <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                      {{ $user->id }}</td>
+                      {{ $user->user_id }}</td>
 
                     <td
                       class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
@@ -101,12 +101,12 @@
                       {{ $user->organization_id}}</td>
 
                     <td class="flex justify-center gap-4 p-2" id="organizations-actions">
-                      <x-button type="button" id="approve-user-btn"
+                      <x-button type="button" id="approve-user-btn" data-user-id="{{ $user->user_id}}"
                         class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                         <img src="{{ Vite::asset("resources/icons/approve.svg") }}" alt="" class="w-4 h-4 mr-2">Approve
                       </x-button>
 
-                      <x-button type="button" id="reject-user-btn"
+                      <x-button type="button" id="reject-user-btn" data-user-id="{{ $user->user_id}}"
                         class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                         <img src="{{ Vite::asset("resources/icons/reject.svg")}}" alt="" class="w-4 h-4 mr-2"> Reject
                       </x-button>

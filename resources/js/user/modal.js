@@ -1,15 +1,19 @@
 document.addEventListener("click", function (ev) {
   const btn = ev.target;
-  let modalToClose;
+  const id = btn.dataset.userId;
 
   if (ev.target.id === "approve-user-btn") {
     modal_overlay('approve-user-modal');
-    modalToClose = "approve-user-modal";
+
+    document.querySelector("#approve-user-form").action = `http://nio.php/users/${id}/approve`
   }
   if (ev.target.id === "reject-user-btn") {
     modal_overlay('reject-user-modal')
-    modalToClose = "reject-user-modal";
+
+    document.querySelector("#reject-user-form").action = `http://nio.php/users/${id}/reject`
+    console.log(document.querySelector("#reject-user-form").action = `http://nio.php/users/${id}/reject`)
   }
+
 
   // hide overlay
   if (ev.target.closest(".modal-close-btn")

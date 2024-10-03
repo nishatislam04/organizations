@@ -19,9 +19,8 @@
 
         <div class="flex justify-end">
 
-            <form action="#" method="POST" id="delete-organization-form">
+            <form action="#" method="POST" id="reject-user-form">
                 @csrf
-                @method("DELETE")
 
                 <x-button type="submit" value="{{ $actionConfirmBtn }}"
                     class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-900" />
