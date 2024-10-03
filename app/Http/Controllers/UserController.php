@@ -99,8 +99,14 @@ class UserController extends Controller {
     }
 
     function approve(User $user) {
+
+        $organization = Organization::find($user->organization_id);
+        $organization->user_id = $user->id;
+        $organization->save();
+
         $user->status = "passed";
         $user->save();
+
         return redirect()->route("users.index")->with("success", "user approve success");
     }
 
