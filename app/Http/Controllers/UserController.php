@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organization;
 use Illuminate\Http\Request;
 
 class UserController extends Controller {
@@ -16,7 +17,8 @@ class UserController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create() {
-        //
+        $organizations = Organization::all();
+        return view("users.create", compact("organizations"));
     }
 
     /**

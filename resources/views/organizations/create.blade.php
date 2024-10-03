@@ -1,9 +1,9 @@
 <x-layout>
 
-  <div class="flex w-full mt-5 justify-stretch lg:ml-64">
+  <div class="flex w-full h-screen mt-5 justify-stretch lg:ml-64">
     <div class="relative w-full px-4 lg:w-9/12">
-      <div
-        class="relative flex flex-col justify-center h-auto overflow-hidden bg-white rounded-lg shadow dark:bg-gray-800">
+      <div class="relative flex flex-col justify-center overflow-hidden bg-white rounded-lg shadow dark:bg-gray-800"
+        style="height: 450px;">
         <div class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
           <h3 class="text-xl font-semibold dark:text-white">
             Add a new organization
