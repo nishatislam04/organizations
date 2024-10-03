@@ -138,10 +138,10 @@
 
 
       {{-- delete view --}}
-      <x-modal headerTitle="Delete item" typeIcon="warning-icon" actionConfirmBtn="Yes, I am sure"
+      <x-delete-modal headerTitle="Delete item" typeIcon="warning-icon" actionConfirmBtn="Yes, I am sure"
         actionConfirmCancel="No, cancel">Are you sure you want to delete this organization?</x-modal>
 
-      {!! $organizations->appends(['query' => request('query')])->links() !!}
+        {!! $organizations->appends(['query' => request('query')])->links() !!}
     </main>
   </div>
 

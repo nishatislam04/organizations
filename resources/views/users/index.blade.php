@@ -101,12 +101,12 @@
                       {{ $user->organization_id}}</td>
 
                     <td class="flex justify-center gap-4 p-2" id="organizations-actions">
-                      <x-button type="a" href="#" id="updateProductButton"
+                      <x-button type="button" id="approve-user-btn"
                         class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                         <img src="{{ Vite::asset("resources/icons/approve.svg") }}" alt="" class="w-4 h-4 mr-2">Approve
                       </x-button>
 
-                      <x-button type="button" id="delete-organization"
+                      <x-button type="button" id="reject-user-btn"
                         class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                         <img src="{{ Vite::asset("resources/icons/reject.svg")}}" alt="" class="w-4 h-4 mr-2"> Reject
                       </x-button>
@@ -122,8 +122,10 @@
 
 
       {{-- delete view --}}
-      <x-modal headerTitle="Delete item" typeIcon="warning-icon" actionConfirmBtn="Yes, I am sure"
-        actionConfirmCancel="No, cancel">Are you sure you want to delete this organization?</x-modal>
+      <x-approve-modal headerTitle="Accept User" typeIcon="success-icon" actionConfirmBtn="Yes, I am sure"
+        actionConfirmCancel="No, cancel">Are you sure you want to Accept this user?</x-approve-modal>
+      <x-reject-modal headerTitle="Reject user" typeIcon="warning-icon" actionConfirmBtn="Yes, I am sure"
+        actionConfirmCancel="No, cancel">Are you sure you want to reject this user?</x-approve-modal>
 
     </main>
   </div>

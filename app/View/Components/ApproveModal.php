@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Modal extends Component {
+class ApproveModal extends Component {
     /**
      * Create a new component instance.
      */
@@ -15,7 +15,6 @@ class Modal extends Component {
         public string $typeIcon,
         public string $actionConfirmBtn,
         public string $actionConfirmCancel,
-
     ) {
         //
     }
@@ -24,6 +23,6 @@ class Modal extends Component {
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string {
-        return view('components.modal');
+        return view('components.approve-modal');
     }
 }

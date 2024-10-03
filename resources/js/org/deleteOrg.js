@@ -1,4 +1,4 @@
-const deleteBtn = document.addEventListener("click", function (ev) {
+document.addEventListener("click", function (ev) {
 
   if (ev.target.closest("#delete-organization")) {
 
@@ -6,20 +6,21 @@ const deleteBtn = document.addEventListener("click", function (ev) {
     const id = item.dataset.itemId;
 
     // show modal & overlay
-    modal_overlay()
+    modal_overlay("delete-modal")
 
     document.querySelector("#delete-organization-form").action = `http://nio.php/organizations/${id}/delete`
 
   }
 
   // hide overlay
-  if (ev.target.closest(".modal-close-btn"))
-    modal_overlay()
-
-
+  if (ev.target.closest(".modal-close-btn")
+    && (ev.target.closest("#delete-modal"))) {
+    console.log("del")
+    modal_overlay("delete-modal")
+  }
 })
 
-function modal_overlay() {
-  document.querySelector("#modal").classList.toggle("hidden");
+function modal_overlay(id) {
+  document.querySelector(`#${id}`)?.classList.toggle("hidden");
   document.querySelector("#modal-overlay").classList.toggle("hidden");
 }

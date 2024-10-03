@@ -1,4 +1,4 @@
-<div id="modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+<div id="reject-user-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
     <div class="justify-between p-4 bg-white dark:bg-gray-800">
         <div class="flex justify-between">
 
