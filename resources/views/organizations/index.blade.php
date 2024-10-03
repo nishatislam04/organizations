@@ -135,9 +135,9 @@
         </div>
       </div>
 
-      {{-- {{ $organizations->appends(request()->query())->links() }} --}}
-      {{ $organizations->appends(['query' => $query])->links() }}
-
+      {{-- {!! $organizations->appends(['query' => request('query')])->links() !!} --}}
+      {{-- {{dd($organizations->links());}} --}}
+      {!! $organizations->appends(['query' => request('query')])->links() !!}
     </main>
   </div>
 
