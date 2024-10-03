@@ -1,5 +1,4 @@
 <form action="{{ route("organizations.index")}}" method="GET" class="hidden lg:block ">
-    @csrf
 
     <label for="topbar-search" class="sr-only">Search</label>
     <div class="relative mt-1 lg:w-96">
