@@ -71,7 +71,8 @@
             <p>{{ $message }}</p>
             @enderror
           </div>
-          <div>
+
+          {{-- <div>
             <label for="role"
               class="block mb-2 text-sm font-medium text-gray-900 cursor-pointer dark:text-white">Role</label>
             <select name="role" id="role"
@@ -82,35 +83,49 @@
             </select>
             @error("role")
             <p>{{ $message }}</p>
-            @enderror
-          </div>
-          <div>
-            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
-              password</label>
-            <input type="password" name="password" id="password" placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              required>
-            @error("password")
-            <p>{{ $message }}</p>
-            @enderror
-          </div>
-          <div>
-            <label for="password-confirmation"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
-              password</label>
-            <input type="password" name="password_confirmation" id="password-confirmation" placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              required>
-          </div>
-          <button type="submit"
-            class="w-full px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create
-            account</button>
-          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            Already have an account? <a href="#" class="text-primary-700 hover:underline dark:text-primary-500">Login
-              here</a>
-          </div>
-        </form>
+          @enderror
+      </div> --}}
+
+      <div>
+        <label for="organization-listings"
+          class="block mb-2 text-sm font-medium text-gray-900 cursor-pointer dark:text-white">Select A Organization
+        </label>
+        <select id="organization-listings" name="organization_id"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <option selected>Choose an Organization</option>
+          @foreach ($organizations as $organization)
+          <option value="{{ $organization->id }}">{{ $organization->name }}</option>
+          @endforeach
+        </select>
       </div>
+
+      <div>
+        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+          password</label>
+        <input type="password" name="password" id="password" placeholder="••••••••"
+          class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          required>
+        @error("password")
+        <p>{{ $message }}</p>
+        @enderror
+      </div>
+      <div>
+        <label for="password-confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm
+          password</label>
+        <input type="password" name="password_confirmation" id="password-confirmation" placeholder="••••••••"
+          class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+          required>
+      </div>
+      <button type="submit"
+        class="w-full px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create
+        account</button>
+      <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
+        Already have an account? <a href="{{ route("auth.login")}}"
+          class="text-primary-700 hover:underline dark:text-primary-500">Login
+          here</a>
+      </div>
+      </form>
+    </div>
     </div>
   </main>
 

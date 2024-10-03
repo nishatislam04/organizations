@@ -15,7 +15,8 @@ return new class extends Migration {
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
-            $table->string("role")->default("member");
+            $table->string("role")->default("admin");
+            $table->string("status")->nullable()->default("null");
             $table->foreignIdFor(Organization::class)->nullable();
             $table->timestamps();
         });

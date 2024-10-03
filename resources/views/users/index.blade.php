@@ -34,12 +34,14 @@
                   <tr class="">
                     <th scope="col" class="p-4">
 
-                      <x-checkbox />
+                      <x-checkbox type="all" />
 
                     </th>
                     <th scope="col"
                       class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                      Name
+                      Username
+
+                      <x-sort sortBy="name" :sortDir="$sortDir ?? 'asc'" />
                     </th>
                     <th scope="col"
                       class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
@@ -47,19 +49,18 @@
                     </th>
                     <th scope="col"
                       class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                      Description
+                      Email
+
+                      {{-- <x-sort :sorted="$sortBy" sortBy="description" :sortDir="$sortDir ?? 'asc'" /> --}}
+
                     </th>
                     <th scope="col"
                       class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                      join members
+                      Organization Name
                     </th>
                     <th scope="col"
                       class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                      max members
-                    </th>
-                    <th scope="col"
-                      class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                      created By
+                      Organization Id
                     </th>
                     <th scope="col"
                       class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
@@ -70,6 +71,48 @@
 
                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
+                  @foreach ($usersAndOrganizations as $user)
+                  <tr class="h-14 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <td class="w-4 p-4">
+                      <x-checkbox type="single" />
+                      {{-- <div class="flex items-center">
+                                                <input id="checkbox-194556" aria-describedby="checkbox-1" type="checkbox"
+                                                  class="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600">
+                                                <label for="checkbox-194556" class="sr-only">checkbox</label>
+                                              </div> --}}
+                    </td>
+
+                    <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                      <div class="text-base font-semibold text-gray-900 dark:text-white">{{ $user->username }}
+                      </div>
+                    </td>
+
+                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      {{ $user->id }}</td>
+
+                    <td
+                      class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
+                      {{$user->email }}
+                    </td>
+
+                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      {{ $user->name}}</td>
+                    <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      {{ $user->organization_id}}</td>
+
+                    <td class="flex justify-center gap-4 p-2" id="organizations-actions">
+                      <x-button type="a" href="#" id="updateProductButton"
+                        class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <img src="{{ Vite::asset("resources/icons/approve.svg") }}" alt="" class="w-4 h-4 mr-2">Approve
+                      </x-button>
+
+                      <x-button type="button" id="delete-organization"
+                        class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
+                        <img src="{{ Vite::asset("resources/icons/reject.svg")}}" alt="" class="w-4 h-4 mr-2"> Reject
+                      </x-button>
+                    </td>
+                  </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>

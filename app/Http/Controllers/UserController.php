@@ -5,13 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller {
     /**
      * Display a listing of the resource.
      */
     public function index() {
-        return view("users.index");
+        $usersAndOrganizations = DB::table("users")
+            ->where("users.status", "=", "pending")
+            ->join("organizations", "users.organization_id", "=", "organizations.id")
+            ->select("users.*", "organizations.*")->get();
+
+        // $pendingUsers = User::where("status", "=", "pending")->get();
+        return view("users.index", compact("usersAndOrganizations"));
     }
 
     /**
@@ -36,6 +43,7 @@ class UserController extends Controller {
             "organization_id" => "required",
         ]);
         $validated['role'] = "admin";
+        $validated['status'] = "passed";
 
         // create a new user
         $user = User::create($validated);
