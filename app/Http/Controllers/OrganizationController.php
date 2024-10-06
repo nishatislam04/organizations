@@ -100,7 +100,14 @@ class OrganizationController extends Controller {
         // is admin over there
         $user_id = $organization->user_id;
         $organization->delete();
-        User::find($user_id)->delete();
+
+        // check if the user role is super or not
+        $role = User::find($user_id)->role;
+
+        if ($role !== "super") {
+            User::find($user_id)->delete();
+            return redirect()->route("organizations.index")->with("success", "organization and user  delete success");
+        }
 
         return redirect()->route("organizations.index")->with("success", "organization delete success");
     }

@@ -2,16 +2,32 @@ document.addEventListener("click", function (ev) {
   const btn = ev.target;
   const id = btn.dataset.userId;
 
+  // approve
   if (ev.target.id === "approve-user-btn") {
     modal_overlay('approve-user-modal');
 
     document.querySelector("#approve-user-form").action = `http://nio.php/users/${id}/approve`
   }
+
+  // reject
   if (ev.target.id === "reject-user-btn") {
     modal_overlay('reject-user-modal')
 
     document.querySelector("#reject-user-form").action = `http://nio.php/users/${id}/reject`
     console.log(document.querySelector("#reject-user-form").action = `http://nio.php/users/${id}/reject`)
+  }
+
+  // delete
+  if (ev.target.closest("#delete-user-btn")) {
+
+    const item = ev.target;
+    const id = item.dataset.userId;
+
+    // show modal & overlay
+    modal_overlay("delete-modal")
+
+    document.querySelector("#user-delete-form").action = `http://nio.php/users/${id}/delete`
+
   }
 
 

@@ -56,7 +56,7 @@ Route::get("/users/create", [UserController::class, "create"])->name("users.crea
 Route::post("/users/", [UserController::class, "store"])->name("users.store");
 Route::get("/users/{user}/edit", [UserController::class, "edit"])->name("users.edit");
 Route::put("/users/{user}", [UserController::class, "update"])->name("users.update");
-
+Route::delete("/users/{user}/delete", [UserController::class, "destroy"])->name("users.destroy");
 Route::post("/users/{user}/approve", [UserController::class, "approve"])->name("users.approve");
 Route::post("/users/{user}/reject", [UserController::class, "reject"])->name("users.reject");
 

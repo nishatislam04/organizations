@@ -151,12 +151,16 @@
         </div>
 
 
-        {{-- delete view --}}
-        <x-modals.approve-modal headerTitle="Accept User" typeIcon="success-icon" actionConfirmBtn="Yes, I am sure"
-          actionConfirmCancel="No, cancel">Are you sure you want to Accept this user?</x-modals.approve-modal>
-        <x-modals.reject-modal headerTitle="Reject user" typeIcon="warning-icon" actionConfirmBtn="Yes, I am sure"
-          actionConfirmCancel="No, cancel">Are you sure you want to reject this user?</x-modals.approve-modal>
+        <x-modals.delete-modal headerTitle="Delete item" typeIcon="warning-icon" formId="user-delete-form"
+          actionConfirmBtn="Yes, I am sure" actionConfirmCancel="No, cancel">Are you sure you want to delete this user?
+          </x-modal>
 
+          <x-modals.approve-modal headerTitle="Accept User" typeIcon="success-icon" actionConfirmBtn="Yes, I am sure"
+            actionConfirmCancel="No, cancel">Are you sure you want to Accept this user?</x-modals.approve-modal>
+          <x-modals.reject-modal headerTitle="Reject user" typeIcon="warning-icon" actionConfirmBtn="Yes, I am sure"
+            actionConfirmCancel="No, cancel">Are you sure you want to reject this user?</x-modals.approve-modal>
+
+            {!! $users->appends(['query' => request('query')])->links() !!}
       </main>
     </div>
 

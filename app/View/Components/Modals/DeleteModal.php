@@ -13,6 +13,7 @@ class DeleteModal extends Component {
     public function __construct(
         public string $headerTitle,
         public string $typeIcon,
+        public string $formId,
         public string $actionConfirmBtn,
         public string $actionConfirmCancel,
     ) {

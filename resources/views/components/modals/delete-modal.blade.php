@@ -19,7 +19,7 @@
 
         <div class="flex justify-end">
 
-            <form action="#" method="POST" id="delete-organization-form">
+            <form action="#" method="POST" id="{{ $formId }}">
                 @csrf
                 @method("DELETE")
 
