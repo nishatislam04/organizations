@@ -66,13 +66,6 @@ class OrganizationController extends Controller {
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Organization $organization) {
-        return view("organizations.show", compact("organization"));
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Organization $organization) {

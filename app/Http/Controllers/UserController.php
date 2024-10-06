@@ -25,27 +25,6 @@ class UserController extends Controller {
             session()->flash("search_result", $count);
         }
 
-        // getting pending users data
-        // $usersAndOrganizations = DB::table('users')
-        //     ->where('users.status', '=', 'pending')
-        //     ->join('organizations', 'users.organization_id', '=', 'organizations.id')
-        //     ->select(
-        //         'users.id as user_id',
-        //         'users.username',
-        //         'users.email',
-        //         'users.password',
-        //         'users.role',
-        //         'users.status',
-        //         'users.organization_id',
-        //         'organizations.id as organization_id',
-        //         'organizations.name',
-        //         'organizations.description',
-        //         'organizations.max_members',
-        //     )
-        //     ->get();
-
-
-        // $pendingUsers = User::where("status", "=", "pending")->get();
         return view("users.index", compact("users"));
     }
 
@@ -85,24 +64,26 @@ class UserController extends Controller {
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id) {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {
-        //
+    public function edit(User $user) {
+        return view("users.edit", compact("user"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) {
-        //
+    public function update(Request $request, User $user) {
+        $validated = $request->validate([
+            "username" => "required|min:3|max:254",
+            "email" => "required|email",
+        ]);
+
+        $user->username = $validated['username'];
+        $user->email = $validated['email'];
+
+        $user->save();
+        return redirect()->route("users.index")->with("success", "user update success");
     }
 
     /**

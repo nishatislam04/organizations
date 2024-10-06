@@ -112,7 +112,8 @@
 
                         @if ($user->status === "passed")
 
-                        <x-buttons.button type="button" id="edit-user-btn" data-user-id="{{ $user->id  }}"
+                        <x-buttons.button type="a" href="{{ route('users.edit', $user->id) }}" id="edit-user-btn"
+                          data-user-id="{{ $user->id  }}"
                           class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                           <img src="{{ Vite::asset('resources/icons/edit.svg') }}" alt="" class="w-4 h-4 mr-2">
                           Edit
