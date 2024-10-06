@@ -18,10 +18,20 @@
 
               <x-search.search-result />
 
+              @if ($availableOrganizations !== 0)
               <x-buttons.button :href="route('users.create')" type="a"
                 class="absolute right-0 bottom-0 text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                 Create a new User
               </x-buttons.button>
+
+              @else
+              <x-buttons.button type="button"
+                class="absolute right-0 px-2 py-2 pr-5 text-sm text-center capitalize bg-gray-300 opacity-50 cursor-not-allowed bottom-0px-5 text-stone-500 dark:text-white dark:bg-slate-700 dark:hover:bg-slate-600 focus:ring-4 dark:focus:ring-slate-400 hover:bg-gray-400 focus:ring-gray-500"
+                disabled>
+                No organization is available to assign
+              </x-buttons.button>
+              @endif
+
             </div>
           </div>
         </div>

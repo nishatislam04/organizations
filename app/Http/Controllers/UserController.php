@@ -16,6 +16,9 @@ class UserController extends Controller {
         $sortBy = $request->input("sortBy");
         $sortDir = $request->input("sortDir");
 
+        $superId = User::where("role", "super")->get()[0]->id;
+        $availableOrganizations = Organization::where("user_id", "=", $superId)->get()->count();
+
         if ($sortBy || $sortDir) {
             session()->forget("search_result");
 
@@ -25,7 +28,7 @@ class UserController extends Controller {
                 ->orderBy($sortBy, $sortDir)
                 ->simplePaginate(5);
 
-            return view("users.index", compact("users", "sortBy", "sortDir"));
+            return view("users.index", compact("users", "sortBy", "sortDir", "availableOrganizations"));
         }
 
         if (empty($query)) {
@@ -46,7 +49,7 @@ class UserController extends Controller {
             session()->flash("search_result", $count);
         }
 
-        return view("users.index", compact("users"));
+        return view("users.index", compact("users", "availableOrganizations"));
     }
 
     /**
