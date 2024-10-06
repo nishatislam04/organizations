@@ -33,10 +33,9 @@ class OrganizationController extends Controller {
                 ->appends(['query' => $query]); // Keep the query in pagination links
 
             // Count total results for the search
-            $count = Organization::where("name", "like", "%" . $query . "%")
-                ->count();
+            $count = $organizations->count();
 
-            session()->flash("search_result", $count);  // Flash the result count for display
+            session()->flash("search_result", $count);
         }
 
         // Pass organizations, sortBy, and sortDir to the view
@@ -98,9 +97,6 @@ class OrganizationController extends Controller {
         return redirect()->route("organizations.index")->with("success", "organization update success");
     }
 
-    public function deleteView(Organization $organization) {
-        return view("organizations.delete", compact("organization"));
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -109,7 +105,9 @@ class OrganizationController extends Controller {
         // what if the 'super' deleted a organization where 
         //  already a user wanted to join or user already
         // is admin over there
+        $user_id = $organization->user_id;
         $organization->delete();
+        User::find($user_id)->delete();
 
         return redirect()->route("organizations.index")->with("success", "organization delete success");
     }

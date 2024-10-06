@@ -45,22 +45,7 @@
     {{ $attributes->merge(["class"=>"bg-gray-50 dark:bg-gray-800 overflow-hidden" . ($bodyOverflowHidden === "true" ? " overflow-hidden":"")])}}
     class="">
 
-    @if ($showNav)
-
-    <x-layouts.nav />
-    @endif
-
-    <div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
-        @if ($showAside)
-
-        <x-layouts.aside />
-        @endif
-
-        <div class="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
-        <div id="modal-overlay" class="absolute inset-0 z-10 hidden bg-gray-900 bg-opacity-50"></div>
-
-        {{ $slot }}
-    </div>
+    {{ $slot }}
 
 
 </body>

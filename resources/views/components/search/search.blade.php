@@ -1,4 +1,6 @@
-<form action="{{ route("organizations.index")}}" method="GET" class="hidden lg:block ">
+@props(["search_route" => "organizations.index"])
+
+<form action="{{ route($search_route) }}" method="GET" class="hidden lg:block ">
     @csrf
 
     <label for="topbar-search" class="sr-only">Search</label>

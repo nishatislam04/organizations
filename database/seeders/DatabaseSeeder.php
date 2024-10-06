@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder {
             'email' => fake()->unique()->safeEmail(),
             'password' => "1234",
             "role" => "super",
-            "organization_id" => "1",
         ]);
 
         // User::factory(5)->create([
