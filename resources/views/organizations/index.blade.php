@@ -88,8 +88,9 @@
                       </td>
 
                       <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                        <div class="text-base font-semibold text-gray-900 dark:text-white">{{ $organization->name }}
-                        </div>
+                        <a href="{{ route("organizations.show", $organization->id) }}"
+                          class="text-base font-semibold text-gray-900 dark:text-white">{{ $organization->name }}
+                        </a>
                       </td>
 
                       <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">

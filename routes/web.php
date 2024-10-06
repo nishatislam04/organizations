@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrganizationController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\UserController;
+use App\Models\Subscription;
 use Database\Factories\UserFactory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,7 +40,9 @@ Route::middleware(["auth"])
 
     Route::get("", "index")->name("index");
 
-    Route::post("/store", "store")->name("store");
+    Route::get("/{organization}", "show")->name("show");
+
+    Route::post("", "store")->name("store");
 
     Route::get("/create", "create")->name("create");
 
@@ -51,15 +55,28 @@ Route::middleware(["auth"])
     Route::delete("/{organization}/delete", "destroy")->name("destroy");
   });
 
-Route::get("/users", [UserController::class, "index"])->name("users.index");
-Route::get("/users/create", [UserController::class, "create"])->name("users.create");
-Route::post("/users/", [UserController::class, "store"])->name("users.store");
-Route::get("/users/{user}/edit", [UserController::class, "edit"])->name("users.edit");
-Route::put("/users/{user}", [UserController::class, "update"])->name("users.update");
-Route::delete("/users/{user}/delete", [UserController::class, "destroy"])->name("users.destroy");
-Route::post("/users/{user}/approve", [UserController::class, "approve"])->name("users.approve");
-Route::post("/users/{user}/reject", [UserController::class, "reject"])->name("users.reject");
+Route::middleware(["auth"])
+  ->prefix("users")
+  ->name("users.")
+  ->controller(UserController::class)->group(function () {
+    Route::get("", "index")->name("index");
 
+    Route::get("/create", "create")->name("create");
+
+    Route::post("", "store")->name("store");
+
+    Route::get("/{user}/edit", "edit")->name("edit");
+
+    Route::put("/{user}", "update")->name("update");
+
+    Route::delete("/{user}/delete", "destroy")->name("destroy");
+
+    Route::post("/{user}/approve", "approve")->name("approve");
+
+    Route::post("/{user}/reject", "reject")->name("reject");
+  });
+
+Route::get("/subscriptions/create", [SubscriptionController::class, "create"])->name("subscriptions.create");
 
 
 Route::fallback(fn() => response()->view('errors.404', [], 404));

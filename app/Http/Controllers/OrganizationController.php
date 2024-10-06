@@ -58,6 +58,10 @@ class OrganizationController extends Controller {
         return view("organizations.create");
     }
 
+    public function show(Organization $organization) {
+        return view("organizations.show", compact("organization"));
+    }
+
     /**
      * Store a newly created resource in storage.
      */
