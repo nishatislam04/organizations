@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.layout>
 
   <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
     <main>
@@ -93,7 +93,8 @@
             class="p-4 bg-white border border-gray-200 rounded-lg shadow-sm dark:border-gray-700 sm:p-6 dark:bg-gray-800">
             <h3 class="flex items-center mb-4 text-lg font-semibold text-gray-900 dark:text-white">Statistics this
               month
-              <x-tooltip></x-tooltip>
+              <x-layouts.tooltip>
+              </x-layouts.tooltip>
             </h3>
             <div data-popover id="popover-description" role="tooltip"
               class="absolute z-10 invisible inline-block text-sm font-light text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
@@ -1998,4 +1999,4 @@
 
   </div>
 
-</x-layout>
+</x-layouts.layout>

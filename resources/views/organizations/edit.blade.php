@@ -1,4 +1,4 @@
-<x-layout>
+<x-layouts.layout>
   <div class="flex w-full h-screen mt-5 justify-stretch lg:ml-64">
     <div class="relative w-full px-4 lg:w-9/12">
       <div class="relative flex flex-col justify-center overflow-hidden bg-white rounded-lg shadow dark:bg-gray-800"
@@ -8,10 +8,10 @@
             Update <span class="text-4xl font-normal">{{ $organization->name }} </span> informations
           </h3>
 
-          <x-button type="a" href="{{ route('organizations.index') }}"
+          <x-buttons.button type="a" href="{{ route('organizations.index') }}"
             class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white">
             <img src="{{ Vite::asset('resources/icons/close-icon.svg') }}" alt="" class="w-5 h-5">
-          </x-button>
+          </x-buttons.button>
         </div>
 
         <div class="p-6 pb-12 max-h-[500px] overflow-y-auto">
@@ -22,29 +22,29 @@
 
             <div class="grid grid-cols-6 gap-6 ">
 
-              <x-form-field>
-                <x-label for="name">Name </x-label>
-                <x-input id="name" name="name" type="text" value="{{ $organization->name }}"
+              <x-forms.form-field>
+                <x-forms.label for="name">Name </x-forms.label>
+                <x-forms.input id="name" name="name" type="text" value="{{ $organization->name }}"
                   placeholder="Enter Organization Name" />
-              </x-form-field>
+              </x-forms.form-field>
 
-              <x-form-field>
-                <x-label for="description">Description </x-label>
-                <x-textarea id="description" name="description" placeholder="Enter Organization Description">
-                  {{ $organization->description }}</x-textarea>
-              </x-form-field>
+              <x-forms.form-field>
+                <x-forms.label for="description">Description </x-forms.label>
+                <x-forms.textarea id="description" name="description" placeholder="Enter Organization Description">
+                  {{ $organization->description }}</x-forms.textarea>
+              </x-forms.form-field>
 
-              <x-form-field>
-                <x-label for="max_members">Max Members </x-label>
-                <x-input id="max_members" name="max_members" type="text" value="{{ $organization->max_members }}"
+              <x-forms.form-field>
+                <x-forms.label for="max_members">Max Members </x-forms.label>
+                <x-forms.input id="max_members" name="max_members" type="text" value="{{ $organization->max_members }}"
                   placeholder="Maximum member can join" />
-              </x-form-field>
+              </x-forms.form-field>
 
-              <x-button type="submit" class="text-white text-sm px-5 py-2.5 text-center " value="Update" />
+              <x-buttons.button type="submit" class="text-white text-sm px-5 py-2.5 text-center " value="Update" />
             </div>
           </form>
         </div>
       </div>
     </div>
   </div>
-</x-layout>
+</x-layouts.layout>
