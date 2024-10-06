@@ -10,8 +10,8 @@ class SubscriptionController extends Controller {
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-        //
+    public function index(Organization $organization) {
+        return view("subscriptions.index", compact("organization"));
     }
 
     /**

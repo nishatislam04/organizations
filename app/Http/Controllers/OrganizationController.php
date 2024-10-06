@@ -59,6 +59,11 @@ class OrganizationController extends Controller {
     }
 
     public function show(Organization $organization) {
+        $organization = Organization::where("organizations.id", $organization->id)
+            ->join("users", "organizations.user_id", "=", "users.id")
+            ->select("users.*", "users.id as userId", "organizations.*", "organizations.id as organizationId")
+            ->get()[0];
+
         return view("organizations.show", compact("organization"));
     }
 

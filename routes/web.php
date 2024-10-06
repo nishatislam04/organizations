@@ -76,6 +76,7 @@ Route::middleware(["auth"])
     Route::post("/{user}/reject", "reject")->name("reject");
   });
 
+Route::get("/subscriptions/{organization}/", [SubscriptionController::class, "index"])->name("subscriptions.index");
 Route::get("/subscriptions/{organization}/create", [SubscriptionController::class, "create"])->name("subscriptions.create");
 Route::post("/subscriptions/{organization}/store", [SubscriptionController::class, "store"])->name("subscriptions.store");
 
