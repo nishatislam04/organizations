@@ -6,6 +6,7 @@ use App\Models\Organization;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Ramsey\Collection\DoubleEndedQueue;
 
 class UserController extends Controller {
     /**
@@ -114,7 +115,16 @@ class UserController extends Controller {
      * Remove the specified resource from storage.
      */
     public function destroy(User $user) {
+        $superId = User::where("role", "super")->get()[0]->id;
+        $orgId = $user->organization_id;
+        // delete user
         $user->delete();
+
+        //update org info
+        $org = Organization::find($orgId);
+        $org->user_id = $superId;
+        $org->save();
+
         return redirect()->route("users.index")->with("success", "user delete success");
     }
 
@@ -130,13 +140,13 @@ class UserController extends Controller {
 
         // delete rest of the users when 
         // current user got assigned to the current org
-        $org_id = $user->organization_id;
+        // $org_id = $user->organization_id;
 
-        User::where([
-            ['id', '!=', $user->id],
-            ['organization_id', '=', $org_id],
-            ['status', '=', 'pending'],
-        ])->delete();
+        // User::where([
+        //     ['id', '!=', $user->id],
+        //     ['organization_id', '=', $org_id],
+        //     ['status', '=', 'pending'],
+        // ])->delete();
 
         return redirect()->route("users.index")->with("success", "user approve success");
     }

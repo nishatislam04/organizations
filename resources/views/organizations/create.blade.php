@@ -1,6 +1,6 @@
 <x-layouts.layout>
 
-  <x-layouts.container>
+  <x-layouts.container search_route="organizations.index">
     <div class="flex w-full h-screen mt-5 justify-stretch lg:ml-64">
       <div class="relative w-full px-4 lg:w-9/12">
         <div class="relative flex flex-col justify-center overflow-hidden bg-white rounded-lg shadow dark:bg-gray-800"
