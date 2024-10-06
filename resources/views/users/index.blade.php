@@ -101,11 +101,11 @@
                       </td>
 
                       <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $user->username }}
+                        {{ $user->name }}
                       </td>
 
                       <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $user->organization_id }}
+                        {{ $user->organizationId }}
                       </td>
 
                       <td class="flex justify-center gap-4 p-2" id="organizations-actions">
