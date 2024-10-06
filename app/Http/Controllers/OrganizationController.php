@@ -21,7 +21,8 @@ class OrganizationController extends Controller {
 
             session()->forget("search_result");
 
-            $organizations = Organization::with("user", "joinedMembers")
+            $organizations = Organization::join("users", "organizations.user_id", "=", "users.id")
+                ->select("users.*", "users.id as userId", "organizations.*", "organizations.id as organizationId")
                 ->orderBy($sortBy, $sortDir)
                 ->simplePaginate(5);
 
@@ -31,14 +32,14 @@ class OrganizationController extends Controller {
         if (empty($query)) {
             session()->forget("search_result");
 
-            $organizations = Organization::with("user", "joinedMembers")
-                ->latest()
+            $organizations = Organization::join("users", "organizations.user_id", "=", "users.id")
+                ->select("users.*", "users.id as userId", "organizations.*", "organizations.id as organizationId")
                 ->simplePaginate(5);
         } else {
 
             $organizations = Organization::where("name", "like", "%" . $query . "%")
-                ->with("user", "joinedMembers")
-                ->latest()
+                ->join("users", "organizations.user_id", "=", "users.id")
+                ->select("users.*", "users.id as userId", "organizations.*", "organizations.id as organizationId")
                 ->simplePaginate(5)
                 ->appends(['query' => $query]);
 
