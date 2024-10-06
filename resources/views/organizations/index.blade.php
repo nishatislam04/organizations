@@ -49,7 +49,7 @@
                         class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                         Name
 
-                        <x-layouts.sort sortBy="name" :sortDir="$sortDir ?? 'asc'" />
+                        <x-layouts.sort sort_route="organizations.index" sortBy="name" :sortDir="$sortDir ?? 'asc'" />
                       </th>
                       <th scope="col"
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">

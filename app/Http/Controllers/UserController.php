@@ -12,15 +12,36 @@ class UserController extends Controller {
      * Display a listing of the resource.
      */
     public function index(Request $request) {
-        // search users
         $query = $request->input("query") ?? "";
+        $sortBy = $request->input("sortBy");
+        $sortDir = $request->input("sortDir");
+
+        if ($sortBy || $sortDir) {
+            session()->forget("search_result");
+
+            $users =
+                User::join("organizations", "users.organization_id", "organizations.id")
+                ->select("users.id as userId", "users.*", "organizations.name", "organizations.id as organizationId")
+                ->orderBy($sortBy, $sortDir)
+                ->simplePaginate(5);
+
+            return view("users.index", compact("users", "sortBy", "sortDir"));
+        }
 
         if (empty($query)) {
             session()->forget("search_result");
 
-            $users = User::join("organizations", "users.organization_id", "organizations.id")->select("users.id as userId", "users.*", "organizations.name", "organizations.id as organizationId")->latest()->simplePaginate(5);
+            $users = User::join("organizations", "users.organization_id", "organizations.id")
+                ->select("users.id as userId", "users.*", "organizations.name", "organizations.id as organizationId")
+                ->latest()
+                ->simplePaginate(5);
         } else {
-            $users = User::where("username", "like", "%" . $query . "%")->join("organizations", "users.organization_id", "organizations.id")->select("users.id as userId", "users.*", "organizations.name", "organizations.id as organizationId")->latest()->simplePaginate(5)->appends(["query" => $query]);
+            $users = User::where("username", "like", "%" . $query . "%")->join("organizations", "users.organization_id", "organizations.id")
+                ->select("users.id as userId", "users.*", "organizations.name", "organizations.id as organizationId")
+                ->latest()
+                ->simplePaginate(5)
+                ->appends(["query" => $query]);
+
             $count = $users->count();
             session()->flash("search_result", $count);
         }

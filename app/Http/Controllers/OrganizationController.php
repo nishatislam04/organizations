@@ -12,33 +12,41 @@ class OrganizationController extends Controller {
      * Display a listing of the resource.
      */
     public function index(Request $request) {
-        $query = $request->input("query") ?? "";  // Get the search query
-        $sortBy = $request->input("sortBy", 'name');  // Sort by 'name' if not provided
-        $sortDir = $request->input("sortDir", 'asc'); // Sort direction default to 'asc'
+        $query = $request->input("query") ?? "";
+        $sortBy = $request->input("sortBy");
+        $sortDir = $request->input("sortDir");
 
-        // If no search query, retrieve all organizations
-        if (empty($query)) {
-            session()->forget("search_result"); // Clear search result from session
+        if ($sortBy || $sortDir) {
+            // IMPLEMENT : sorting on search_result
 
-            // Fetch and paginate organizations with sorting
+            session()->forget("search_result");
+
             $organizations = Organization::with("user", "joinedMembers")
                 ->orderBy($sortBy, $sortDir)
-                ->simplePaginate(5);  // Paginate with 5 results per page
+                ->simplePaginate(5);
+
+            return view("organizations.index", compact("organizations", "sortBy", "sortDir"));
+        }
+
+        if (empty($query)) {
+            session()->forget("search_result");
+
+            $organizations = Organization::with("user", "joinedMembers")
+                ->latest()
+                ->simplePaginate(5);
         } else {
-            // Search organizations by name or description
+
             $organizations = Organization::where("name", "like", "%" . $query . "%")
                 ->with("user", "joinedMembers")
-                ->orderBy($sortBy, $sortDir)
+                ->latest()
                 ->simplePaginate(5)
-                ->appends(['query' => $query]); // Keep the query in pagination links
+                ->appends(['query' => $query]);
 
-            // Count total results for the search
             $count = $organizations->count();
 
             session()->flash("search_result", $count);
         }
 
-        // Pass organizations, sortBy, and sortDir to the view
         return view("organizations.index", compact("organizations", "sortBy", "sortDir"));
     }
 
