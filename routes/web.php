@@ -76,7 +76,8 @@ Route::middleware(["auth"])
     Route::post("/{user}/reject", "reject")->name("reject");
   });
 
-Route::get("/subscriptions/create", [SubscriptionController::class, "create"])->name("subscriptions.create");
+Route::get("/subscriptions/{organization}/create", [SubscriptionController::class, "create"])->name("subscriptions.create");
+Route::post("/subscriptions/{organization}/store", [SubscriptionController::class, "store"])->name("subscriptions.store");
 
 
 Route::fallback(fn() => response()->view('errors.404', [], 404));

@@ -13,11 +13,11 @@ return new class extends Migration {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Organization::class)->constrained()->cascadeOnDelete();
-            $table->string("installment_type");
-            $table->integer("total_installment");
-            $table->integer("amount_per_installment");
-            $table->integer("due_penalty_charge");
-            $table->string("installment_start_date");
+            $table->string("type");
+            $table->integer("total");
+            $table->integer("per_amount");
+            $table->integer("penalty_amount");
+            $table->string("start_month");
             $table->timestamps();
         });
     }

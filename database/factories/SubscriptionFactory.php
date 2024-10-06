@@ -16,11 +16,11 @@ class SubscriptionFactory extends Factory {
     public function definition(): array {
         return [
             "organization_id" => 1,
-            "installment_type" => "monthly",
-            "total_installment" => 50,
-            "amount_per_installment" => 1000,
-            "due_penalty_charge" => 200,
-            "installment_start_date" => fake()->monthName(),
+            "type" => "monthly",
+            "total" => 50,
+            "per_amount" => 1000,
+            "penalty_amount" => 200,
+            "start_amount" => fake()->monthName(),
         ];
     }
 }

@@ -13,6 +13,7 @@
     "dependencies": {
         "apexcharts": "^3.54.0",
         "autoprefixer": "^10.4.20",
+        "flatpickr": "^4.6.13",
         "flowbite": "^2.5.2",
         "jquery": "^3.7.1",
         "postcss": "^8.4.47",

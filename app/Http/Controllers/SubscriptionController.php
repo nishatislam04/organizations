@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organization;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller {
@@ -15,15 +17,28 @@ class SubscriptionController extends Controller {
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
-        return view("subscriptions.create");
+    public function create(Organization $organization) {
+        return view("subscriptions.create", compact("organization"));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
-        //
+    public function store(Request $request, Organization $organization) {
+
+        $validated = $request->validate([
+            "type" => "required|string",
+            "total" => "required|integer",
+            "per_amount" => "required|integer",
+            "penalty_amount" => "required|integer",
+            "start_month" => "required|string"
+        ]);
+
+        $validated["organization_id"] = $organization->id;
+
+        Subscription::create($validated);
+
+        return redirect()->route("organizations.show", $organization->id)->with("success", "subscription create success");
     }
 
     /**
