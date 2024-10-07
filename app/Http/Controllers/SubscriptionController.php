@@ -11,7 +11,12 @@ class SubscriptionController extends Controller {
      * Display a listing of the resource.
      */
     public function index(Organization $organization) {
-        return view("subscriptions.index", compact("organization"));
+        $subscriptions = Subscription::where("organization_id", $organization->id)
+            ->get();
+
+        // dd($subscriptions);
+
+        return view("subscriptions.index", compact("organization", "subscriptions"));
     }
 
     /**

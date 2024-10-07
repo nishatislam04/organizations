@@ -5,6 +5,6 @@ document.addEventListener("click", function (ev) {
 
   const month = ev.target.dataset.month;
 
-  document.querySelector("#start_month").value = month;
+  document.querySelector("#start").value = month;
 })
 

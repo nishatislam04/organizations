@@ -40,11 +40,11 @@ Route::middleware(["auth"])
 
     Route::get("", "index")->name("index");
 
+    Route::get("/create", "create")->name("create");
+
     Route::get("/{organization}", "show")->name("show");
 
     Route::post("", "store")->name("store");
-
-    Route::get("/create", "create")->name("create");
 
     Route::get("/{organization}", "show")->name("show");
 
