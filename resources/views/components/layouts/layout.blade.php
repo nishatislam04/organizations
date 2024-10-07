@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
-    @vite(["resources/css/template.css","resources/css/app.css", "resources/css/style.css", "resources/js/index.js"])
+    @vite(["resources/css/template.css","resources/css/app.css", "resources/css/style.css", "resources/js/app.js"])
 
     <link rel="apple-touch-icon" sizes="180x180"
         href="{{ Vite::asset('resources/icons/favicons/apple-touch-icon.png') }}">

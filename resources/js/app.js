@@ -1,7 +1,8 @@
 import 'flowbite';
 
-import "./org/deleteOrg.js"
-import "./user/modal.js"
-import "./org/checkboxes.js"
-import "./subs/monthSelect.js"
+import "./flowbite/index.js"
 
+import "./organizations/checkboxes.js"
+import "./organizations/deleteOrg.js"
+import "./subscriptions/monthSelect.js"
+import "./users/modal.js"
