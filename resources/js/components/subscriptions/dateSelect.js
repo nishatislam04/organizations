@@ -1,11 +1,17 @@
 document.addEventListener("click", function (ev) {
-  if (!ev.target.closest("#select-month-container")) return;
+  if (!(ev.target.closest("#subscription-type") || ev.target.closest("#select-date-container"))) return;
 
-  document.querySelector("#month-picker").classList.toggle("hidden")
+  const selectedType = document.querySelector("#subscription-type").value;
 
-  const month = ev.target.dataset.date;
+  if (ev.target.closest("#subscription-type")) {
+    document.querySelector("#monthly-picker").classList.add("hidden")
+    document.querySelector("#yearly-picker").classList.add("hidden")
+  }
 
-  document.querySelector("#start").value = month;
+
+  document.querySelector(`#${selectedType}-picker`)?.classList.toggle("hidden")
+
+  document.querySelector("#start").value = ev.target.dataset.date;
 })
 
 // document.addEventListener('DOMContentLoaded', function () {
