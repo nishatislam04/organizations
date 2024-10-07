@@ -51,7 +51,13 @@ class SubscriptionController extends Controller {
         $start_date = $validated['start'];
         $total = $validated["total"];
 
-        $this->createInstallment(['organization_id' => $organization_id, 'subscription_id' => $subscription_id, 'pay_amount' => $pay_amount, 'start_date' => $start_date, 'total' => $total]);
+        $this->createInstallment([
+            'organization_id' => $organization_id,
+            'subscription_id' => $subscription_id,
+            'pay_amount' => $pay_amount,
+            'start_date' => $start_date,
+            'total' => $total
+        ]);
 
         return redirect()->route("organizations.show", $organization->id)->with("success", "subscription create success");
     }

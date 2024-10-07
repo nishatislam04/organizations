@@ -35,18 +35,29 @@ class AuthController extends Controller {
         );
         $remember = $request->has("remember");
 
-        if (Auth::attempt([
-            "username" => $validated['username'],
-            "password" => $validated["password"]
-        ], $remember)) {
+        $user = User::where("email", $validated['username'])
+            ->orWhere("username", $validated['username'])->first();
+
+        if (!$user) {
+            return redirect()->route("login")
+                ->withErrors(
+                    ["username" => "The provided credentials do not match our records."]
+                );
+        }
+
+        if (
+            Auth::attempt(['email' => $user->email, 'password' => $validated['password']]) ||
+            Auth::attempt(['username' => $user->username, 'password' => $validated['password']], $remember)
+        ) {
             $request->session()->regenerate();
 
             return redirect()->route("dashboard.index");
         }
 
-        return redirect()->route("login")->withErrors(
-            ["username" => "The provided credentials do not match our records."]
-        );
+        return redirect()->route("login")
+            ->withErrors(
+                ["username" => "The provided credentials do not match our records."]
+            );
     }
 
     /**
