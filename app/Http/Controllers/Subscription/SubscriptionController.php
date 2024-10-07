@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Subscription;
 
-use App\Models\Organization;
-use App\Models\Subscription;
+use App\Http\Controllers\Controller;
+use App\Models\Organization\Organization;
+use App\Models\Subscription\Subscription;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller {

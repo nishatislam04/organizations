@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
-use App\Models\Organization;
-use App\Models\User;
+use App\Http\Controllers\Controller;
+use App\Models\Organization\Organization;
+use App\Models\Auth\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Ramsey\Collection\DoubleEndedQueue;
+
 
 class UserController extends Controller {
     /**

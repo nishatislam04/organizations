@@ -1,12 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\OrganizationController;
-use App\Http\Controllers\SubscriptionController;
-use App\Http\Controllers\UserController;
-use App\Models\Subscription;
-use Database\Factories\UserFactory;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Organization\OrganizationController;
+use App\Http\Controllers\Subscription\SubscriptionController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 

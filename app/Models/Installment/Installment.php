@@ -1,16 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Installment;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Subscription extends Model {
+class Installment extends Model {
     use HasFactory;
 
     protected $guarded = [];
-
-    function creator() {
-        return $this->belongsTo(Organization::class);
-    }
 }

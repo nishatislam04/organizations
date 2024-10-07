@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Organization;
 
+use App\Models\Auth\User;
+use App\Models\Subscription\Subscription;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
