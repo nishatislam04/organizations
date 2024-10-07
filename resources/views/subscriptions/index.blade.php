@@ -38,10 +38,12 @@
 
                       </th>
                       <th scope="col"
+                        class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
+                        Name
+                      </th>
+                      <th scope="col"
                         class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                         ID
-
-                        <x-layouts.sort sort_route="organizations.index" sortBy="name" :sortDir="$sortDir ?? 'asc'" />
                       </th>
                       <th scope="col"
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
@@ -63,10 +65,7 @@
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                         Start From
                       </th>
-                      <th scope="col"
-                        class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
-                        Actions
-                      </th>
+
                     </tr>
                   </thead>
 
@@ -76,8 +75,10 @@
                     <tr class="h-14 hover:bg-gray-100 dark:hover:bg-gray-700">
                       <td class="w-4 p-4">
                         <x-forms.checkbox type="single" />
-
                       </td>
+
+                      <td class="p-4 text-base font-medium text-gray-900 capitalize whitespace-nowrap dark:text-white">
+                        {{ $subscription->name }}</td>
 
                       <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
                         <a href="#"
@@ -90,25 +91,29 @@
 
                       <td
                         class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-                        {{$subscription->total}}
+                        {{ number_format($subscription->total) }}
                       </td>
 
                       <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <span class="flex gap-1 ">
-                          {{ $subscription->per_amount}} <img src="{{ Vite::asset("resources/icons/taka.svg")}}" alt=""
-                            class="w-5 h-5">
+                          {{ number_format($subscription->per_amount) }} <img
+                            src="{{ Vite::asset("resources/icons/taka.svg")}}" alt="" class="w-5 h-5">
                         </span>
                       </td>
 
                       <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <span class="flex gap-1 ">
-                          {{ $subscription->penalty_amount}} <img src="{{ Vite::asset("resources/icons/taka.svg")}}"
-                            alt="" class="w-5 h-5">
+                          {{ number_format($subscription->penalty_amount) }} <img
+                            src="{{ Vite::asset("resources/icons/taka.svg")}}" alt="" class="w-5 h-5">
                         </span>
                       </td>
 
+                      @php
+                      $date = date_create($subscription->start);
+                      $date = date_format($date, "M-Y")
+                      @endphp
                       <td class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ $subscription->start}}
+                        {{ $date  }}
                       </td>
 
                       {{-- <td class="flex flex-col gap-2 p-2" id="organizations-actions">

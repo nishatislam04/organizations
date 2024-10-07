@@ -39,7 +39,7 @@ class SubscriptionController extends Controller {
             "total" => "required|integer",
             "per_amount" => "required|integer",
             "penalty_amount" => "required|integer",
-            "start" => "required|regex:/\d{2}:\d{4}/"
+            "start" => "required|regex:/\d{2}-\d{2}-\d{4}/"
         ]);
 
         $validated["organization_id"] = $organization->id;
@@ -68,7 +68,7 @@ class SubscriptionController extends Controller {
     function createInstallment($data) {
         $all_installments = [];
 
-        list($month, $year) = explode(":", $data['start_date']);
+        list($day, $month, $year) = explode("-", $data['start_date']);
 
 
         for ($i = 0; $i < $data['total']; $i++) {
@@ -77,7 +77,7 @@ class SubscriptionController extends Controller {
                 $year++;
             }
 
-            $due_date = (int) $month . ":" . (int) $year;
+            $due_date = (int)$day . "-" . (int) $month . "-" . (int) $year;
             $all_installments[] = [
                 'organization_id' => $data['organization_id'],
                 "subscription_id" => $data['subscription_id'],

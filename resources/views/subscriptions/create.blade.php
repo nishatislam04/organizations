@@ -85,7 +85,7 @@
                       <div class="grid grid-cols-3 gap-3 p-6">
                         @foreach ($months as $key => $value)
                         <p class="px-5 py-2 text-center text-white transition-all rounded-md cursor-pointer hover:bg-gray-400"
-                          data-date="{{ $value . ":" .date("Y") }}">
+                          data-date="{{ date("d") . "-" . $value . "-" .date("Y") }}">
                           {{ $key }}
                         </p>
                         @endforeach
