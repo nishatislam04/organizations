@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Subscription;
 
 use App\Http\Controllers\Controller;
+use App\Models\Installment\Installment;
 use App\Models\Organization\Organization;
 use App\Models\Subscription\Subscription;
 use Illuminate\Http\Request;
@@ -33,18 +34,53 @@ class SubscriptionController extends Controller {
     public function store(Request $request, Organization $organization) {
 
         $validated = $request->validate([
-            "type" => "required|string",
+            "type" => "required|in:monthly,yearly",
             "total" => "required|integer",
             "per_amount" => "required|integer",
             "penalty_amount" => "required|integer",
-            "start" => "required|string"
+            "start" => "required|regex:/\d{2}:\d{4}/"
         ]);
 
         $validated["organization_id"] = $organization->id;
 
-        Subscription::create($validated);
+        $subs =  Subscription::create($validated);
+
+        $organization_id = $organization->id;
+        $subscription_id = $subs->id;
+        $pay_amount = $validated['per_amount'];
+        $start_date = $validated['start'];
+        $total = $validated["total"];
+
+        $this->createInstallment(['organization_id' => $organization_id, 'subscription_id' => $subscription_id, 'pay_amount' => $pay_amount, 'start_date' => $start_date, 'total' => $total]);
 
         return redirect()->route("organizations.show", $organization->id)->with("success", "subscription create success");
+    }
+
+    function createInstallment($data) {
+        $all_installments = [];
+
+        list($month, $year) = explode(":", $data['start_date']);
+
+
+        for ($i = 0; $i < $data['total']; $i++) {
+            if ((int) $month === 13) {
+                $month = 1;
+                $year++;
+            }
+
+            $due_date = (int) $month . ":" . (int) $year;
+            $all_installments[] = [
+                'organization_id' => $data['organization_id'],
+                "subscription_id" => $data['subscription_id'],
+                "pay_amount" => $data['pay_amount'],
+                "due_date" => $due_date,
+                "created_at" => date("d-m-Y")
+            ];
+
+            $month++;
+        }
+
+        Installment::insert($all_installments);
     }
 
     /**

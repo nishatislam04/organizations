@@ -89,7 +89,7 @@
 
                       <td class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
                         <a href="{{ route("organizations.show", $organization->id) }}"
-                          class="text-base font-semibold text-gray-900 dark:text-white">{{ $organization->name }}
+                          class="text-base font-semibold text-gray-900 dark:text-white hover:underline">{{ $organization->name }}
                         </a>
                       </td>
 

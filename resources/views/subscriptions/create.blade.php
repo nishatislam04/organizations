@@ -29,7 +29,7 @@
                   <x-forms.form-select id="suscription-listings" name="type">
                     <option selected>Choose a Subscription Type</option>
 
-                    <x-forms.form-option value="monthly">
+                    <x-forms.form-option value="monthly" selected>
                       Monthly
                     </x-forms.form-option>
                     <x-forms.form-option value="yearly">
@@ -38,7 +38,7 @@
 
                   </x-forms.form-select>
 
-                  <x-forms.input-error key="suscription-listings" />
+                  <x-forms.input-error key="type" />
                   </x-form-field>
 
                   <x-forms.form-field class="lg:col-span-2">
@@ -65,16 +65,21 @@
                   <x-forms.form-field class="cursor-pointer lg:col-span-2" id="select-month-container">
                     <x-forms.label for="start">Installment Start</x-forms.label>
                     <x-forms.input id="start" name="start" type="text" value="{{ old('start') }}"
-                      placeholder="Select to specify Installment start" />
+                      placeholder="Select to specify Installment start" readonly class="bg-gray-100 cursor-pointer" />
                     <x-forms.input-error key="start" />
 
-                    <?php $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct","Nov", "Dec"] ?>
+                    @php
+                    $months = ["Jan" => "01", "Feb" => "02", "Mar" => "03", "Apr" => "04", "May" => "05", "Jun" => "06",
+                    "Jul" => "07",
+                    "Aug" => "08", "Sep" => "09", "Oct" => "10", "Nov" => "11", "Dec" => "12"];
+                    @endphp
+
                     <div class="hidden bg-gray-600 w-96" id="month-picker">
                       <div class="grid grid-cols-3 gap-3 p-6">
-                        @foreach ($months as $month)
+                        @foreach ($months as $key => $value)
                         <p class="px-5 py-2 text-center text-white transition-all rounded-md cursor-pointer hover:bg-gray-400"
-                          data-month="{{ $month }}">
-                          {{ $month }}
+                          data-date="{{ $value . ":" .date("Y") }}">
+                          {{ $key }}
                         </p>
                         @endforeach
 
