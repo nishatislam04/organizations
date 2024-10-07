@@ -2,12 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Organization;
-use App\Models\Subscription;
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Organization\Organization;
+use App\Models\Subscription\Subscription;
+use App\Models\Auth\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder {
     /**

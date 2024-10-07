@@ -33,11 +33,12 @@ class AuthController extends Controller {
                 "password" => "required|min:3|max:254"
             ]
         );
+        $remember = $request->has("remember");
 
         if (Auth::attempt([
             "username" => $validated['username'],
             "password" => $validated["password"]
-        ])) {
+        ], $remember)) {
             $request->session()->regenerate();
 
             return redirect()->route("dashboard.index");

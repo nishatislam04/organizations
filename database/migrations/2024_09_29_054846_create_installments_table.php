@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\Organization;
-use App\Models\Subscription;
+use App\Models\Organization\Organization;
+use App\Models\Subscription\Subscription;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use NunoMaduro\Collision\Adapters\Phpunit\Subscribers\Subscriber;
 
 return new class extends Migration {
     /**
