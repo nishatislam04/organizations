@@ -74,7 +74,7 @@ class AuthController extends Controller {
                 "password" => "required|confirmed|min:3|max:254"
             ]
         );
-        $validated['role'] = "admin";
+        $validated['role'] = "member";
         $validated["status"] = "pending";
         $user = User::create($validated);
 
