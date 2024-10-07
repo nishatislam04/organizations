@@ -13,6 +13,7 @@ class SubscriptionFactory extends Factory {
     public function definition(): array {
         return [
             "organization_id" => 1,
+            "name" => fake()->name(),
             "type" => "monthly",
             "total" => 50,
             "per_amount" => 1000,

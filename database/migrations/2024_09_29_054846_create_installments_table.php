@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(Organization::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Subscription::class)->constrained()->cascadeOnDelete();
+            $table->string("name");
             $table->integer("pay_amount");
             $table->string("due_date");
             $table->string("created_at");

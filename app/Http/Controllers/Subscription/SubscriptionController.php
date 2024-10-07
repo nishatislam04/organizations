@@ -34,6 +34,7 @@ class SubscriptionController extends Controller {
     public function store(Request $request, Organization $organization) {
 
         $validated = $request->validate([
+            "name" => "required|min:3|unique:subscriptions,name",
             "type" => "required|in:monthly,yearly",
             "total" => "required|integer",
             "per_amount" => "required|integer",
@@ -47,6 +48,7 @@ class SubscriptionController extends Controller {
 
         $organization_id = $organization->id;
         $subscription_id = $subs->id;
+        $name = $validated['name'];
         $pay_amount = $validated['per_amount'];
         $start_date = $validated['start'];
         $total = $validated["total"];
@@ -54,6 +56,7 @@ class SubscriptionController extends Controller {
         $this->createInstallment([
             'organization_id' => $organization_id,
             'subscription_id' => $subscription_id,
+            "name" => $name,
             'pay_amount' => $pay_amount,
             'start_date' => $start_date,
             'total' => $total
@@ -78,6 +81,7 @@ class SubscriptionController extends Controller {
             $all_installments[] = [
                 'organization_id' => $data['organization_id'],
                 "subscription_id" => $data['subscription_id'],
+                "name" => $data['name'],
                 "pay_amount" => $data['pay_amount'],
                 "due_date" => $due_date,
                 "created_at" => date("d-m-Y")

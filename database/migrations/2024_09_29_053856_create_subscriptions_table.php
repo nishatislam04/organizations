@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Organization::class)->constrained()->cascadeOnDelete();
+            $table->string("name");
             $table->string("type");
             $table->integer("total");
             $table->integer("per_amount");

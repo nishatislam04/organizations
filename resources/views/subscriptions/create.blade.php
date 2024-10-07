@@ -23,6 +23,13 @@
 
               <div class="grid grid-cols-1 gap-6 lg:grid-cols-6">
 
+                <x-forms.form-field class="lg:col-span-2">
+                  <x-forms.label for="name">Subscription Name</x-forms.label>
+                  <x-forms.input id="name" name="name" type="text" value="{{ old('name') }}"
+                    placeholder="Enter Subscription Name" />
+                  <x-forms.input-error key="name" />
+                </x-forms.form-field>
+
                 <x-forms.form-field class="lg:col-span-3">
                   <x-forms.label for="suscription-listings">Subscription Type</x-forms.label>
 
