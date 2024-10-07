@@ -20,7 +20,7 @@ class SubscriptionFactory extends Factory {
             "total" => 50,
             "per_amount" => 1000,
             "penalty_amount" => 200,
-            "start_amount" => fake()->monthName(),
+            "start" => fake()->monthName(),
         ];
     }
 }
