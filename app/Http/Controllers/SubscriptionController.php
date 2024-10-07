@@ -31,7 +31,7 @@ class SubscriptionController extends Controller {
             "total" => "required|integer",
             "per_amount" => "required|integer",
             "penalty_amount" => "required|integer",
-            "start_month" => "required|string"
+            "start" => "required|string"
         ]);
 
         $validated["organization_id"] = $organization->id;

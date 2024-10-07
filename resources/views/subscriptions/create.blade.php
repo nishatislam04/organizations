@@ -62,14 +62,11 @@
                     <x-forms.input-error key="penalty_amount" />
                   </x-forms.form-field>
 
-
-
-
                   <x-forms.form-field class="cursor-pointer lg:col-span-2" id="select-month-container">
-                    <x-forms.label for="start_month">Installment Start Month</x-forms.label>
-                    <x-forms.input id="start_month" name="start_month" type="text" value="{{ old('start_month') }}"
-                      placeholder="Select Installment start month" />
-                    <x-forms.input-error key="start_month" />
+                    <x-forms.label for="start">Installment Start</x-forms.label>
+                    <x-forms.input id="start" name="start" type="text" value="{{ old('start') }}"
+                      placeholder="Select to specify Installment start" />
+                    <x-forms.input-error key="start" />
 
                     <?php $months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct","Nov", "Dec"] ?>
                     <div class="hidden bg-gray-600 w-96" id="month-picker">
@@ -89,7 +86,7 @@
 
               <div class="flex justify-end mt-6">
                 <x-buttons.button type="submit" class="text-white text-sm px-4 py-2.5 text-center w-36"
-                  value="Add Organization" />
+                  value="create" />
               </div>
             </form>
           </div>
