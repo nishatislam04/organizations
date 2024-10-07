@@ -28,7 +28,9 @@ Route::controller(AuthController::class)->group(function () {
   Route::post("/logout", "logout")->name("logout");
 });
 
-Route::get("/dashboard", [DashboardController::class, "dashboard"])->name("dashboard.index")->middleware(["auth", "role"]);
+Route::get("/dashboard", [DashboardController::class, "dashboard"])
+  ->name("dashboard.index")
+  ->middleware(["auth", "role"]);
 
 Route::middleware(["auth"])
   ->prefix("organizations")

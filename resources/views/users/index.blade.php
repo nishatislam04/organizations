@@ -19,10 +19,12 @@
               <x-search.search-result />
 
               @if ($availableOrganizations !== 0)
+              @can("is-super")
               <x-buttons.button :href="route('users.create')" type="a"
                 class="absolute right-0 bottom-0 text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                 Create a new User
               </x-buttons.button>
+              @endcan
 
               @else
               <x-buttons.button type="button"
@@ -62,9 +64,6 @@
                       <th scope="col"
                         class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
                         Email
-
-                        {{-- <x-sort :sorted="$sortBy" sortBy="description" :sortDir="$sortDir ?? 'asc'" /> --}}
-
                       </th>
                       <th scope="col"
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400">
@@ -122,18 +121,23 @@
 
                         @if ($user->status === "passed")
 
+
+                        @can("user-edit")
                         <x-buttons.button type="a" href="{{ route('users.edit', $user->id) }}" id="edit-user-btn"
                           data-user-id="{{ $user->id  }}"
                           class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                           <img src="{{ Vite::asset('resources/icons/edit.svg') }}" alt="" class="w-4 h-4 mr-2">
                           Edit
                         </x-buttons.button>
+                        @endcan
 
+                        @can("user-delete")
                         <x-buttons.button type="button" id="delete-user-btn" data-user-id="{{ $user->id  }}"
                           class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                           <img src="{{ Vite::asset('resources/icons/delete.svg') }}" alt="" class="w-4 h-4 mr-2">
                           Delete
                         </x-buttons.button>
+                        @endcan
 
                         @else
 

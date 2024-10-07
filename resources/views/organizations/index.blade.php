@@ -20,13 +20,13 @@
 
               <x-search.search-result />
 
-
               {{-- <x-search showSearchIcon="false" /> --}}
-
+              @can("is-super")
               <x-buttons.button :href="route('organizations.create')" type="a"
                 class="absolute right-0 bottom-0 text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
                 Create a new Organization
               </x-buttons.button>
+              @endcan
 
             </div>
           </div>
@@ -112,17 +112,24 @@
                       </td>
 
                       <td class="flex flex-col gap-2 p-2" id="organizations-actions">
+
+                        @can("org-edit", $organization)
                         <x-buttons.button type="a" href="{{ route('organizations.edit', $organization->id)}}"
                           id="updateProductButton"
                           class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                           <img src="{{ Vite::asset("resources/icons/edit.svg") }}" alt="" class="w-4 h-4 mr-2">
                           Edit
                         </x-buttons.button>
+                        @endcan
 
+
+                        @can("org-delete", $organization)
                         <x-buttons.button type="button" id="delete-organization" data-item-id="{{ $organization->id }}"
                           class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900">
                           <img src="{{ Vite::asset("resources/icons/delete.svg")}}" alt="" class="w-4 h-4 mr-2">Delete
                         </x-buttons.button>
+                        @endcan
+
                       </td>
                     </tr>
                     @endforeach
