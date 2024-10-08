@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\UserApprovedMail;
 use App\Models\Organization\Organization;
 use App\Models\Auth\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller {
     /**
@@ -138,15 +139,19 @@ class UserController extends Controller {
         $user->status = "passed";
         $user->save();
 
+        // Mail::to($user->email)->send(new UserApprovedMail($organization, $user));
+
         // delete rest of the users when 
         // current user got assigned to the current org
-        // $org_id = $user->organization_id;
+        $org_id = $user->organization_id;
 
-        // User::where([
-        //     ['id', '!=', $user->id],
-        //     ['organization_id', '=', $org_id],
-        //     ['status', '=', 'pending'],
-        // ])->delete();
+        $t = User::where([
+            ['id', '!=', $user->id],
+            ['organization_id', '=', $org_id],
+            ['status', '=', 'pending'],
+        ])->get();
+
+        dd($t);
 
         return redirect()->route("users.index")->with("success", "user approve success");
     }
