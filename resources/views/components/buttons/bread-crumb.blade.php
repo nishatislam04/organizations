@@ -12,24 +12,30 @@
             href='{{ route($linkValue["route"], $linkValue["id"]) }}'>
             {{ $linkKey }}
           </a>
+          <img class="w-4 h-4"
+            src="{{ Vite::asset("resources/icons/backSlash.svg") }}"
+            alt="">
         @elseif (!is_array($linkValue) && !empty($linkValue))
           <a class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white"
             href='{{ route($linkValue) }}'>
             {{ $linkKey }}
+            <img class="w-4 h-4"
+              src="{{ Vite::asset("resources/icons/backSlash.svg") }}"
+              alt="">
           </a>
         @else
           <a
             class="inline-flex items-center text-gray-700 hover:text-primary-600 dark:text-gray-300 dark:hover:text-white">
             {{ $linkKey }}
+            <img class="w-2 h-1"
+              src="{{ Vite::asset("resources/icons/backSlash.svg") }}"
+              alt="">
           </a>
         @endif
 
       </li>
     @endforeach
 
-    {{-- <img class="w-6 h-6"
-      src="{{ Vite::asset("resources/icons/right-arrow.svg") }}"
-      alt=""> --}}
 
 
     {{-- <li class="inline-flex items-center">
