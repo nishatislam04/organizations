@@ -2,6 +2,7 @@
 
 namespace App\Models\Subscription;
 
+use App\Models\Installment\Installment;
 use App\Models\Organization\Organization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,5 +14,9 @@ class Subscription extends Model {
 
     function creator() {
         return $this->belongsTo(Organization::class);
+    }
+
+    function installments() {
+        return $this->hasMany(Installment::class);
     }
 }

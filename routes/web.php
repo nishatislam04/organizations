@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Installment\InstallmentController;
 use App\Http\Controllers\Organization\OrganizationController;
 use App\Http\Controllers\Subscription\SubscriptionController;
 use App\Http\Controllers\User\UserController;
@@ -79,6 +80,9 @@ Route::middleware(["auth"])
 Route::get("/subscriptions/{organization}/", [SubscriptionController::class, "index"])->name("subscriptions.index");
 Route::get("/subscriptions/{organization}/create", [SubscriptionController::class, "create"])->name("subscriptions.create");
 Route::post("/subscriptions/{organization}/store", [SubscriptionController::class, "store"])->name("subscriptions.store");
+
+
+Route::get("/installments/{subscription}", [InstallmentController::class, "index"])->name("installments.index");
 
 
 Route::fallback(fn() => response()->view('errors.404', [], 404));
