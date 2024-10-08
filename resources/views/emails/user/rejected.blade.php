@@ -1,12 +1,14 @@
 <x-mail::message>
-# Introduction
+  # Sorry. Try another organization
 
-The body of your message.
+  we are sorry to inform you that, we could not assign you to the
+  organization you chose.
+  Please try another one.
 
-<x-mail::button :url="''">
-Button Text
-</x-mail::button>
+  <x-mail::button :url='""'>
+    clickable btn to view the organization listings
+  </x-mail::button>
 
-Thanks,<br>
-{{ config('app.name') }}
+  Thanks,<br>
+  {{ config("app.name") }}
 </x-mail::message>

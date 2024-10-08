@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Mail\UserApprovedMail;
+use App\Mail\UserRejectedMail;
 use App\Models\Organization\Organization;
 use App\Models\Auth\User;
 use Illuminate\Http\Request;
@@ -139,25 +140,28 @@ class UserController extends Controller {
         $user->status = "passed";
         $user->save();
 
-        // Mail::to($user->email)->send(new UserApprovedMail($organization, $user));
+        Mail::to($user->email)->send(new UserApprovedMail($organization, $user));
 
         // delete rest of the users when 
         // current user got assigned to the current org
         $org_id = $user->organization_id;
 
-        $t = User::where([
+        $rejectedUsers = User::where([
             ['id', '!=', $user->id],
             ['organization_id', '=', $org_id],
             ['status', '=', 'pending'],
         ])->get();
 
-        dd($t);
+        foreach ($rejectedUsers as $user) {
+            Mail::to($user->email)->send(new UserRejectedMail());
+        }
 
         return redirect()->route("users.index")->with("success", "user approve success");
     }
 
     function reject(User $user) {
-        $user->delete();
+        // $user->delete();
+
         return redirect()->route("users.index")->with("success", "user reject success");
     }
 }

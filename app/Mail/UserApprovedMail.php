@@ -32,7 +32,7 @@ class UserApprovedMail extends Mailable {
      */
     public function envelope(): Envelope {
         return new Envelope(
-            from: new Address("nahidaslamxxx3@gmail.com", "nahid"),
+            from: new Address("nahidaslamxxx3@gmail.com", "superuser"),
             subject: 'You have Been Approved!',
         );
     }
