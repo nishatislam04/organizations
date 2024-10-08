@@ -15,8 +15,7 @@
               <x-buttons.bread-crumb class="mb-10" />
               <h1
                 class="text-xl font-semibold text-gray-900 -translate-y-3 sm:text-2xl dark:text-white">
-                All
-                Users</h1>
+                All Users</h1>
             </div>
             <div
               class="flex items-center justify-between sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
@@ -27,7 +26,7 @@
                 @can("is-super")
                   <x-buttons.button
                     class="absolute right-0 bottom-0 text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-                    type="a" :href="route("users.create")">
+                    type="a" :href='route("users.create")'>
                     Create a new User
                   </x-buttons.button>
                 @endcan
@@ -145,7 +144,7 @@
                                 id="edit-user-btn"
                                 data-user-id="{{ $user->id }}"
                                 type="a"
-                                href="{{ route("users.edit", $user->id) }}">
+                                href='{{ route("users.edit", $user->id) }}'>
                                 <img class="w-4 h-4 mr-2"
                                   src="{{ Vite::asset("resources/icons/edit.svg") }}"
                                   alt="">
