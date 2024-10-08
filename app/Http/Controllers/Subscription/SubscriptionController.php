@@ -7,6 +7,7 @@ use App\Models\Installment\Installment;
 use App\Models\Organization\Organization;
 use App\Models\Subscription\Subscription;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SubscriptionController extends Controller {
     /**
@@ -90,7 +91,9 @@ class SubscriptionController extends Controller {
             $month++;
         }
 
-        Installment::insert($all_installments);
+        DB::transaction(function () use ($all_installments) {
+            Installment::insert($all_installments);
+        });
     }
 
     /**
