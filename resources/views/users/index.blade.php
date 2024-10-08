@@ -12,7 +12,11 @@
             <x-modals.flash />
 
             <div class="">
-              <x-buttons.bread-crumb class="mb-10" />
+              <x-buttons.bread-crumb class="mb-10" :links='[
+                  "home" => "dashboard.index",
+                  "users" => "",
+              ]' />
+              {{-- <x-buttons.bread-crumb class="mb-10" /> --}}
               <h1
                 class="text-xl font-semibold text-gray-900 -translate-y-3 sm:text-2xl dark:text-white">
                 All Users</h1>
