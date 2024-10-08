@@ -13,7 +13,19 @@
             <x-modals.flash />
 
             <div class="">
-              <x-buttons.bread-crumb class="mb-10" />
+
+              <x-buttons.bread-crumb class="mb-10" :links='[
+                  "home" => "dashboard.index",
+                  "organizations" => "organizations.index",
+                  "organization" => [
+                      "route" => "organizations.show",
+                      "id" => "$organization->id",
+                  ],
+                  "subscriptions" => "",
+              ]' />
+
+
+              {{-- <x-buttons.bread-crumb class="mb-10" /> --}}
 
               <h1
                 class="text-xl font-semibold text-gray-900 -translate-y-3 sm:text-2xl dark:text-white">

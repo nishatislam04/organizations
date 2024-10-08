@@ -20,6 +20,9 @@ class InstallmentController extends Controller {
             ->join("subscriptions", "installments.subscription_id", "=", "subscriptions.id")
             ->join("organizations", "installments.organization_id", "=", "organizations.id")
             ->select(
+                "installments.id as installmentId",
+                "organizations.id as organizationId",
+                "subscriptions.id as subscriptionId",
                 "subscriptions.name as subscriptionName",
                 "subscriptions.type as subscriptionType",
                 "subscriptions.penalty_amount as installmentPenaltyAmount",
