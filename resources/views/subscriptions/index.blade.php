@@ -107,7 +107,7 @@
 
                         <td
                           class="p-4 text-base font-medium text-gray-900 capitalize whitespace-nowrap dark:text-white">
-                          <a
+                          <a class="hover:underline"
                             href="{{ route("installments.index", $subscription->id) }}">
                             {{ $subscription->name }}</a>
                         </td>
