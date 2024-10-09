@@ -56,7 +56,7 @@ Route::middleware(["auth", "super-admin"])
     Route::delete("/{organization}/delete", "destroy")->name("destroy");
   });
 
-Route::middleware(["auth", "super-admin"])
+Route::middleware(["auth", "super"])
   ->prefix("users")
   ->name("users.")
   ->controller(UserController::class)->group(function () {

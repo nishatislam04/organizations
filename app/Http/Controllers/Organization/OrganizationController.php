@@ -45,7 +45,6 @@ class OrganizationController extends Controller {
                     ->first();
                 // using first() bcz admin can have only one organization
 
-                // dd($organizations);
             }
         } else {
 

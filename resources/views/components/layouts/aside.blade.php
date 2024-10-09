@@ -45,10 +45,13 @@
                   <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
                     href="{{ route("organizations.index") }}">Organizations</a>
                 </li>
-                <li>
-                  <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                    href="{{ route("users.index") }}">Users</a>
-                </li>
+                @can("is-super")
+                  <li>
+                    <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
+                      href="{{ route("users.index") }}">Users</a>
+                  </li>
+                @endcan
+
               </ul>
             </li>
           @endcan

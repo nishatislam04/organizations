@@ -102,7 +102,7 @@
                     class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
                     {{-- for admin, organiation is a object, so we direct acess --}}
-                    @if (!is_array($organizations))
+                    @if (!is_array($organizations) && auth()->user()->role === "admin")
                       <tr
                         class="h-14 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <td class="w-4 p-4">
