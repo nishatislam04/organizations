@@ -62,7 +62,7 @@ class UserController extends Controller {
         $superRoleId = User::where("role", "=", "super")->get();
         $superRoleId = $superRoleId[0]->id;
 
-        $organizations = Organization::where("user_id", $superRoleId)->get();
+        $organizations = Organization::where("user_id", null)->get();
         return view("users.create", compact("organizations"));
     }
 

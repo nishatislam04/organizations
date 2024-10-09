@@ -22,7 +22,7 @@
               <span class="ml-3" sidebar-toggle-item>Dashboard</span>
             </a>
           </li>
-          @can("is-admin-or-super")
+          @can("is-super")
             <li>
               <button
                 class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
@@ -51,40 +51,56 @@
                       href="{{ route("users.index") }}">Users</a>
                   </li>
                 @endcan
-
               </ul>
             </li>
           @endcan
-          <li>
-            <button
-              class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-              data-collapse-toggle="dropdown-pages" type="button"
-              aria-controls="dropdown-pages">
+          @can("is-admin")
+            <li>
+              <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
+                href="{{ route("organizations.index") }}">Organizations</a>
+            </li>
+          @endcan
+          @can("is-super")
+            <li>
+              <button
+                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
+                data-collapse-toggle="dropdown-pages" type="button"
+                aria-controls="dropdown-pages">
 
-              <img
-                class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                src="{{ Vite::asset("resources/icons/pages.svg") }}"
-                alt="">
+                <img
+                  class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                  src="{{ Vite::asset("resources/icons/pages.svg") }}"
+                  alt="">
 
 
-              <span class="flex-1 ml-3 text-left whitespace-nowrap"
-                sidebar-toggle-item>Listings</span>
+                <span class="flex-1 ml-3 text-left whitespace-nowrap"
+                  sidebar-toggle-item>Listings</span>
 
-              <img class="w-6 h-6"
-                src="{{ Vite::asset("resources/icons/arrow-down.svg") }}"
-                alt="" sidebar-toggle-item>
+                <img class="w-6 h-6"
+                  src="{{ Vite::asset("resources/icons/arrow-down.svg") }}"
+                  alt="" sidebar-toggle-item>
 
-            </button>
-            <ul class="hidden py-2 space-y-2" id="dropdown-pages">
-              <li>
-                <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-                  href="{{ route("organizations.listings") }}">Organizations</a>
-              </li>
-            </ul>
-          </li>
+              </button>
+              <ul class="hidden py-2 space-y-2" id="dropdown-pages">
+                <li>
+                  <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
+                    href="{{ route("organizations.listings") }}">Organizations</a>
+                </li>
+              </ul>
+            </li>
+          @endcan
+
+
+          {{-- @can("is-admin") --}}
+          @can("is-super")
+            <li>
+              <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
+                href="{{ route("organizations.listings") }}">Organizations</a>
+            </li>
+          @endcan
           <li>
             <a class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 "
-              href="http://localhost:1313/settings/">
+              href="#">
 
               <img
                 class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"

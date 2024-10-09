@@ -42,6 +42,9 @@ Route::get("/dashboard", [DashboardController::class, "dashboard"])
   ->name("dashboard.index")
   ->middleware(["auth"]);
 
+
+Route::get("/organizations/listings", [OrganizationController::class, "listings"])->name("organizations.listings")->middleware("auth");
+
 Route::middleware(["auth", "super-admin"])
   ->controller(OrganizationController::class)
   ->prefix("organizations")
@@ -65,7 +68,6 @@ Route::middleware(["auth", "super-admin"])
     Route::delete("/{organization}/delete", "destroy")->name("destroy");
   });
 
-Route::get("/organizations/listings", [OrganizationController::class, "listings"])->name("organizations.listings")->middleware("auth");
 
 Route::middleware(["auth", "super"])
   ->controller(UserController::class)

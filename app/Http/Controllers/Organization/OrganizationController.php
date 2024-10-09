@@ -69,7 +69,9 @@ class OrganizationController extends Controller {
     }
 
     function listings() {
-        // Organization::
+        $organizations = Organization::where("user_id", null)->get();
+
+        return view("organizations.listings");
     }
 
     /**
