@@ -28,6 +28,6 @@ export default defineConfig({
     },
 
     //     The host: true option allows Vite to accept connections from custom domains, not just localhost.
-    // The hmr.host setting ensures that Hot Module Replacement(HMR) is served from nio.php, not localhost, which could otherwise cause CORS or routing issues.
+    // The hmr.host setting ensures that Hot Module Replacement(HMR) is served from nio.com, not localhost, which could otherwise cause CORS or routing issues.
 });
 

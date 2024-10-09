@@ -8,7 +8,7 @@ document.addEventListener("click", function (ev) {
     // show modal & overlay
     modal_overlay("delete-modal")
 
-    document.querySelector("#delete-organization-form").action = `http://nio.php/organizations/${id}/delete`
+    document.querySelector("#delete-organization-form").action = `http://nio.com/organizations/${id}/delete`
 
   }
 

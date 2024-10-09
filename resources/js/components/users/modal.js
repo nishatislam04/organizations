@@ -6,15 +6,15 @@ document.addEventListener("click", function (ev) {
   if (ev.target.id === "approve-user-btn") {
     modal_overlay('approve-user-modal');
 
-    document.querySelector("#approve-user-form").action = `http://nio.php/users/${id}/approve`
+    document.querySelector("#approve-user-form").action = `http://nio.com/users/${id}/approve`
   }
 
   // reject
   if (ev.target.id === "reject-user-btn") {
     modal_overlay('reject-user-modal')
 
-    document.querySelector("#reject-user-form").action = `http://nio.php/users/${id}/reject`
-    console.log(document.querySelector("#reject-user-form").action = `http://nio.php/users/${id}/reject`)
+    document.querySelector("#reject-user-form").action = `http://nio.com/users/${id}/reject`
+    console.log(document.querySelector("#reject-user-form").action = `http://nio.com/users/${id}/reject`)
   }
 
   // delete
@@ -26,7 +26,7 @@ document.addEventListener("click", function (ev) {
     // show modal & overlay
     modal_overlay("delete-modal")
 
-    document.querySelector("#user-delete-form").action = `http://nio.php/users/${id}/delete`
+    document.querySelector("#user-delete-form").action = `http://nio.com/users/${id}/delete`
 
   }
 

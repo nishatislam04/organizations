@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://nio.php', 'http://localhost:5173'],
+    'allowed_origins' => ['http://nio.com', 'http://localhost:5173'],
 
     'allowed_origins_patterns' => [],
 

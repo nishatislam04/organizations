@@ -142,7 +142,7 @@ class UserController extends Controller {
 
         Mail::to($user->email)->send(new UserApprovedMail($organization, $user));
 
-        // delete rest of the users when 
+        // update rest of the users when 
         // current user got assigned to the current org
         $org_id = $user->organization_id;
 
@@ -153,6 +153,9 @@ class UserController extends Controller {
         ])->get();
 
         foreach ($rejectedUsers as $user) {
+            $user->status = null;
+            $user->organization_id = null;
+            $user->save();
             Mail::to($user->email)->send(new UserRejectedMail());
         }
 
@@ -160,7 +163,9 @@ class UserController extends Controller {
     }
 
     function reject(User $user) {
-        // $user->delete();
+        $user->status = null;
+        $user->organization_id = null;
+        $user->save();
 
         return redirect()->route("users.index")->with("success", "user reject success");
     }
