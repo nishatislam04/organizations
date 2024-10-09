@@ -23,7 +23,7 @@ export default defineConfig({
     server: {
         host: true,
         hmr: {
-            host: 'nio.php',
+            host: 'nio.com',
         },
     },
 

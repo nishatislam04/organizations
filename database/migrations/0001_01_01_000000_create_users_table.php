@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string("status")->nullable()->default("null");
             $table->foreignIdFor(Organization::class)->nullable();
             $table->string("remember_token")->nullable();
+            $table->string('google_id')->nullable();
             $table->timestamps();
         });
 

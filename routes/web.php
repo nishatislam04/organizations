@@ -14,6 +14,15 @@ Route::get("/", function () {
   else return redirect()->route("auth.login");
 });
 
+use App\Http\Controllers\Auth\GoogleController;
+
+// Route to initiate Google login
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+
+// Route to handle Google callback
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+
+
 Route::controller(AuthController::class)->group(function () {
 
   Route::middleware("guest")->group(function () {
