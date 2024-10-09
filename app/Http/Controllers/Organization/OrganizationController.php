@@ -33,9 +33,20 @@ class OrganizationController extends Controller {
         if (empty($query)) {
             session()->forget("search_result");
 
-            $organizations = Organization::join("users", "organizations.user_id", "=", "users.id")
-                ->select("users.*", "users.id as userId", "organizations.*", "organizations.id as organizationId")
-                ->simplePaginate(5);
+            if (Auth::user()->role === "super") {
+                $organizations = Organization::join("users", "organizations.user_id", "=", "users.id")
+                    ->select("users.*", "users.id as userId", "organizations.*", "organizations.id as organizationId")
+                    ->simplePaginate(5);
+            }
+            if (Auth::user()->role === "admin") {
+
+                $organizations = Organization::join("users", "users.organization_id", "=", "organizations.id")
+                    ->select("users.*", "users.id as userId", "organizations.*", "organizations.id as organizationId")
+                    ->first();
+                // using first() bcz admin can have only one organization
+
+                // dd($organizations);
+            }
         } else {
 
             $organizations = Organization::where("name", "like", "%" . $query . "%")
@@ -48,6 +59,7 @@ class OrganizationController extends Controller {
 
             session()->flash("search_result", $count);
         }
+        // dd($organizations);
 
         return view("organizations.index", compact("organizations", "sortBy", "sortDir"));
     }

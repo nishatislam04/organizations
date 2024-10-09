@@ -101,7 +101,8 @@
                   <tbody
                     class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
-                    @foreach ($organizations as $organization)
+                    {{-- for admin, organiation is a object, so we direct acess --}}
+                    @if (!is_array($organizations))
                       <tr
                         class="h-14 hover:bg-gray-100 dark:hover:bg-gray-700">
                         <td class="w-4 p-4">
@@ -112,40 +113,40 @@
                         <td
                           class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
                           <a class="text-base font-semibold text-gray-900 dark:text-white hover:underline"
-                            href='{{ route("organizations.show", $organization->id) }}'>{{ $organization->name }}
+                            href='{{ route("organizations.show", $organizations->id) }}'>{{ $organizations->name }}
                           </a>
                         </td>
 
                         <td
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {{ $organization->organizationId }}</td>
+                          {{ $organizations->organizationId }}</td>
 
                         <td
                           class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-                          {{ $organization->description }}
+                          {{ $organizations->description }}
                         </td>
 
                         <td
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {{ count($organization->joinedMembers) }}</td>
+                          {{ count($organizations->joinedMembers) }}</td>
 
                         <td
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {{ $organization->max_members }}</td>
+                          {{ $organizations->max_members }}</td>
 
                         <td
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {{ $organization->user->username }}
+                          {{ $organizations->user->username }}
                         </td>
 
                         <td class="flex flex-col gap-2 p-2"
                           id="organizations-actions">
 
-                          @can("org-edit", $organization)
+                          @can("org-edit", $organizations)
                             <x-buttons.button
                               class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                               id="updateProductButton" type="a"
-                              href='{{ route("organizations.edit", $organization->id) }}'>
+                              href='{{ route("organizations.edit", $organizations->id) }}'>
                               <img class="w-4 h-4 mr-2"
                                 src="{{ Vite::asset("resources/icons/edit.svg") }}"
                                 alt="">
@@ -154,11 +155,11 @@
                           @endcan
 
 
-                          @can("org-delete", $organization)
+                          @can("org-delete", $organizations)
                             <x-buttons.button
                               class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
                               id="delete-organization"
-                              data-item-id="{{ $organization->id }}"
+                              data-item-id="{{ $organizations->id }}"
                               type="button">
                               <img class="w-4 h-4 mr-2"
                                 src="{{ Vite::asset("resources/icons/delete.svg") }}"
@@ -168,7 +169,80 @@
 
                         </td>
                       </tr>
-                    @endforeach
+                    @else
+                      {{-- for super, organiations is a list, so we loop --}}
+                      @foreach ($organizations as $organization)
+                        <tr
+                          class="h-14 hover:bg-gray-100 dark:hover:bg-gray-700">
+                          <td class="w-4 p-4">
+                            <x-forms.checkbox type="single" />
+
+                          </td>
+
+                          <td
+                            class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            <a class="text-base font-semibold text-gray-900 dark:text-white hover:underline"
+                              href='{{ route("organizations.show", $organization->id) }}'>{{ $organization->name }}
+                            </a>
+                          </td>
+
+                          <td
+                            class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $organization->organizationId }}</td>
+
+                          <td
+                            class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
+                            {{ $organization->description }}
+                          </td>
+
+                          <td
+                            class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ count($organization->joinedMembers) }}</td>
+
+                          <td
+                            class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $organization->max_members }}</td>
+
+                          <td
+                            class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ $organization->user->username }}
+                          </td>
+
+                          <td class="flex flex-col gap-2 p-2"
+                            id="organizations-actions">
+
+                            @can("org-edit", $organization)
+                              <x-buttons.button
+                                class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                id="updateProductButton" type="a"
+                                href='{{ route("organizations.edit", $organization->id) }}'>
+                                <img class="w-4 h-4 mr-2"
+                                  src="{{ Vite::asset("resources/icons/edit.svg") }}"
+                                  alt="">
+                                Edit
+                              </x-buttons.button>
+                            @endcan
+
+
+                            @can("org-delete", $organization)
+                              <x-buttons.button
+                                class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
+                                id="delete-organization"
+                                data-item-id="{{ $organization->id }}"
+                                type="button">
+                                <img class="w-4 h-4 mr-2"
+                                  src="{{ Vite::asset("resources/icons/delete.svg") }}"
+                                  alt="">Delete
+                              </x-buttons.button>
+                            @endcan
+
+                          </td>
+                        </tr>
+                      @endforeach
+                    @endif
+
+
+
                   </tbody>
                 </table>
               </div>
@@ -185,7 +259,9 @@
           this
           organization?</x-modal>
 
-          {!! $organizations->appends(["query" => request("query")])->links() !!}
+          @if (is_array($organizations))
+            {!! $organizations->appends(["query" => request("query")])->links() !!}
+          @endif
       </main>
     </div>
 
