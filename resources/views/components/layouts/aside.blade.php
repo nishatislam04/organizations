@@ -56,18 +56,6 @@
             </li>
           @endcan
           <li>
-            <a class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 "
-              href="http://localhost:1313/settings/">
-
-              <img
-                class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                src="{{ Vite::asset("resources/icons/settings.svg") }}"
-                alt="">
-
-              <span class="ml-3" sidebar-toggle-item>Settings</span>
-            </a>
-          </li>
-          <li>
             <button
               class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
               data-collapse-toggle="dropdown-pages" type="button"
@@ -80,7 +68,7 @@
 
 
               <span class="flex-1 ml-3 text-left whitespace-nowrap"
-                sidebar-toggle-item>Pages</span>
+                sidebar-toggle-item>Listings</span>
 
               <img class="w-6 h-6"
                 src="{{ Vite::asset("resources/icons/arrow-down.svg") }}"
@@ -90,10 +78,23 @@
             <ul class="hidden py-2 space-y-2" id="dropdown-pages">
               <li>
                 <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-                  href="http://localhost:1313/pages/pricing/">Pricing</a>
+                  href="{{ route("organizations.listings") }}">Organizations</a>
               </li>
             </ul>
           </li>
+          <li>
+            <a class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 "
+              href="http://localhost:1313/settings/">
+
+              <img
+                class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                src="{{ Vite::asset("resources/icons/settings.svg") }}"
+                alt="">
+
+              <span class="ml-3" sidebar-toggle-item>Settings</span>
+            </a>
+          </li>
+
         </ul>
       </div>
     </div>

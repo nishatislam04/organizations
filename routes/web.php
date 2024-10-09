@@ -43,9 +43,9 @@ Route::get("/dashboard", [DashboardController::class, "dashboard"])
   ->middleware(["auth"]);
 
 Route::middleware(["auth", "super-admin"])
+  ->controller(OrganizationController::class)
   ->prefix("organizations")
   ->name("organizations.")
-  ->controller(OrganizationController::class)
   ->group(function () {
 
     Route::get("", "index")->name("index");
@@ -65,10 +65,13 @@ Route::middleware(["auth", "super-admin"])
     Route::delete("/{organization}/delete", "destroy")->name("destroy");
   });
 
+Route::get("/organizations/listings", [OrganizationController::class, "listings"])->name("organizations.listings")->middleware("auth");
+
 Route::middleware(["auth", "super"])
+  ->controller(UserController::class)
   ->prefix("users")
   ->name("users.")
-  ->controller(UserController::class)->group(function () {
+  ->group(function () {
     Route::get("", "index")->name("index");
 
     Route::get("/create", "create")->name("create");

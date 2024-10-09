@@ -15,7 +15,7 @@ class OrganizationFactory extends Factory {
             "name" => fake()->company(),
             "description" => fake()->sentence(6),
             "max_members" => 10,
-            "user_id" => 1,
+            "user_id" => null,
         ];
     }
 }

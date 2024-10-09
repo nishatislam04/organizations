@@ -205,7 +205,7 @@
 
                           <td
                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $organization->user->username }}
+                            {{ $organization->user->username ?? "" }}
                           </td>
 
                           <td class="flex flex-col gap-2 p-2"
@@ -259,7 +259,7 @@
           this
           organization?</x-modal>
 
-          @if (is_array($organizations))
+          @if ($organizations instanceof Illuminate\Pagination\Paginator)
             {!! $organizations->appends(["query" => request("query")])->links() !!}
           @endif
       </main>

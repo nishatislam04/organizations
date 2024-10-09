@@ -19,15 +19,14 @@ class DatabaseSeeder extends Seeder {
             'password' => "1234",
             "role" => "super",
         ]);
-
-        // User::factory(5)->create([
-        //     'username' => fake()->name(),
-        //     'email' => fake()->unique()->safeEmail(),
-        //     'password' => Hash::make('password'),
-        //     "role" => "member",
-        //     "organization_id" => 1,
-        // ]);
         Organization::factory(5)->create();
         Subscription::factory(3)->create();
+
+        Organization::factory(1)->create([
+            "name" => "testing",
+            "description" => fake()->sentence(6),
+            "max_members" => 10,
+            "user_id" => 1,
+        ]);
     }
 }

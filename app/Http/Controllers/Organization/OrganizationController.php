@@ -34,8 +34,13 @@ class OrganizationController extends Controller {
             session()->forget("search_result");
 
             if (Auth::user()->role === "super") {
-                $organizations = Organization::join("users", "organizations.user_id", "=", "users.id")
-                    ->select("users.*", "users.id as userId", "organizations.*", "organizations.id as organizationId")
+                $organizations = Organization::leftJoin('users', 'organizations.user_id', '=', 'users.id')
+                    ->select(
+                        'users.*',                       // Select all columns from users
+                        'users.id as userId',             // Alias user id
+                        'organizations.*',                // Select all columns from organizations
+                        'organizations.id as organizationId' // Alias organization id
+                    )
                     ->simplePaginate(5);
             }
             if (Auth::user()->role === "admin") {
@@ -61,6 +66,10 @@ class OrganizationController extends Controller {
         // dd($organizations);
 
         return view("organizations.index", compact("organizations", "sortBy", "sortDir"));
+    }
+
+    function listings() {
+        // Organization::
     }
 
     /**
