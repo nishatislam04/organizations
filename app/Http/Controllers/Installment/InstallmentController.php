@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class InstallmentController extends Controller {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. 
      */
     public function index(Subscription $subscription) {
 
@@ -31,7 +31,7 @@ class InstallmentController extends Controller {
             )
             ->first();
 
-        // dd($details);
+        // dd($dueDates);
 
         // $installments = Installment::where("subscription_id", $subscription->id)
         //     ->join("subscriptions", "installments.subscription_id", "=", "subscriptions.id")

@@ -14,7 +14,7 @@ class SubscriptionController extends Controller {
      * Display a listing of the resource.
      */
     public function index(Organization $organization) {
-        $subscriptions = Subscription::where("organization_id", $organization->id)
+        $subscriptions = Subscription::where("organization_id", $organization->id)->latest()
             ->get();
 
         // dd($subscriptions);
@@ -82,8 +82,6 @@ class SubscriptionController extends Controller {
             $all_installments[] = [
                 'organization_id' => $data['organization_id'],
                 "subscription_id" => $data['subscription_id'],
-                "name" => $data['name'],
-                "pay_amount" => $data['pay_amount'],
                 "due_date" => $due_date,
                 "created_at" => date("d-m-Y")
             ];
