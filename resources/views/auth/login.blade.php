@@ -97,15 +97,26 @@
                 for="checked-checkbox">Remember
                 Me</label>
             </div>
-            <button
-              class="w-full px-5 py-3 mt-10 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              type="submit">Login
-              to your account</button>
 
-            <a class="w-full mt-4 btn btn-primary"
-              href="{{ route("auth.google") }}">
-              <i class="fab fa-google"></i> Sign in with Google
-            </a>
+
+            <div class="flex items-center justify-start gap-6">
+              <button
+                class="w-full px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                type="submit">Login
+                to your account</button>
+
+              <div
+                class="flex items-center justify-center dark:bg-gray-800">
+                <button
+                  class="flex gap-2 px-4 py-2 transition duration-150 border rounded-lg border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow">
+                  <img class="w-6 h-6"
+                    src="{{ Vite::asset("resources/icons/google.svg") }}"
+                    alt="google logo" loading="lazy">
+                  <a href="{{ route("auth.google") }}">Login with
+                    Google</a>
+                </button>
+              </div>
+            </div>
 
             <div
               class="text-sm font-medium text-gray-500 dark:text-gray-400">
