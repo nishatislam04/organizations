@@ -7,24 +7,19 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleMiddleware {
+class SuperMiddleware {
     /**
      * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response {
-        if (
-            Auth::check() &&
-            ((Auth::user()->role === "admin") ||
-                (Auth::user()->role === "super") ||
-                (Auth::user()->role === "member"))
-        ) {
+        if (Auth::user()->role === "super") {
             return $next($request);
+        } else {
+            return redirect()->route("login")->withErrors(
+                ['username' => "you are not authorized to view this page"]
+            );
         }
-
-        return redirect()->route("login")->withErrors(
-            ['username' => "you are not authorized to view this page"]
-        );
     }
 }

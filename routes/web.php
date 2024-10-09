@@ -31,9 +31,9 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::get("/dashboard", [DashboardController::class, "dashboard"])
   ->name("dashboard.index")
-  ->middleware(["auth", "role"]);
+  ->middleware(["auth"]);
 
-Route::middleware(["auth"])
+Route::middleware(["auth", "super-admin"])
   ->prefix("organizations")
   ->name("organizations.")
   ->controller(OrganizationController::class)
@@ -56,7 +56,7 @@ Route::middleware(["auth"])
     Route::delete("/{organization}/delete", "destroy")->name("destroy");
   });
 
-Route::middleware(["auth"])
+Route::middleware(["auth", "super-admin"])
   ->prefix("users")
   ->name("users.")
   ->controller(UserController::class)->group(function () {
