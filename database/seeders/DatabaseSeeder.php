@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder {
         // User::factory(1)->create();
         User::factory(1)->create([
             'username' => "nio",
-            'email' => fake()->unique()->safeEmail(),
+            'email' => "nishatislam318@gmail.com",
             'password' => "1234",
             "role" => "super",
         ]);

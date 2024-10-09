@@ -33,7 +33,7 @@ class AuthController extends Controller {
                 "password" => "required|min:3|max:254"
             ]
         );
-        $remember = $request->has("remember");
+        $remember = $request->remember ? true : false;
 
         $user = User::where("email", $validated['username'])
             ->orWhere("username", $validated['username'])->first();
@@ -46,7 +46,7 @@ class AuthController extends Controller {
         }
 
         if (
-            Auth::attempt(['email' => $user->email, 'password' => $validated['password']]) ||
+            Auth::attempt(['email' => $user->email, 'password' => $validated['password']], $remember) ||
             Auth::attempt(['username' => $user->username, 'password' => $validated['password']], $remember)
         ) {
             $request->session()->regenerate();
@@ -70,15 +70,17 @@ class AuthController extends Controller {
                 'username' => "required|string|min:3|max:254",
                 "email" => "required|email|min:5|max:254",
                 // "role" => "required|string|in:admin,member",
-                "organization_id" => "required",
+                "organization_id" => "nullable",
                 "password" => "required|confirmed|min:3|max:254"
             ]
         );
+        $remember = $request->remember ? true : false;
+
         $validated['role'] = "member";
         $validated["status"] = "pending";
         $user = User::create($validated);
 
-        Auth::login($user);
+        Auth::login($user, $remember);
 
         return redirect()->route("dashboard.index");
     }
