@@ -36,10 +36,10 @@ class OrganizationController extends Controller {
             if (Auth::user()->role === "super") {
                 $organizations = Organization::leftJoin('users', 'organizations.user_id', '=', 'users.id')
                     ->select(
-                        'users.*',                       // Select all columns from users
-                        'users.id as userId',             // Alias user id
-                        'organizations.*',                // Select all columns from organizations
-                        'organizations.id as organizationId' // Alias organization id
+                        'users.*',
+                        'users.id as userId',
+                        'organizations.*',
+                        'organizations.id as organizationId'
                     )
                     ->simplePaginate(5);
             }
@@ -63,15 +63,25 @@ class OrganizationController extends Controller {
 
             session()->flash("search_result", $count);
         }
-        // dd($organizations);
 
-        return view("organizations.index", compact("organizations", "sortBy", "sortDir"));
+        return view(
+            "organizations.index",
+            compact("organizations", "sortBy", "sortDir")
+        );
     }
 
     function listings() {
-        $organizations = Organization::where("user_id", null)->get();
+        $superName = User::where("role", "super")->first()->username;
+        // $organizations = Organization::where("user_id", null)->simplePaginate(10);
+        $organizations = Organization::with("user")->simplePaginate();
 
-        return view("organizations.listings");
+        // dd($organizations);
+
+
+        return view(
+            "organizations.listings",
+            compact("superName", "organizations")
+        );
     }
 
     /**
@@ -99,7 +109,6 @@ class OrganizationController extends Controller {
             "description" => "required|string",
             "max_members" => "required|integer|min_digits:1"
         ]);
-        $validated["user_id"] = Auth::id();
 
         Organization::create($validated);
 
