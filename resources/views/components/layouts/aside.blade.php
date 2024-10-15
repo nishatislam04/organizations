@@ -1,3 +1,9 @@
+@php
+  $user = auth()->user();
+  $shouldShowOrganization =
+      is_null($user->organization_id) && !$user->role === "super";
+@endphp
+
 <aside
   class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-16 font-normal duration-75 lg:flex transition-width"
   id="sidebar" aria-label="Sidebar">
@@ -54,12 +60,14 @@
               </ul>
             </li>
           @endcan
-          @can("is-admin")
+
+          @if ($shouldShowOrganization)
             <li>
               <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                href="{{ route("organizations.index") }}">Organizations</a>
+                href="{{ route("organizations.listings") }}">Organizations</a>
             </li>
-          @endcan
+          @endif
+
           @can("is-super")
             <li>
               <button

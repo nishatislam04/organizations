@@ -9,7 +9,7 @@
       <main>
         <div
           class="items-center justify-between block p-4 bg-white border-b border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-700">
-          <div class="relative w-full mb-2 h-28">
+          <div class="relative w-full h-20 mb-2">
 
             <x-modals.flash />
 
@@ -23,9 +23,8 @@
               @endauth
 
               <h1
-                class="text-xl font-semibold text-gray-900 -translate-y-3 sm:text-2xl dark:text-white">
-                All
-                Organizations</h1>
+                class="mt-1 text-xl font-semibold text-gray-900 -translate-y-3 sm:text-2xl dark:text-white">
+                All Organizations</h1>
             </div>
             <div
               class="flex items-center justify-between sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
@@ -85,7 +84,8 @@
 
                         <td
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {{ 0 / $organization->max_members }}</td>
+                          {{ $organization->max_members }}
+                        </td>
 
                         <td
                           class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
@@ -95,9 +95,10 @@
                         <td class="flex flex-col gap-2 p-2"
                           id="organizations-actions">
                           <x-buttons.button
-                            class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                            id="updateProductButton" type="a"
-                            href='{{ route("organizations.edit", $organization->id) }}'>
+                            class="inline-flex items-start px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                            id="join-organization-btn"
+                            data-item-id="{{ $organization->id }}"
+                            type="button">
                             <img class="w-4 h-4 mr-2"
                               src="{{ Vite::asset("resources/icons/join.svg") }}"
                               alt="">
@@ -106,7 +107,7 @@
 
                           <x-buttons.button
                             class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
-                            id="delete-organization"
+                            id="hide-organization-btn"
                             data-item-id="{{ $organization->id }}"
                             type="button">
                             <img class="w-4 h-4 mr-2"
@@ -123,10 +124,20 @@
             </div>
           </div>
         </div>
+        <x-modals.join-modal formId="join-organization-form"
+          typeIcon="success-icon" headerTitle="Join Organization"
+          actionConfirmBtn="Yes, I am sure"
+          actionConfirmCancel="No, cancel">Are you sure you want to join
+          this organization?</x-modal>
+          <x-modals.hide-modal formId="hide-organization-form"
+            typeIcon="warning-icon" headerTitle="Hide Organization"
+            actionConfirmBtn="Yes, I am sure"
+            actionConfirmCancel="No, cancel">Are you sure you want to
+            hide this organization?</x-modal>
 
-        @if ($organizations instanceof Illuminate\Pagination\Paginator)
-          {!! $organizations->appends(["query" => request("query")])->links() !!}
-        @endif
+            @if ($organizations instanceof Illuminate\Pagination\Paginator)
+              {!! $organizations->appends(["query" => request("query")])->links() !!}
+            @endif
       </main>
     </div>
 

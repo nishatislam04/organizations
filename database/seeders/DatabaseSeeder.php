@@ -21,12 +21,5 @@ class DatabaseSeeder extends Seeder {
         ]);
         Organization::factory(5)->create();
         Subscription::factory(3)->create();
-
-        Organization::factory(1)->create([
-            "name" => "testing",
-            "description" => fake()->sentence(6),
-            "max_members" => 10,
-            "user_id" => 1,
-        ]);
     }
 }

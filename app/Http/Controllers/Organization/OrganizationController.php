@@ -72,11 +72,7 @@ class OrganizationController extends Controller {
 
     function listings() {
         $superName = User::where("role", "super")->first()->username;
-        // $organizations = Organization::where("user_id", null)->simplePaginate(10);
-        $organizations = Organization::with("user")->simplePaginate();
-
-        // dd($organizations);
-
+        $organizations = Organization::with("user")->simplePaginate(10);
 
         return view(
             "organizations.listings",

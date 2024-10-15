@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Auth\User;
+use App\Models\Member\Member;
 use App\Models\Organization\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,10 @@ class AuthController extends Controller {
         $superRoleId = User::where("role", "=", "super")->get();
         $superRoleId = $superRoleId[0]->id;
 
-        $organizations = Organization::where("user_id", $superRoleId)->get();
+        session()->has("joining_org") ?
+            $organizations = [] :
+            $organizations = Organization::where("user_id", null)->get();
+
         return view("auth.register", compact("organizations"));
     }
 
@@ -27,6 +31,7 @@ class AuthController extends Controller {
      *
      */
     function login(Request $request) {
+
         $validated = $request->validate(
             [
                 "username" => "required|string|min:3|max:254",
@@ -78,9 +83,16 @@ class AuthController extends Controller {
 
         $validated['role'] = "member";
         $validated["status"] = "pending";
+
+        session()->has("joining_org") &&
+            $validated['organization_id'] = session()->get("joining_org");
+
         $user = User::create($validated);
 
         Auth::login($user, $remember);
+
+        session()->has("joining_org") &&
+            session()->forget("joining_org");
 
         return redirect()->route("dashboard.index");
     }

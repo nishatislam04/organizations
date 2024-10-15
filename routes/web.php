@@ -15,6 +15,7 @@ Route::get("/", function () {
 });
 
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Member\MemberController;
 
 // Route to initiate Google login
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
@@ -97,6 +98,8 @@ Route::post("/subscriptions/{organization}/store", [SubscriptionController::clas
 
 
 Route::get("/installments/{subscription}", [InstallmentController::class, "index"])->name("installments.index");
+
+Route::post("/organizations/{organization}/join", [MemberController::class, "store"])->name("members.join");
 
 
 Route::fallback(fn() => response()->view('errors.404', [], 404));
