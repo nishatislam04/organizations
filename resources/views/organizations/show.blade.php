@@ -13,11 +13,19 @@
             <x-modals.flash />
 
             <div class="">
-              <x-buttons.bread-crumb class="mb-10" :links='[
-                  "home" => "dashboard.index",
-                  "organizations" => "organizations.index",
-                  "organization" => "",
-              ]' />
+              @can("is-super")
+                <x-buttons.bread-crumb class="mb-10" :links='[
+                    "home" => "dashboard.index",
+                    "organizations" => "organizations.index",
+                    "organization" => "",
+                ]' />
+              @endcan
+              @can("is-member")
+                <x-buttons.bread-crumb class="mb-10" :links='[
+                    "home" => "dashboard.index",
+                    "organization" => "",
+                ]' />
+              @endcan
               {{-- <x-buttons.bread-crumb class="mb-10" /> --}}
 
               <h1

@@ -203,10 +203,21 @@
                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $organization->max_members }}</td>
 
-                          <td
-                            class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $organization->user->username ?? $superName }}
-                          </td>
+                          {{-- user_id === null; author is super --}}
+                          {{-- user_id === something; & role is not admin author is super --}}
+                          @if (is_null($organization->user_id))
+                            <td
+                              class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              {{ $superName }} </td>
+                          @elseif ($organization->role === "member")
+                            <td
+                              class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              {{ $superName }} </td>
+                          @else
+                            <td
+                              class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                              {{ $organization->username }}</td>
+                          @endif
 
                           <td class="flex flex-col gap-2 p-2"
                             id="organizations-actions">

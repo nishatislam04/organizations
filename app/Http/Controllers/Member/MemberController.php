@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\Auth\User;
-use App\Models\member\member;
 use App\Models\Organization\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,14 +34,10 @@ class MemberController extends Controller {
             return redirect()->route("auth.login");
         }
         $user_id = Auth::id();
-
-        Member::create([
-            "user_id" => $user_id,
-            "organization_id" => $organization->id
-        ]);
-
         $user = User::find($user_id);
+
         $user->organization_id = $organization->id;
+        $user->status = "pending";
         $user->save();
 
         return redirect()->route("organizations.index");

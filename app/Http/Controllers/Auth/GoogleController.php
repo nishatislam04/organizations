@@ -31,29 +31,31 @@ class GoogleController extends Controller {
             $user = AuthUser::where('email', $googleUser->getEmail())->first();
 
             if ($user) {
-                // If the user exists, update the google_id if it's null
+
                 if (is_null($user->google_id)) {
                     $user->google_id = $googleUser->getId();
-                    session()->has("joining_org") &&
-                        $user->organization_id = session()->get("joining_org");
-                    $user->save();  // Save the updated user with google_id
+                    $user->organization_id = session()->get("joining_org");
+                    $user->status = "pending";
+                    $user->save();
+                } else {
+                    $user->organization_id = session()->get("joining_org");
+                    $user->status = "pending";
+                    $user->save();
                 }
             } else {
-                // If the user does not exist, create a new user
+
                 $user = AuthUser::create([
                     'username' => $googleUser->getName(),
                     'email' => $googleUser->getEmail(),
                     'google_id' => $googleUser->getId(),
                     'password' => bcrypt('1234'),
-                    "organization_id" => session()->has("joining_org") &&
-                        session()->get("joining_org")
+                    "status" => "pending",
+                    "organization_id" => session()->get("joining_org")
                 ]);
             }
 
-            // Log the user in
             Auth::login($user);
 
-            // Redirect to the intended page or the homepage
             return redirect()->route('dashboard.index');
         } catch (Exception $e) {
             return redirect('/login')->withErrors(['error' => 'Unable to login, try again.']);

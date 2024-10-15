@@ -35,7 +35,12 @@ class OrganizationController extends Controller {
             session()->forget("search_result");
 
             if (Auth::user()->role === "super") {
-                $organizations = Organization::leftJoin('users', 'organizations.user_id', '=', 'users.id')
+                $organizations = Organization::leftJoin(
+                    'users',
+                    'organizations.user_id',
+                    '=',
+                    'users.id'
+                )
                     ->select(
                         'users.*',
                         'users.id as userId',
@@ -47,10 +52,13 @@ class OrganizationController extends Controller {
             if (Auth::user()->role === "admin") {
 
                 $organizations = Organization::join("users", "users.organization_id", "=", "organizations.id")
-                    ->select("users.*", "users.id as userId", "organizations.*", "organizations.id as organizationId")
+                    ->select(
+                        "users.*",
+                        "users.id as userId",
+                        "organizations.*",
+                        "organizations.id as organizationId"
+                    )
                     ->first();
-                // using first() bcz admin can have only one organization
-
             }
         } else {
 
@@ -74,6 +82,8 @@ class OrganizationController extends Controller {
     }
 
     function listings() {
+        session()->forget("joining_org");
+
         $superName = User::where("role", "super")->first()->username;
         $organizations = Organization::with("user")->simplePaginate(10);
 

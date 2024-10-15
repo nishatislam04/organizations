@@ -32,6 +32,10 @@ class GateServiceProvider extends ServiceProvider {
             return in_array($user->role, ["super", "admin"]);
         });
 
+        Gate::define("is-member", function (User $user) {
+            return $user->role === "member";
+        });
+
         Gate::define("org-delete", function (User $user, Organization $organization) {
             // return $user->id === $organization->user_id || $user->role === "super";
             return $user->role === "super";

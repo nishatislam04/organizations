@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->text("description");
             $table->integer("max_members");
             $table->foreignIdFor(User::class)->nullable();
-            $table->foreignIdFor(Member::class)->nullable();
             $table->timestamps();
         });
     }

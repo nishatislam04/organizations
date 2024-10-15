@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Auth\User;
-use App\Models\Member\Member;
 use App\Models\Organization\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,6 +55,10 @@ class AuthController extends Controller {
         ) {
             $request->session()->regenerate();
 
+            $user->organization_id = session()->get("joining_org");
+            $user->status = "pending";
+            $user->save();
+
             return redirect()->route("dashboard.index");
         }
 
@@ -83,16 +86,13 @@ class AuthController extends Controller {
 
         $validated['role'] = "member";
         $validated["status"] = "pending";
-
-        session()->has("joining_org") &&
-            $validated['organization_id'] = session()->get("joining_org");
+        $validated['organization_id'] = session()->get("joining_org");
 
         $user = User::create($validated);
 
         Auth::login($user, $remember);
 
-        session()->has("joining_org") &&
-            session()->forget("joining_org");
+        session()->forget("joining_org");
 
         return redirect()->route("dashboard.index");
     }
@@ -102,6 +102,8 @@ class AuthController extends Controller {
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
+        session()->forget("joining_org");
 
         return redirect('');
     }

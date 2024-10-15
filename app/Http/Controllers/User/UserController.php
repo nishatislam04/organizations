@@ -20,7 +20,7 @@ class UserController extends Controller {
         $sortDir = $request->input("sortDir");
 
         $superId = User::where("role", "super")->get()[0]->id;
-        $availableOrganizations = Organization::where("user_id", "=", $superId)->get()->count();
+        $availableOrganizations = Organization::where("user_id", null)->get()->count();
 
         if ($sortBy || $sortDir) {
             session()->forget("search_result");
@@ -59,8 +59,6 @@ class UserController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create() {
-        $superRoleId = User::where("role", "=", "super")->get();
-        $superRoleId = $superRoleId[0]->id;
 
         $organizations = Organization::where("user_id", null)->get();
         return view("users.create", compact("organizations"));
