@@ -64,7 +64,7 @@ class InstallmentController extends Controller {
             "installment_id" => $installmentId,
         ]);
 
-        return redirect()->route("installments.index");
+        return redirect()->route("dashboard.index");
     }
 
     /**
