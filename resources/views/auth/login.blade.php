@@ -9,7 +9,7 @@
     <meta name="author" content="Themesberg">
     <meta name="generator" content="Hugo 0.135.0">
 
-    <title>Login</title>
+    <title>Organizations Admin Dashboard</title>
 
 
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet">
 
-    @vite(["resources/css/template.css", "resources/css/app.css", "resources/css/style.css", "resources/js/index.js", "resources/js/app.js"])
+    @vite(["resources/css/template.css", "resources/css/app.css", "resources/css/style.css", "resources/js/app.js"])
 
     <link
       href="{{ Vite::asset("resources/icons/favicons/apple-touch-icon.png") }}"
@@ -40,6 +40,8 @@
       rel="mask-icon" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
+
+
   </head>
 
   <body class="bg-gray-50 dark:bg-gray-800">
@@ -106,7 +108,8 @@
                 to your account</button>
 
               <div
-                class="flex items-center justify-center dark:bg-gray-800">
+                class="flex items-center justify-center dark:bg-gray-800"
+                id="login-container">
                 <button
                   class="flex gap-2 px-4 py-2 transition duration-150 border rounded-lg border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-slate-400 dark:hover:border-slate-500 hover:text-slate-900 dark:hover:text-slate-300 hover:shadow">
                   <img class="w-6 h-6"
