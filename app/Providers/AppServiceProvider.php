@@ -29,5 +29,6 @@ class AppServiceProvider extends ServiceProvider {
         $superUser = User::where("role", "super")->first();
         $superName = $superUser ? $superUser->username : null;
         View::share('superName', $superName);
+        View::share('super', $superUser);
     }
 }

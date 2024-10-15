@@ -1,7 +1,10 @@
 @php
   $user = auth()->user();
-  $shouldShowOrganization =
-      is_null($user->organization_id) && !$user->role === "super";
+  $shouldShowOrganizationListings =
+      is_null($user->organization_id) && $user->role === "member";
+  $shouldShowOrganization = !is_null($user->organization_id);
+  $organization_id = $user->organization_id;
+
 @endphp
 
 <aside
@@ -61,10 +64,17 @@
             </li>
           @endcan
 
-          @if ($shouldShowOrganization)
+          @if ($shouldShowOrganizationListings)
             <li>
               <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
                 href="{{ route("organizations.listings") }}">Organizations</a>
+            </li>
+          @endif
+
+          @if ($shouldShowOrganization)
+            <li>
+              <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
+                href="{{ route("organizations.show", $organization_id) }}">Organization</a>
             </li>
           @endif
 

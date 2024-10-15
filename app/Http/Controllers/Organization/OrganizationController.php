@@ -17,6 +17,7 @@ class OrganizationController extends Controller {
         $sortBy = $request->input("sortBy");
         $sortDir = $request->input("sortDir");
 
+        // sorted
         if ($sortBy || $sortDir) {
             // IMPLEMENT : sorting on search_result
 
@@ -64,6 +65,8 @@ class OrganizationController extends Controller {
             session()->flash("search_result", $count);
         }
 
+        // dd($organizations);
+
         return view(
             "organizations.index",
             compact("organizations", "sortBy", "sortDir")
@@ -88,10 +91,16 @@ class OrganizationController extends Controller {
     }
 
     public function show(Organization $organization) {
+
+        // dd(User::with("joinOrganizations")->get());
+        // dd(Organization::find($organization->id)->with("user")->get());
+
         $organization = Organization::where("organizations.id", $organization->id)
-            ->join("users", "organizations.user_id", "=", "users.id")
+            ->leftJoin("users", "organizations.user_id", "=", "users.id")
             ->select("users.*", "users.id as userId", "organizations.*", "organizations.id as organizationId")
-            ->get()[0];
+            ->first();
+
+
 
         return view("organizations.show", compact("organization"));
     }

@@ -128,7 +128,7 @@
 
                         <td
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {{ count($organizations->joinedMembers) }}</td>
+                          {{ count($organizations->max_members) }}</td>
 
                         <td
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -197,7 +197,7 @@
 
                           <td
                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ count($organization->joinedMembers) }}</td>
+                            {{ $organization->max_members }}</td>
 
                           <td
                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">

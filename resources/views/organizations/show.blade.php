@@ -34,7 +34,7 @@
                   class="absolute right-0 bottom-0 text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
                   type="a" :href='route(
                       "subscriptions.create",
-                      $organization->organizationId,
+                      "$organization->organizationId",
                   )'>
                   Create a new Subscription
                 </x-buttons.button>
@@ -74,7 +74,7 @@
                       <p class="font-medium text-gray-400">Author:</p>
                       <p
                         class="text-lg font-semibold text-gray-500 dark:text-gray-300">
-                        {{ $organization->username }}
+                        {{ $organization->username ?? $superName }}
                       </p>
                     </div>
 

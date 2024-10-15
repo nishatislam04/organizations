@@ -20,7 +20,7 @@ class Organization extends Model {
         return $this->hasMany(Subscription::class);
     }
 
-    function joinedMembers() {
+    function members() {
         return $this->hasMany(User::class);
     }
 }

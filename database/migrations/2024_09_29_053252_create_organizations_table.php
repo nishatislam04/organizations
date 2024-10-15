@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Auth\User;
+use App\Models\Member\Member;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,7 @@ return new class extends Migration {
             $table->text("description");
             $table->integer("max_members");
             $table->foreignIdFor(User::class)->nullable();
+            $table->foreignIdFor(Member::class)->nullable();
             $table->timestamps();
         });
     }

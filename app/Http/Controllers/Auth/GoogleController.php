@@ -34,6 +34,8 @@ class GoogleController extends Controller {
                 // If the user exists, update the google_id if it's null
                 if (is_null($user->google_id)) {
                     $user->google_id = $googleUser->getId();
+                    session()->has("joining_org") &&
+                        $user->organization_id = session()->get("joining_org");
                     $user->save();  // Save the updated user with google_id
                 }
             } else {
@@ -42,7 +44,9 @@ class GoogleController extends Controller {
                     'username' => $googleUser->getName(),
                     'email' => $googleUser->getEmail(),
                     'google_id' => $googleUser->getId(),
-                    'password' => bcrypt('1234'),  // Default password, should be secured later
+                    'password' => bcrypt('1234'),
+                    "organization_id" => session()->has("joining_org") &&
+                        session()->get("joining_org")
                 ]);
             }
 

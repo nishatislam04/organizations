@@ -46,7 +46,7 @@ Route::get("/dashboard", [DashboardController::class, "dashboard"])
 
 Route::get("/organizations/listings", [OrganizationController::class, "listings"])->name("organizations.listings");
 
-Route::middleware(["auth", "super-admin"])
+Route::middleware(["auth"])
   ->controller(OrganizationController::class)
   ->prefix("organizations")
   ->name("organizations.")
