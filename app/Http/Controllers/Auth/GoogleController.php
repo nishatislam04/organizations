@@ -38,8 +38,8 @@ class GoogleController extends Controller {
                     $user->status = "pending";
                     $user->save();
                 } else {
-                    $user->organization_id = session()->get("joining_org");
-                    $user->status = "pending";
+                    $user->organization_id = $user->organization_id ?? session()->get("joining_org");
+                    $user->status =  $user->status === "passed" ? "passed" : "pending";
                     $user->save();
                 }
             } else {

@@ -15,6 +15,7 @@ document.addEventListener("click", (ev) => {
   if (ev.target.closest("#join-organization-form input")) {
     document.querySelector("#join-organization-form").action = `http://nio.com/organizations/${getQueryString('id')}/join`
   }
+
   if (ev.target.closest("#join-organization-modal")) {
     modal_overlay("join-organization-modal")
   }

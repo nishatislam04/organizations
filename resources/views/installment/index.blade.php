@@ -13,19 +13,36 @@
             <x-modals.flash />
 
             <div class="">
-              <x-buttons.bread-crumb class="mb-10" :links='[
-                  "home" => "dashboard.index",
-                  "organizations" => "organizations.index",
-                  "organizaion" => [
-                      "route" => "organizations.show",
-                      "id" => $details->organizationId,
-                  ],
-                  "subscriptions" => [
-                      "route" => "subscriptions.index",
-                      "id" => "$details->organizationId",
-                  ],
-                  "installment" => "",
-              ]' />
+              @can("is-super-or-admin")
+                <x-buttons.bread-crumb class="mb-10" :links='[
+                    "home" => "dashboard.index",
+                    "organizations" => "organizations.index",
+                    "organizaion" => [
+                        "route" => "organizations.show",
+                        "id" => $details->organizationId,
+                    ],
+                    "subscriptions" => [
+                        "route" => "subscriptions.index",
+                        "id" => "$details->organizationId",
+                    ],
+                    "installment" => "",
+                ]' />
+              @endcan
+              @can("is-member")
+                <x-buttons.bread-crumb class="mb-10" :links='[
+                    "home" => "dashboard.index",
+                    "organizaion" => [
+                        "route" => "organizations.show",
+                        "id" => $details->organizationId,
+                    ],
+                    "subscriptions" => [
+                        "route" => "subscriptions.index",
+                        "id" => "$details->organizationId",
+                    ],
+                    "installment" => "",
+                ]' />
+              @endcan
+
               {{-- <x-buttons.bread-crumb class="mb-10" /> --}}
 
               <h1
@@ -39,6 +56,10 @@
 
               <x-search.search-result />
 
+              @can("is-member")
+                <p class="mt-1 text-sm text-gray-500 ">Today is :
+                  {{ date("d-m-Y") }}</p>
+              @endcan
             </div>
           </div>
         </div>
@@ -82,16 +103,14 @@
           </div>
 
           {{-- right --}}
-          <div class="ml-auto mr-3 overflow-x-auto w-96">
+          <div class="ml-auto mr-3 overflow-x-auto">
             <div class="inline-block min-w-full align-middle">
               <div class="shadow h-80">
                 <table
                   class="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-600">
                   <thead class="sticky top-0 bg-gray-100 dark:bg-gray-700">
                     <tr>
-                      <th class="p-4" scope="col">
-                        <x-forms.checkbox type="all" />
-                      </th>
+
                       <th
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                         scope="col">
@@ -100,26 +119,66 @@
                       <th
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                         scope="col">
+                        Paid
+                      </th>
+                      <th
+                        class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
+                        scope="col">
                         Due Date
+                      </th>
+                      <th
+                        class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
+                        scope="col">
+                        Pay
                       </th>
                     </tr>
                   </thead>
+                  @php
+                    $currentMonth = date("n");
+                    $currentDay = date("j");
+                    $currentYear = date("Y");
+                  @endphp
                   <tbody
                     class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                     @foreach ($dueDates as $key => $dueDate)
                       <tr
                         class="h-14 hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <td class="w-4 p-4">
-                          <x-forms.checkbox type="single" />
-                        </td>
+
                         <td
                           class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
                           {{ $key + 1 }}
                         </td>
                         <td
                           class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
+                          unpaid
+                        </td>
+                        <td
+                          class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
                           {{ $dueDate->due_date }}
                         </td>
+                        @php
+                          $date = explode("-", $dueDate->due_date);
+                          [$dueDay, $dueMonth, $dueYear] = $date;
+                        @endphp
+                        @if ($dueYear <= $currentYear && $dueMonth <= $currentMonth)
+                          <td
+                            class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
+                            <x-buttons.button
+                              class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                              id="installment-pay-btn" type="a"
+                              href='{{ route("installments.payView", $details->subscriptionId) }}'>
+                              <img class="w-4 h-4 mr-2"
+                                src="{{ Vite::asset("resources/icons/success-icon.svg") }}"
+                                alt="">Pay
+                            </x-buttons.button>
+                          </td>
+                        @else
+                          <td
+                            class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
+                            <button>not available</button>
+                          </td>
+                        @endif
+
                       </tr>
                     @endforeach
                   </tbody>

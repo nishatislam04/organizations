@@ -19,7 +19,6 @@ return new class extends Migration {
             $table->foreignIdFor(Organization::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Subscription::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Installment::class)->constrained()->cascadeOnDelete();
-            $table->date("payment_date");
             $table->timestamps();
         });
     }

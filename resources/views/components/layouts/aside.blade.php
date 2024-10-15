@@ -2,7 +2,8 @@
   $user = auth()->user();
   $shouldShowOrganizationListings =
       is_null($user->organization_id) && $user->role === "member";
-  $shouldShowOrganization = !is_null($user->organization_id);
+  $shouldShowOrganization =
+      !is_null($user->organization_id) && $user->status !== "pending";
   $organization_id = $user->organization_id;
 
 @endphp
