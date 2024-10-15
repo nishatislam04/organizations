@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get("/", function () {
   if (Auth::check()) return redirect()->route("dashboard.index");
-  else return redirect()->route("auth.login");
+  else return redirect()->route("organizations.listings");
 });
 
 use App\Http\Controllers\Auth\GoogleController;
@@ -43,7 +43,7 @@ Route::get("/dashboard", [DashboardController::class, "dashboard"])
   ->middleware(["auth"]);
 
 
-Route::get("/organizations/listings", [OrganizationController::class, "listings"])->name("organizations.listings")->middleware("auth");
+Route::get("/organizations/listings", [OrganizationController::class, "listings"])->name("organizations.listings");
 
 Route::middleware(["auth", "super-admin"])
   ->controller(OrganizationController::class)

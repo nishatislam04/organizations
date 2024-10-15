@@ -2,9 +2,10 @@
 
   <x-layouts.container search_route="organizations.index">
 
-    <div
-      class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900"
-      id="main-content">
+    <div id="main-content" @class([
+        "lg:ml-64" => Auth::check(),
+        "relative w-full h-full overflow-y-auto bg-gray-50 dark:bg-gray-900",
+    ])>
       <main>
         <div
           class="items-center justify-between block p-4 bg-white border-b border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-700">
@@ -13,10 +14,13 @@
             <x-modals.flash />
 
             <div class="">
-              <x-buttons.bread-crumb class="mb-10" :links='[
-                  "home" => "dashboard.index",
-                  "organizations" => "",
-              ]' />
+              @auth
+
+                <x-buttons.bread-crumb class="mb-10" :links='[
+                    "home" => "dashboard.index",
+                    "organizations" => "",
+                ]' />
+              @endauth
 
               <h1
                 class="text-xl font-semibold text-gray-900 -translate-y-3 sm:text-2xl dark:text-white">
@@ -32,10 +36,10 @@
           </div>
         </div>
 
-        <div class="flex flex-col">
+        <div class="flex flex-col ">
           <div class="overflow-x-auto">
             <div class="inline-block min-w-full">
-              <div class="shadow h-80">
+              <div @class(["shadow h-80", "p-20 pt-0" => !Auth::check()])>
                 <table
                   class="w-full max-w-full min-w-full overflow-y-scroll divide-y divide-gray-200 dark:divide-gray-600">
                   <thead
