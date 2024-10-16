@@ -16,8 +16,8 @@ class InstallmentController extends Controller {
      */
     public function index(Subscription $subscription) {
 
-        $dueDates =  $subscription->installments;
-
+        // $dueDates =  $subscription->installments;
+        $installments = Installment::with("collected")->get();
         $details =  Installment::where("subscription_id", $subscription->id)
             ->join("subscriptions", "installments.subscription_id", "=", "subscriptions.id")
             ->join("organizations", "installments.organization_id", "=", "organizations.id")
@@ -33,11 +33,8 @@ class InstallmentController extends Controller {
             ->first();
 
         // dd($dueDates);
-        // $installmentCollections = InstallmentCollections::where("user_id", Auth::id())->first();
-        // dd(Installment::with("collected")->get());
-        // dd(InstallmentCollections::with("installment")->get());
 
-        return view("installment.index", compact("dueDates", "details"));
+        return view("installment.index", compact("installments", "details"));
     }
 
     function payView(Installment $installment) {

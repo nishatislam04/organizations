@@ -15,7 +15,7 @@ class Installment extends Model {
         return $this->belongsTo(Subscription::class);
     }
 
-    function collected() {
+    public function collected() {
         return  $this->hasMany(InstallmentCollections::class);
     }
 }
