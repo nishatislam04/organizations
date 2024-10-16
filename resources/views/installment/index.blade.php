@@ -50,6 +50,10 @@
                 Installment Name: <span
                   class="text-5xl font-semibold text-gray-500">{{ $details->subscriptionName }}</span>
               </h1>
+
+              <div>
+
+              </div>
             </div>
             <div
               class="flex items-center justify-between sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
@@ -59,16 +63,30 @@
               @can("is-member")
                 <p class="mt-1 text-sm text-gray-500 ">Today is :
                   {{ date("d-m-Y") }}</p>
+
+                <div
+                  class="absolute bottom-0 right-0 flex flex-col justify-between gap-8">
+
+                  <p class="text-2xl text-gray-400 ">
+                    Penalty Charges : 10,000$
+                  </p>
+
+                  <x-buttons.button
+                    class=" text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                    type="a" :href='route("organizations.create")'>
+                    Pay Installment
+                  </x-buttons.button>
+                </div>
               @endcan
             </div>
+
           </div>
         </div>
         <div class="flex">
           {{-- left --}}
           <div class="flex flex-col justify-center gap-4 ml-4">
             <h2 class="mb-3 text-4xl font-semibold text-gray-200">
-              Installment
-              Details</h2>
+              Installment Details</h2>
             <p
               class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Organization Name:

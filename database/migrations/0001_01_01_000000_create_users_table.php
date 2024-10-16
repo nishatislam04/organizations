@@ -18,6 +18,8 @@ return new class extends Migration {
             $table->string("role")->default("member");
             $table->string("status")->nullable()->default("null");
             $table->foreignIdFor(Organization::class)->nullable();
+            $table->string("penalty_charges")->default(0);
+            $table->string("last_penalty_date")->nullable();
             $table->string("joining_date")->nullable();
             $table->string("remember_token")->nullable();
             $table->string('google_id')->nullable();

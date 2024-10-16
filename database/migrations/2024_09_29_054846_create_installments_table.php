@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Auth\User;
 use App\Models\Organization\Organization;
 use App\Models\Subscription\Subscription;
 use Illuminate\Database\Migrations\Migration;
@@ -15,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignIdFor(Organization::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Subscription::class)->constrained()->cascadeOnDelete();
+            // $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string("due_date");
             $table->string("created_at");
         });
