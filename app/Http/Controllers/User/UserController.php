@@ -138,7 +138,7 @@ class UserController extends Controller {
         $user->status = "passed";
         $user->save();
 
-        Mail::to($user->email)->send(new UserApprovedMail($organization, $user));
+        Mail::to($user->email)->queue(new UserApprovedMail($organization, $user));
 
         // update rest of the users when 
         // current user got assigned to the current org
@@ -154,7 +154,7 @@ class UserController extends Controller {
             $user->status = null;
             $user->organization_id = null;
             $user->save();
-            Mail::to($user->email)->send(new UserRejectedMail());
+            Mail::to($user->email)->queue(new UserRejectedMail());
         }
 
         return redirect()->route("users.index")->with("success", "user approve success");
