@@ -135,6 +135,7 @@ class UserController extends Controller {
         $organization->user_id = $user->id;
         $organization->save();
 
+        $user->joining_date = date("d-n-Y");
         $user->status = "passed";
         $user->save();
 
@@ -152,6 +153,7 @@ class UserController extends Controller {
 
         foreach ($rejectedUsers as $user) {
             $user->status = null;
+            $user->joining_date = null;
             $user->organization_id = null;
             $user->save();
             Mail::to($user->email)->queue(new UserRejectedMail());
