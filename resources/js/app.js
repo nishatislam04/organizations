@@ -9,3 +9,4 @@ import "./components/users/modal.js"
 import "./components/login/login.js"
 import "./components/organizations/listings.js"
 import "./components/installments/pay.js"
+import "./components/organizations/leave.js";

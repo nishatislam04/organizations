@@ -1,22 +1,17 @@
 document.addEventListener("click", (ev) => {
+  if (ev.target.closest("#organization-leave-btn")) {
 
-  // join btn listing
-  if (ev.target.closest("#join-organization-btn")) {
-
-    setQueryString(ev.target.dataset.itemId)
-
-    modal_overlay("join-organization-modal")
+    setQueryString(ev.target.closest("#organization-leave-btn").dataset.oId)
+    modal_overlay("leave-organization-modal")
   }
 
-  // join confirm
-  if (ev.target.closest("#join-organization-form input")) {
-    document.querySelector("#join-organization-form").action = `http://nio.com/organizations/${getQueryString('id')}/join`
+  if (ev.target.closest("#leave-organization-form input")) {
+    document.querySelector("#leave-organization-form").action = `http://nio.com/organizations/${getQueryString("id")}/leave`
   }
 
-  if (ev.target.closest("#join-organization-modal")) {
-    modal_overlay("join-organization-modal")
+  if (ev.target.closest("#leave-organization-modal")) {
+    modal_overlay("leave-organization-modal")
   }
-
 })
 
 function modal_overlay(id) {

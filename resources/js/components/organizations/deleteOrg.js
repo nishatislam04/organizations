@@ -15,7 +15,6 @@ document.addEventListener("click", function (ev) {
   // hide overlay
   if (ev.target.closest(".modal-close-btn")
     && (ev.target.closest("#delete-modal"))) {
-    console.log("del")
     modal_overlay("delete-modal")
   }
 })

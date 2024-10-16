@@ -154,6 +154,17 @@ class OrganizationController extends Controller {
         return redirect()->route("organizations.index")->with("success", "organization update success");
     }
 
+    function leave(Organization $organizaion) {
+        $id = Auth::id();
+        $user = User::find($id);
+        $user->status = null;
+        $user->organization_id = null;
+        $user->joining_date = null;
+        $user->save();
+
+        return redirect()->route("dashboard.index");
+    }
+
 
     /**
      * Remove the specified resource from storage.
