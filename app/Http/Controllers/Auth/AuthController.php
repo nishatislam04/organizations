@@ -77,8 +77,7 @@ class AuthController extends Controller {
             [
                 'username' => "required|string|min:3|max:254",
                 "email" => "required|email|min:5|max:254",
-                // "role" => "required|string|in:admin,member",
-                "organization_id" => "nullable",
+                "organization_id" => "nullable|integer",
                 "password" => "required|confirmed|min:3|max:254"
             ]
         );
@@ -86,7 +85,7 @@ class AuthController extends Controller {
 
         $validated['role'] = "member";
         $validated["status"] = "pending";
-        $validated['organization_id'] = session()->get("joining_org");
+        $validated['organization_id'] = session()->get("joining_org") ?? $validated['organization_id'];
 
         $user = User::create($validated);
 
