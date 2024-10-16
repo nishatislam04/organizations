@@ -137,63 +137,67 @@
                       @endif
                     </tr>
                   </thead>
-                  @php
-                    $currentMonth = date("n");
-                    $currentDay = date("j");
-                    $currentYear = date("Y");
-                  @endphp
+
                   <tbody
                     class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-
                     @foreach ($installments as $key => $installment)
+                      @php
+                        $isPaid = $installment->collected->count() > 0;
+                        $isDuePassed = now()->greaterThan(
+                            $installment->due_date,
+                        );
+                      @endphp
+
+                      <!-- Set row color based on payment status -->
                       <tr
-                        class="h-14 hover:bg-gray-100 dark:hover:bg-gray-700">
+                        class="
+                        h-14 hover:bg-gray-100 dark:hover:bg-gray-700  
+                        @if ($isPaid) bg-green-50 dark:bg-green-900
+                        @elseif ($isDuePassed) bg-red-50 dark:bg-red-900 @endif">
 
                         <td
                           class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
                           {{ $key + 1 }}
                         </td>
+
                         @if (auth()->user()->role !== "super")
                           <td
                             class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
-                            {{ $installment->collected->count() > 0 ? "paid" : "unpaid" }}
+                            {{ $isPaid ? "Paid" : "Unpaid" }}
                           </td>
                         @endif
+
                         <td
                           class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
                           {{ $installment->due_date }}
                         </td>
-                        @php
-                          $date = explode("-", $installment->due_date);
-                          [$dueDay, $dueMonth, $dueYear] = $date;
-                        @endphp
+
+                        <!-- Action Button (for non-super users) -->
                         @if (auth()->user()->role !== "super")
-                          @if ($dueYear <= $currentYear && $dueMonth <= $currentMonth)
-                            @if ($installment->collected->count() > 0)
-                              <td
-                                class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
-                                <button>Already Paid</button>
-                              </td>
+                          <td
+                            class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
+                            @if ($isPaid)
+                              <button
+                                class="px-3 py-2 text-sm font-medium text-gray-700 bg-green-100 rounded cursor-not-allowed dark:bg-green-800 dark:text-green-200">
+                                Already Paid
+                              </button>
+                            @elseif ($isDuePassed)
+                              <button
+                                class="px-3 py-2 text-sm font-medium text-gray-700 bg-red-100 rounded cursor-not-allowed dark:bg-red-800 dark:text-red-200">
+                                Due Date Passed
+                              </button>
                             @else
-                              <td
-                                class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
-                                <x-buttons.button
-                                  class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                                  id="installment-pay-btn" type="a"
-                                  href='{{ route("installments.payView", $installment->id) }}'>
-                                  <img class="w-4 h-4 mr-2"
-                                    src="{{ Vite::asset("resources/icons/success-icon.svg") }}"
-                                    alt="">
-                                  {{ $installment->collected->count() ? "Already Paid" : "Pay" }}
-                                </x-buttons.button>
-                              </td>
+                              <x-buttons.button
+                                class="inline-flex items-center px-3 py-2 text-sm text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                id="installment-pay-btn" type="a"
+                                href='{{ route("installments.payView", $installment->id) }}'>
+                                <img class="w-4 h-4 mr-2"
+                                  src="{{ Vite::asset("resources/icons/success-icon.svg") }}"
+                                  alt="">
+                                Pay
+                              </x-buttons.button>
                             @endif
-                          @else
-                            <td
-                              class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
-                              <button>not available</button>
-                            </td>
-                          @endif
+                          </td>
                         @endif
                       </tr>
                     @endforeach
