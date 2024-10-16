@@ -148,13 +148,17 @@
                         );
                       @endphp
 
-                      <!-- Set row color based on payment status -->
-                      <tr
-                        class="
-                        h-14 hover:bg-gray-100 dark:hover:bg-gray-700  
-                        @if ($isPaid) bg-green-50 dark:bg-green-900
-                        @elseif ($isDuePassed) bg-red-50 dark:bg-red-900 @endif">
-
+                      <tr @class([
+                          "h-14 hover:bg-gray-100 dark:hover:bg-gray-700",
+                          "bg-green-50 dark:bg-green-900" =>
+                              $isPaid &&
+                              auth()->user()->role !== "super" &&
+                              auth()->user()->role !== "admin",
+                          "bg-red-50 dark:bg-red-900" =>
+                              $isDuePassed &&
+                              auth()->user()->role !== "super" &&
+                              auth()->user()->role !== "admin",
+                      ])>
                         <td
                           class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
                           {{ $key + 1 }}
