@@ -72,7 +72,7 @@ class SubscriptionController extends Controller {
 
         for ($i = 0; $i < $data['total']; $i++) {
             if ((int) $month === 12) {
-                $month = 1;
+                $month = 0;
                 $year++;
             }
 
