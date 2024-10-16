@@ -42,7 +42,7 @@ class MemberController extends Controller {
 
         $organizations = Organization::simplePaginate(5);
 
-        return redirect()->route("organizations.index", compact("organizations"));
+        return redirect()->route("dashboard.index");
     }
 
     /**

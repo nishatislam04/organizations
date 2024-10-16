@@ -166,6 +166,7 @@ class UserController extends Controller {
         $user->status = null;
         $user->organization_id = null;
         $user->save();
+        Mail::to($user->email)->queue(new UserRejectedMail());
 
         return redirect()->route("users.index")->with("success", "user reject success");
     }

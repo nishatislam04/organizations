@@ -3,7 +3,7 @@ document.addEventListener("click", (ev) => {
   // join btn listing
   if (ev.target.closest("#join-organization-btn")) {
 
-    setQueryString(ev.target.dataset.itemId)
+    setQueryString(ev.target.closest("#join-organization-btn").dataset.itemId)
 
     modal_overlay("join-organization-modal")
   }

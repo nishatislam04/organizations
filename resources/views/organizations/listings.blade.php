@@ -87,10 +87,20 @@
                           {{ $organization->max_members }}
                         </td>
 
-                        <td
-                          class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-                          {{ $organization->user->username ?? $superName }}
-                        </td>
+                        @if (
+                            !is_null($organization->user) &&
+                                $organization->user->username &&
+                                $organization->user->role === "admin")
+                          <td
+                            class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
+                            {{ $organization->user->username }}
+                          </td>
+                        @else
+                          <td
+                            class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
+                            {{ $superName }}
+                          </td>
+                        @endif
 
                         <td class="flex flex-col gap-2 p-2"
                           id="organizations-actions">
