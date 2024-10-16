@@ -1,8 +1,11 @@
 document.addEventListener("click", function (ev) {
   if (ev.target.closest("#installment-pay-btn")) {
-    queryString("o", ev.target.dataset.orgId)
-    queryString("s", ev.target.dataset.subId)
-    queryString("i", ev.target.dataset.insId)
+    const target = document.querySelector("#installment-pay-btn")
+    queryString("o", target.dataset.orgId)
+    queryString("s", target.dataset.subId)
+    queryString("i", target.dataset.insId)
+
+    console.log(ev.target)
 
     modal_overlay("installment-pay-modal")
   }

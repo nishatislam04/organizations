@@ -113,21 +113,24 @@
                       {{ $organization->description }}</p>
                   </div>
                 </div>
-
-                <!-- Button to Show All Subscriptions -->
-                <x-buttons.button
-                  class="border border-b-gray-600 absolute bottom-2 px-5 py-3 ml-auto text-sm text-white transform -translate-x-1/2 bg-blue-800 left-[48%] hover:bg-blue-700 focus:ring-4 focus:ring-blue-500 dark:bg-gray-900 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-700"
-                  type="a" :href='route(
-                      "subscriptions.index",
-                      $organization->organizationId,
-                  )'>
-                  Show All Subscriptions
-                </x-buttons.button>
-
               </div>
             </div>
           </div>
         </div>
+        <!-- Button to Show All Subscriptions -->
+        @if ($subscriptionsAvailable < 1)
+          <p class="text-lg italic text-center text-gray-600">
+            No subscriptions is available to show</p>
+        @else
+          <x-buttons.button
+            class="border border-b-gray-600 absolute bottom-2 px-5 py-3 ml-auto text-sm text-white transform -translate-x-1/2 bg-blue-800 left-[48%] hover:bg-blue-700 focus:ring-4 focus:ring-blue-500 dark:bg-gray-900 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-700"
+            type="a" :href='route(
+                "subscriptions.index",
+                $organization->organizationId,
+            )'>
+            Show All Subscriptions
+          </x-buttons.button>
+        @endif
       </main>
     </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Organization;
 use App\Http\Controllers\Controller;
 use App\Models\Auth\User;
 use App\Models\Organization\Organization;
+use App\Models\Subscription\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -102,17 +103,15 @@ class OrganizationController extends Controller {
 
     public function show(Organization $organization) {
 
-        // dd(User::with("joinOrganizations")->get());
-        // dd(Organization::find($organization->id)->with("user")->get());
-
         $organization = Organization::where("organizations.id", $organization->id)
             ->leftJoin("users", "organizations.user_id", "=", "users.id")
             ->select("users.*", "users.id as userId", "organizations.*", "organizations.id as organizationId")
             ->first();
 
+        $subscriptionsAvailable =  Subscription::where("organization_id", $organization->id)->latest()
+            ->count();
 
-
-        return view("organizations.show", compact("organization"));
+        return view("organizations.show", compact("organization", "subscriptionsAvailable"));
     }
 
     /**

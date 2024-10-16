@@ -40,7 +40,9 @@ class MemberController extends Controller {
         $user->status = "pending";
         $user->save();
 
-        return redirect()->route("organizations.index");
+        $organizations = Organization::simplePaginate(5);
+
+        return redirect()->route("organizations.index", compact("organizations"));
     }
 
     /**

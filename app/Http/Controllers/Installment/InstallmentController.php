@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Installment;
 
 use App\Http\Controllers\Controller;
 use App\Models\Installment\Installment;
-use App\Models\Installment\Installment_collections;
+use App\Models\Installment\InstallmentCollections;
 use App\Models\Organization\Organization;
 use App\Models\Subscription\Subscription;
 use Illuminate\Http\Request;
@@ -22,7 +22,6 @@ class InstallmentController extends Controller {
             ->join("subscriptions", "installments.subscription_id", "=", "subscriptions.id")
             ->join("organizations", "installments.organization_id", "=", "organizations.id")
             ->select(
-                "installments.id as installmentId",
                 "organizations.id as organizationId",
                 "subscriptions.id as subscriptionId",
                 "subscriptions.name as subscriptionName",
@@ -33,17 +32,23 @@ class InstallmentController extends Controller {
             )
             ->first();
 
-        // dd($details);
+        // dd($dueDates);
+        // $installmentCollections = InstallmentCollections::where("user_id", Auth::id())->first();
+        // dd(Installment::with("collected")->get());
+        // dd(InstallmentCollections::with("installment")->get());
 
         return view("installment.index", compact("dueDates", "details"));
     }
 
-    function payView(Subscription $subscription) {
-        $details =  Installment::where("subscription_id", $subscription->id)
+    function payView(Installment $installment) {
+        // $dueDates =  $subscription->installments;
+        // $dueDates = Installment::where("subscription_id", $installment->subscription_id)->get();
+        $installmentId = $installment->id;
+
+        $details =  Installment::where("subscription_id", $installment->subscription_id)
             ->join("subscriptions", "installments.subscription_id", "=", "subscriptions.id")
             ->join("organizations", "installments.organization_id", "=", "organizations.id")
             ->select(
-                "installments.id as installmentId",
                 "organizations.id as organizationId",
                 "subscriptions.id as subscriptionId",
                 "subscriptions.name as subscriptionName",
@@ -53,11 +58,13 @@ class InstallmentController extends Controller {
                 "organizations.name as organizationName"
             )
             ->first();
-        return view("installment.pay", compact("details"));
+
+        // dd($installment);
+        return view("installment.pay", compact("installmentId", "details"));
     }
 
     function pay(int $organizationId, int $subscriptionId, int $installmentId) {
-        Installment_collections::create([
+        InstallmentCollections::create([
             'user_id' => Auth::id(),
             "organization_id" => $organizationId,
             "subscription_id" => $subscriptionId,

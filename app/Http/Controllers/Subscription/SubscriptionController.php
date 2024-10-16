@@ -17,8 +17,6 @@ class SubscriptionController extends Controller {
         $subscriptions = Subscription::where("organization_id", $organization->id)->latest()
             ->get();
 
-        // dd($subscriptions);
-
         return view("subscriptions.index", compact("organization", "subscriptions"));
     }
 

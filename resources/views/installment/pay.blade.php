@@ -78,8 +78,10 @@
               <div class="shadow">
                 <x-buttons.button
                   class="flex items-center justify-center px-12 py-5 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                  id="installment-pay-btn" type="button" :data-sub-id="$details->subscriptionId"
-                  :data-org-id="$details->organizationId" :data-ins-id="$details->installmentId">
+                  id="installment-pay-btn"
+                  data-sub-id="{{ $details->subscriptionId }}"
+                  data-org-id="{{ $details->organizationId }}"
+                  data-ins-id="{{ $installmentId }}" type="button">
                   <img class="w-4 h-4 mr-2"
                     src="{{ Vite::asset("resources/icons/success-icon.svg") }}"
                     alt="">

@@ -45,6 +45,7 @@ Route::get("/dashboard", [DashboardController::class, "dashboard"])
 
 
 Route::get("/organizations/listings", [OrganizationController::class, "listings"])->name("organizations.listings");
+Route::post("/organizations/{organization}/join", [MemberController::class, "store"])->name("members.join");
 
 Route::middleware(["auth"])
   ->controller(OrganizationController::class)
@@ -97,11 +98,11 @@ Route::get("/subscriptions/{organization}/create", [SubscriptionController::clas
 Route::post("/subscriptions/{organization}/store", [SubscriptionController::class, "store"])->name("subscriptions.store");
 
 
-Route::get("/installments/{subscription}/pay", [InstallmentController::class, "payView"])->name("installments.payView");
+Route::get("/installments/{installment}/pay", [InstallmentController::class, "payView"])->name("installments.payView");
 Route::post("/installments/pay/{organizaionId}/{subscriptionId}/{installmentId}", [InstallmentController::class, "pay"])->name("installments.pay");
 
 Route::get("/installments/{subscription}", [InstallmentController::class, "index"])->name("installments.index");
-Route::post("/organizations/{organization}/join", [MemberController::class, "store"])->name("members.join");
+
 
 
 Route::fallback(fn() => response()->view('errors.404', [], 404));

@@ -15,10 +15,10 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('installment_collections', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Organization::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Subscription::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Installment::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Organization::class)->constrained();
+            $table->foreignIdFor(Subscription::class)->constrained();
+            $table->foreignIdFor(Installment::class)->constrained();
             $table->timestamps();
         });
     }
