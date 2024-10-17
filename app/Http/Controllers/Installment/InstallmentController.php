@@ -122,7 +122,9 @@ class InstallmentController extends Controller {
     }
 
     function penaltyPayView() {
-        return view("installment.penalty-pay");
+        $org_id = User::find(Auth::id())->organization_id;
+        $subs_id = Subscription::where("organization_id", $org_id)->first()->id;
+        return view("installment.penalty-pay", compact("subs_id"));
     }
 
     function penaltyPay(Request $request) {

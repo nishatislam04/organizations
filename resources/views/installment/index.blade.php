@@ -161,10 +161,28 @@
                     @foreach ($installments as $key => $installment)
                       @php
                         $isPaid = $installment->collected->count() > 0;
-                        $isDuePassed = now()->greaterThanOrEqualTo(
+                        $dueDate = \Carbon\Carbon::createFromFormat(
+                            "d-m-Y",
                             $installment->due_date,
                         );
+                        $currentDate = \Carbon\Carbon::now();
+
+                        // Check if the current date matches the due date
+                        $isSameDay = $currentDate->isSameDay($dueDate);
+
+                        // Check if the due date is in the past (including any previous months of the current year, but not today)
+                        $isDuePassed =
+                            !$isSameDay &&
+                            $dueDate->isBefore(
+                                $currentDate->startOfMonth(),
+                            );
+
+                        // Ensure that we're considering dates that are not just in the past year, but in the past months of the current year
+                        if ($dueDate->year < $currentDate->year) {
+                            $isDuePassed = true; // If the due date is in a previous year, mark it as passed
+                        }
                       @endphp
+
 
                       <tr @class([
                           "h-14 hover:bg-gray-100 dark:hover:bg-gray-700",
@@ -219,6 +237,7 @@
                                 Pay
                               </x-buttons.button>
                             @endif
+
                           </td>
                         @endif
                       </tr>
