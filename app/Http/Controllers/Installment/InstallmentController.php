@@ -9,6 +9,7 @@ use App\Models\Installment\InstallmentCollections;
 use App\Models\Organization\Organization;
 use App\Models\Subscription\Subscription;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,12 +36,14 @@ class InstallmentController extends Controller {
             ->first();
 
         // penalty calculation
-        $today = Carbon::now();
+        $today = CarbonImmutable::now();
+        $tomorrow = $today->addDays();
+        $yestarday = $today->subDays();
         list($currMonth, $currYear) = [date("n"), date("Y")];
         $user = User::find(Auth::id());
         foreach ($installments as $installment) {
             $dueDate = Carbon::createFromFormat("d-m-Y", $installment->due_date);
-            if ($today->isSameDay($dueDate)) {
+            if ($yestarday->isSameDay($dueDate)) {
                 if (is_null($user->last_penalty_date)) {
                     // check if user paid
                     $isPayed = InstallmentCollections::where("installment_id", $installment->id)->first();
