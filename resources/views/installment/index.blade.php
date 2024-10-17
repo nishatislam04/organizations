@@ -111,7 +111,10 @@
               class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Installment Pay Amount:
               <span class="font-normal text-gray-600 dark:text-gray-400">
-                {{ $details->installmentPerAmount }}
+                {{ number_format($details->installmentPerAmount) }} <img
+                  class="inline w-5 h-5"
+                  src="{{ Vite::asset("resources/icons/taka.svg") }}"
+                  alt="">
               </span>
             </p>
 
@@ -119,7 +122,10 @@
               class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Installment Penalty Amount:
               <span class="font-normal text-gray-600 dark:text-gray-400">
-                {{ $details->installmentPenaltyAmount }}
+                {{ number_format($details->installmentPenaltyAmount) }}
+                <img class="inline w-5 h-5"
+                  src="{{ Vite::asset("resources/icons/taka.svg") }}"
+                  alt="">
               </span>
             </p>
           </div>

@@ -20,6 +20,6 @@ class DatabaseSeeder extends Seeder {
             "role" => "super",
         ]);
         Organization::factory(5)->create();
-        Subscription::factory(3)->create();
+        // Subscription::factory(3)->create();
     }
 }

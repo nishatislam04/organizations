@@ -50,6 +50,9 @@
               Paying Amount:
               <span class="font-normal text-gray-600 dark:text-gray-400">
                 {{ number_format($details->installmentPerAmount) }}
+                <img class="inline w-5 h-5"
+                  src="{{ Vite::asset("resources/icons/taka.svg") }}"
+                  alt="">
               </span>
             </p>
 

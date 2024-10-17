@@ -29,8 +29,7 @@
 
               <h1
                 class="text-xl font-semibold text-gray-900 -translate-y-3 sm:text-2xl dark:text-white">
-                All
-                Subscriptions : <span
+                All Subscriptions : <span
                   class="text-4xl italic text-gray-600">{{ $organization->name }}</span>
               </h1>
             </div>
@@ -61,11 +60,14 @@
                         scope="col">
                         Name
                       </th>
-                      <th
-                        class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
-                        scope="col">
-                        ID
-                      </th>
+                      @can("is-admin-or-super")
+                        <th
+                          class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
+                          scope="col">
+                          ID
+                        </th>
+                      @endcan
+
                       <th
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                         scope="col">
@@ -111,13 +113,14 @@
                             href="{{ route("installments.index", $subscription->id) }}">
                             {{ $subscription->name }}</a>
                         </td>
-
-                        <td
-                          class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
-                          <a class="text-base font-semibold text-gray-900 dark:text-white"
-                            href="#">{{ $subscription->id }}
-                          </a>
-                        </td>
+                        @can("is-admin-or-super")
+                          <td
+                            class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
+                            <a class="text-base font-semibold text-gray-900 dark:text-white"
+                              href="#">{{ $subscription->id }}
+                            </a>
+                          </td>
+                        @endcan
 
                         <td
                           class="p-4 text-base font-medium text-gray-900 capitalize whitespace-nowrap dark:text-white">

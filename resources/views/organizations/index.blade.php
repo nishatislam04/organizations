@@ -2,8 +2,7 @@
 
   <x-layouts.container search_route="organizations.index">
 
-    <div
-      class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900"
+    <div class="relative w-full h-full bg-gray-50 lg:ml-64 dark:bg-gray-900"
       id="main-content">
       <main>
         <div
@@ -58,7 +57,7 @@
 
                       </th>
                       <th
-                        class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
+                        class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                         scope="col">
                         Name
 
@@ -71,7 +70,7 @@
                         ID
                       </th>
                       <th
-                        class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
+                        class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                         scope="col">
                         Description
                       </th>
@@ -144,26 +143,26 @@
 
                           @can("org-edit", $organizations)
                             <x-buttons.button
-                              class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                              class="inline-flex items-center justify-center px-2 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                               id="updateProductButton" type="a"
                               href='{{ route("organizations.edit", $organizations->id) }}'>
                               <img class="w-4 h-4 mr-2"
                                 src="{{ Vite::asset("resources/icons/edit.svg") }}"
                                 alt="">
-                              Edit
+
                             </x-buttons.button>
                           @endcan
 
 
                           @can("org-delete", $organizations)
                             <x-buttons.button
-                              class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
+                              class="inline-flex items-center justify-center px-2 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
                               id="delete-organization"
                               data-item-id="{{ $organizations->id }}"
                               type="button">
                               <img class="w-4 h-4 mr-2"
                                 src="{{ Vite::asset("resources/icons/delete.svg") }}"
-                                alt="">Delete
+                                alt="">
                             </x-buttons.button>
                           @endcan
 
@@ -224,26 +223,26 @@
 
                             @can("org-edit", $organization)
                               <x-buttons.button
-                                class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                class="inline-flex items-center justify-center px-2 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                 id="updateProductButton" type="a"
                                 href='{{ route("organizations.edit", $organization->id) }}'>
                                 <img class="w-4 h-4 mr-2"
                                   src="{{ Vite::asset("resources/icons/edit.svg") }}"
                                   alt="">
-                                Edit
+
                               </x-buttons.button>
                             @endcan
 
 
                             @can("org-delete", $organization)
                               <x-buttons.button
-                                class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
+                                class="inline-flex items-center justify-center px-2 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
                                 id="delete-organization"
                                 data-item-id="{{ $organization->id }}"
                                 type="button">
                                 <img class="w-4 h-4 mr-2"
                                   src="{{ Vite::asset("resources/icons/delete.svg") }}"
-                                  alt="">Delete
+                                  alt="">
                               </x-buttons.button>
                             @endcan
 
