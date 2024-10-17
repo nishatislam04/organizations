@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Installment\Installment;
 use App\Models\Organization\Organization;
 use App\Models\Subscription\Subscription;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,6 +18,16 @@ class SubscriptionController extends Controller {
     public function index(Organization $organization) {
         $subscriptions = Subscription::where("organization_id", $organization->id)->latest()
             ->get();
+
+        $today = CarbonImmutable::createFromFormat("d-m-Y", date("d-m-Y"));
+        $tomorrow = $today->addDays();
+        $yestarday = $today->subDays();
+        foreach ($subscriptions as $subscription) {
+            if ($yestarday->isSameDay($subscription->end)) {
+                $subscription->complete = "yes";
+                $subscription->save();
+            }
+        }
 
         return view("subscriptions.index", compact("organization", "subscriptions"));
     }
@@ -42,6 +54,7 @@ class SubscriptionController extends Controller {
         ]);
 
         $validated["organization_id"] = $organization->id;
+        $validated['end'] = "placeholder";
 
         $subs =  Subscription::create($validated);
 
@@ -52,7 +65,10 @@ class SubscriptionController extends Controller {
         $start_date = $validated['start'];
         $total = $validated["total"];
 
-        $this->createInstallment([
+        /**
+         * create installments & return the last  installment
+         */
+        $lastInstallment = $this->createInstallment([
             'organization_id' => $organization_id,
             'subscription_id' => $subscription_id,
             "name" => $name,
@@ -60,6 +76,9 @@ class SubscriptionController extends Controller {
             'start_date' => $start_date,
             'total' => $total
         ]);
+
+        $subs->end = $lastInstallment['due_date'];
+        $subs->save();
 
         return redirect()->route("organizations.show", $organization->id)->with("success", "subscription create success");
     }
@@ -90,6 +109,8 @@ class SubscriptionController extends Controller {
         DB::transaction(function () use ($all_installments) {
             Installment::insert($all_installments);
         });
+
+        return end($all_installments);
     }
 
     /**

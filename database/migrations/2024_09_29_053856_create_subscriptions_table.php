@@ -19,6 +19,8 @@ return new class extends Migration {
             $table->integer("per_amount");
             $table->integer("penalty_amount");
             $table->string("start");
+            $table->string("end");
+            $table->string("complete")->default("no");
             $table->timestamps();
         });
     }

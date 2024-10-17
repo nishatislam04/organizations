@@ -48,14 +48,16 @@
                 </x-buttons.button>
               @endcan
 
-              @can("is-member")
+
+              @if (auth()->user()->role === "member" &&
+                      !is_null(auth()->user()->organization_id))
                 <x-buttons.button
                   class="absolute right-0 bottom-0 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900 text-sm px-5 py-2.5  focus:outline-none"
                   id="organization-leave-btn"
                   data-o-id="{{ $organization->id }}" type="button">
                   Leave Organization
                 </x-buttons.button>
-              @endcan
+              @endif
 
             </div>
           </div>
