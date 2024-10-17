@@ -68,7 +68,11 @@
                   class="absolute bottom-0 right-0 flex flex-col justify-between gap-8">
 
                   <p class="text-2xl text-gray-400 ">
-                    Penalty Charges : 10,000$
+                    Penalty Charges :
+                    <span>{{ auth()->user()->penalty_charges }} <img
+                        class="inline w-6 h-6 -mt-2 -ml-2"
+                        src="{{ Vite::asset("resources/icons/taka.svg") }}"
+                        alt="2"></span>
                   </p>
 
                   <x-buttons.button
