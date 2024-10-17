@@ -1,4 +1,4 @@
-<x-layouts.layout>
+<x-layouts.layout bodyOverflowHidden="true">
 
   <x-layouts.container search_route="organizations.index">
 
