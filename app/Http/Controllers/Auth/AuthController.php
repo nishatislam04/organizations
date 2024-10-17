@@ -78,6 +78,7 @@ class AuthController extends Controller {
                 'username' => "required|string|min:3|max:254",
                 "email" => "required|email|min:5|max:254",
                 "organization_id" => "nullable|integer",
+                "avatar" => 'nullable|image|mimes:jpg,jpeg,png,bmp|max:1024',
                 "password" => "required|confirmed|min:3|max:254"
             ]
         );
@@ -87,6 +88,12 @@ class AuthController extends Controller {
         $validated["status"] = "pending";
         $validated['organization_id'] = session()->get("joining_org") ?? $validated['organization_id'];
 
+        if ($request->hasFile('avatar')) {
+            $avatarFile = $request->file('avatar');
+            $avatarName = time() . '_' . $avatarFile->getClientOriginalName();
+            $avatarFile->storeAs('uploads', $avatarName, 'public');
+            $validated['avatar'] = $avatarName;
+        }
         $user = User::create($validated);
 
         Auth::login($user, $remember);

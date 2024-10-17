@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->string("joining_date")->nullable();
             $table->string("remember_token")->nullable();
             $table->string('google_id')->nullable();
+            $table->text("avatar")->nullable();
             $table->timestamps();
         });
 

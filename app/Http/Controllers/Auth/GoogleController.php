@@ -50,7 +50,8 @@ class GoogleController extends Controller {
                     'google_id' => $googleUser->getId(),
                     'password' => bcrypt('1234'),
                     "status" => "pending",
-                    "organization_id" => session()->get("joining_org")
+                    "organization_id" => session()->get("joining_org"),
+                    "avatar" => $googleUser->getAvatar()
                 ]);
             }
 
