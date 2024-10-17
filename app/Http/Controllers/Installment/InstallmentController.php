@@ -121,6 +121,14 @@ class InstallmentController extends Controller {
         return redirect()->route("dashboard.index");
     }
 
+    function penaltyPayView() {
+        return view("installment.penalty-pay");
+    }
+
+    function penaltyPay(Request $request) {
+        dd($request->all());
+    }
+
     /**
      * Show the form for creating a new resource.
      */

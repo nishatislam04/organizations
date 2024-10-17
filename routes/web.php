@@ -100,11 +100,12 @@ Route::get("/subscriptions/{organization}/create", [SubscriptionController::clas
 Route::post("/subscriptions/{organization}/store", [SubscriptionController::class, "store"])->name("subscriptions.store");
 
 
+Route::get("/installments/penalty-pay", [InstallmentController::class, "penaltyPayView"])->name("installments.penaltyPayView");
+Route::post("/installments/penalty-pay", [InstallmentController::class, "penaltyPay"])->name("installments.penaltyPay");
 Route::get("/installments/{installment}/pay", [InstallmentController::class, "payView"])->name("installments.payView");
 Route::post("/installments/pay/{organizaionId}/{subscriptionId}/{installmentId}", [InstallmentController::class, "pay"])->name("installments.pay");
 
 Route::get("/installments/{subscription}", [InstallmentController::class, "index"])->name("installments.index");
-
 
 
 Route::fallback(fn() => response()->view('errors.404', [], 404));

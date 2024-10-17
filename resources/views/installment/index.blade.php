@@ -73,8 +73,8 @@
 
                   <x-buttons.button
                     class=" text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-                    type="a" :href='route("organizations.create")'>
-                    Pay Installment
+                    type="a" :href='route("installments.penaltyPayView")'>
+                    Pay Penalty
                   </x-buttons.button>
                 </div>
               @endcan
@@ -161,7 +161,7 @@
                     @foreach ($installments as $key => $installment)
                       @php
                         $isPaid = $installment->collected->count() > 0;
-                        $isDuePassed = now()->greaterThan(
+                        $isDuePassed = now()->greaterThanOrEqualTo(
                             $installment->due_date,
                         );
                       @endphp
