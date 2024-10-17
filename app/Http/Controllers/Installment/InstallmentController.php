@@ -35,12 +35,40 @@ class InstallmentController extends Controller {
             ->first();
 
         // penalty calculation
-        list($currDay, $currMonth, $currYear) = [date("d"), date("n"), date("Y")];
-        $currDate = Carbon::createFromFormat("d-m-Y", date("d-m-Y"));
-        // change to '16-5-2024' to  test penalty case
-        $joiningDate = Carbon::createFromFormat("d-m-Y", "16-6-2024");
-        // $joiningDate = Carbon::createFromFormat("d-m-Y", Auth::user()->joining_date);
+        $today = Carbon::now();
+        list($currMonth, $currYear) = [date("n"), date("Y")];
+        $user = User::find(Auth::id());
+        foreach ($installments as $installment) {
+            $dueDate = Carbon::createFromFormat("d-m-Y", $installment->due_date);
+            if ($today->isSameDay($dueDate)) {
+                if (is_null($user->last_penalty_date)) {
+                    // check if user paid
+                    $isPayed = InstallmentCollections::where("installment_id", $installment->id)->first();
+                    if (is_null($isPayed)) {
+                        // charge & update last change date
+                        $user->increment("penalty_charges", $subscription->penalty_amount);
+                        $user->last_penalty_date = date("d-m-Y");
+                        $user->save();
+                    } else {
+                        // user already paid
+                        return view("installment.index", compact("installments", "details"));
+                    }
+                } else {
+                    // check 'last_penalty_date' is current due_date
+                    $user_last_penalty_date = Carbon::createFromFormat("d-m-Y", $user->last_penalty_date);
 
+                    if ($user_last_penalty_date->isSameDay($dueDate)) {
+                        // user already penalty
+                        return view("installment.index", compact("installments", "details"));
+                    } else {
+                        // charge & penalty
+                        $user->increment("penalty_charges", $subscription->penalty_amount);
+                        $user->last_penalty_date = $today;
+                        $user->save();
+                    }
+                }
+            }
+        }
         /**
          * this calculation is only for current month. where we check
          * due date is greaterThan joiningDate.
@@ -54,36 +82,36 @@ class InstallmentController extends Controller {
         // $t = InstallmentCollections::where("installment_id", $isPayed->id)->first();
 
 
-        if ($dueDate->greaterThan($joiningDate)) {
-            // since user is old, we check if the user made the payment
-            // if not, we make him pay
+        // if ($dueDate->greaterThan($joiningDate)) {
+        //     // since user is old, we check if the user made the payment
+        //     // if not, we make him pay
 
-            if ($currDate->greaterThanOrEqualTo($dueDate)) {
-                // check if user Already penaltied
-                // if current date is Already greater than due date
-                // we may penalty him, if we did not already yet!
+        //     if ($currDate->greaterThanOrEqualTo($dueDate)) {
+        //         // check if user Already penaltied
+        //         // if current date is Already greater than due date
+        //         // we may penalty him, if we did not already yet!
 
-                $user = User::find(Auth::id());
-                $alreadyPenalty = $user->last_penalty_date;
+        //         $user = User::find(Auth::id());
+        //         $alreadyPenalty = $user->last_penalty_date;
 
-                if (!is_null($alreadyPenalty)) {
-                    return view("installment.index", compact("installments", "details"));
-                }
-            }
+        //         if (!is_null($alreadyPenalty)) {
+        //             return view("installment.index", compact("installments", "details"));
+        //         }
+        //     }
 
-            $shouldPay = InstallmentCollections::where("subscription_id", "=", $subscription->id)->where("installment_id", "=", $isPayed->id)->first();
+        //     $shouldPay = InstallmentCollections::where("subscription_id", "=", $subscription->id)->where("installment_id", "=", $isPayed->id)->first();
 
-            if (is_null($shouldPay)) {
-                $user = User::where("id", Auth::id())->increment("penalty_charges", $subscription->penalty_amount);
+        //     if (is_null($shouldPay)) {
+        //         $user = User::where("id", Auth::id())->increment("penalty_charges", $subscription->penalty_amount);
 
-                $user = User::find(Auth::id());
-                $user->last_penalty_date = date("j-n-Y");
-                $user->save();
-            }
-        } elseif ($dueDate->equalTo($joiningDate)) {
-            // no penalty for cuurent month
+        //         $user = User::find(Auth::id());
+        //         $user->last_penalty_date = date("j-n-Y");
+        //         $user->save();
+        //     }
+        // } elseif ($dueDate->equalTo($joiningDate)) {
+        //     // no penalty for cuurent month
 
-        }
+        // }
         return view("installment.index", compact("installments", "details"));
     }
 
