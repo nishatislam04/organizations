@@ -119,7 +119,16 @@ class InstallmentController extends Controller {
     }
 
     function penaltyPay(Request $request) {
-        dd($request->all());
+        $user = User::find(Auth::id());
+        $validated =  $request->validate([
+            "penalty_charges" => "required|integer|min:50|max:$user->penalty_charges"
+        ]);
+
+        $user->decrement("penalty_charges", $validated['penalty_charges']);
+        $user->save();
+        $org_id = User::find(Auth::id())->organization_id;
+        $subs_id = Subscription::where("organization_id", $org_id)->first()->id;
+        return redirect()->route("installments.index", $subs_id);
     }
 
     /**
