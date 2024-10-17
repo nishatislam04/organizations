@@ -60,7 +60,8 @@
               <div class="flex justify-end mt-6">
                 <x-buttons.button
                   class="text-white text-sm px-4 py-2.5 text-center w-36"
-                  type="submit" value="Add Organization" />
+                  type="submit" value="Add Organization"
+                  icons="resources/icons/save.svg" />
               </div>
             </form>
           </div>

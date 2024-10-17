@@ -52,13 +52,22 @@
               </button>
               <ul class="hidden py-2 space-y-2 " id="dropdown-crud">
                 <li>
+                  <span>
+
+                  </span>
                   <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                    href="{{ route("organizations.index") }}">Organizations</a>
+                    href="{{ route("organizations.index") }}"><img
+                      class="inline w-5 h-5 mr-2"
+                      src="{{ Vite::asset("resources/icons/organizations.svg") }}"
+                      alt="">Organizations</a>
                 </li>
                 @can("is-super")
                   <li>
                     <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                      href="{{ route("users.index") }}">Users</a>
+                      href="{{ route("users.index") }}"><img
+                        class="inline w-5 h-5 mr-2"
+                        src="{{ Vite::asset("resources/icons/users.svg") }}"
+                        alt="">Users</a>
                   </li>
                 @endcan
               </ul>
@@ -68,14 +77,20 @@
           @if ($shouldShowOrganizationListings)
             <li>
               <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                href="{{ route("organizations.listings") }}">Organizations</a>
+                href="{{ route("organizations.listings") }}"><img
+                  class="inline w-5 h-5 mr-2"
+                  src="{{ Vite::asset("resources/icons/organizations.svg") }}"
+                  alt="">Organizations</a>
             </li>
           @endif
 
           @if ($shouldShowOrganization)
             <li>
               <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                href="{{ route("organizations.show", $organization_id) }}">Organization</a>
+                href="{{ route("organizations.show", $organization_id) }}"><img
+                  class="inline w-5 h-5 mr-2"
+                  src="{{ Vite::asset("resources/icons/organization.svg") }}"
+                  alt="">Organization</a>
             </li>
           @endif
 
@@ -103,7 +118,10 @@
               <ul class="hidden py-2 space-y-2" id="dropdown-pages">
                 <li>
                   <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-                    href="{{ route("organizations.listings") }}">Organizations</a>
+                    href="{{ route("organizations.listings") }}"><img
+                      class="inline w-5 h-5 mr-2"
+                      src="{{ Vite::asset("resources/icons/organizations.svg") }}"
+                      alt="">Organizations</a>
                 </li>
               </ul>
             </li>
