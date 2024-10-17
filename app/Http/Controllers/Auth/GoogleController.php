@@ -33,11 +33,13 @@ class GoogleController extends Controller {
             if ($user) {
 
                 if (is_null($user->google_id)) {
+                    $user->avatar = $googleUser->getAvatar();
                     $user->google_id = $googleUser->getId();
                     $user->organization_id = session()->get("joining_org");
                     $user->status = "pending";
                     $user->save();
                 } else {
+                    $user->avatar = $googleUser->getAvatar();
                     $user->organization_id = $user->organization_id ?? session()->get("joining_org");
                     $user->status =  $user->status === "passed" ? "passed" : "pending";
                     $user->save();
