@@ -46,6 +46,7 @@ Route::get("/dashboard", [DashboardController::class, "dashboard"])
 
 Route::get("/organizations/listings", [OrganizationController::class, "listings"])->name("organizations.listings");
 Route::post("/organizations/{organization}/join", [MemberController::class, "store"])->name("members.join");
+Route::post("/organizations/{organization}/hide", [MemberController::class, "hide"])->name("members.hide");
 Route::post("/organizations/{organizaion}/leave", [OrganizationController::class, "leave"])->name("organizations.leave");
 
 

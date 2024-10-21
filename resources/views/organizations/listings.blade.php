@@ -74,6 +74,9 @@
                   class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
                   @foreach ($organizations as $organization)
+                    @if (in_array($organization->id, session()->get("hide-organization") ?? []))
+                      @continue
+                    @endif
                     <tr
                       class="h-14 hover:bg-gray-100 dark:hover:bg-gray-700">
 
@@ -142,16 +145,18 @@
           typeIcon="success-icon" headerTitle="Join Organization"
           actionConfirmBtn="Yes, I am sure"
           actionConfirmCancel="No, cancel">Are you sure you want to join
-          this organization?</x-modal>
-          <x-modals.hide-modal formId="hide-organization-form"
-            typeIcon="warning-icon" headerTitle="Hide Organization"
-            actionConfirmBtn="Yes, I am sure"
-            actionConfirmCancel="No, cancel">Are you sure you want to
-            hide this organization?</x-modal>
+          this organization?
+        </x-modals.join-modal>
+        <x-modals.hide-modal formId="hide-organization-form"
+          typeIcon="warning-icon" headerTitle="Hide Organization"
+          actionConfirmBtn="Yes, I am sure"
+          actionConfirmCancel="No, cancel">Are you sure you want to
+          hide this organization?
+        </x-modals.hide-modal>
 
-            @if ($organizations instanceof Illuminate\Pagination\Paginator)
-              {!! $organizations->appends(["query" => request("query")])->links() !!}
-            @endif
+        @if ($organizations instanceof Illuminate\Pagination\Paginator)
+          {!! $organizations->appends(["query" => request("query")])->links() !!}
+        @endif
       </main>
     </div>
 

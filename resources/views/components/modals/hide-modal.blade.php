@@ -26,7 +26,7 @@
 
     <div class="flex justify-end">
 
-      <form id="reject-user-form" action="#" method="POST">
+      <form id="hide-organization-form" action="#" method="POST">
         @csrf
 
         <x-buttons.button

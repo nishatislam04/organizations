@@ -42,8 +42,29 @@ class MemberController extends Controller {
 
         $organizations = Organization::simplePaginate(5);
 
+        session()->forget("hide-organization");
+
         return redirect()->route("dashboard.index");
     }
+
+    function hide(Organization $organization) {
+        $id = $organization->id;
+
+        if (session()->has('hide-organization')) {
+            $session = session()->get('hide-organization');
+
+            // Check if the organization ID is not already in the array
+            if (!in_array($id, $session)) {
+                $session[] = $id;
+                session()->put('hide-organization', $session);
+            }
+        } else {
+            session()->put('hide-organization', [$id]);
+        }
+
+        return redirect()->route("organizations.listings");
+    }
+
 
     /**
      * Display the specified resource.
