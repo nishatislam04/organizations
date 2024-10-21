@@ -22,16 +22,19 @@
               container visible
               on mobile view. fix the css 'hide' conflict</p>
           </li>
-          <li>
-            <a class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700"
-              href="{{ route("dashboard.index") }}">
-              <img
-                class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                src="{{ Vite::asset("resources/icons/dashboard.svg") }}"
-                alt="">
-              <span class="ml-3" sidebar-toggle-item>Dashboard</span>
-            </a>
-          </li>
+          @if (!is_null(auth()->user()->organization_id))
+            <li>
+              <a class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700"
+                href="{{ route("dashboard.index") }}">
+                <img
+                  class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                  src="{{ Vite::asset("resources/icons/dashboard.svg") }}"
+                  alt="">
+                <span class="ml-3" sidebar-toggle-item>Dashboard</span>
+              </a>
+            </li>
+          @endif
+
           @can("is-super")
             <li>
               <button
@@ -76,23 +79,34 @@
 
           @if ($shouldShowOrganizationListings)
             <li>
-              <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                href="{{ route("organizations.listings") }}"><img
+              <a href="{{ route("organizations.listings") }}"
+                @class([
+                    "pl-11" => auth()->user()->role === "super",
+                    "pl-2" => auth()->user()->role === "member",
+                    "flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700",
+                ])><img
                   class="inline w-5 h-5 mr-2"
                   src="{{ Vite::asset("resources/icons/organizations.svg") }}"
                   alt="">Organizations</a>
             </li>
           @endif
 
-          @if ($shouldShowOrganization)
+          @if (
+              !is_null(auth()->user()->organization_id) &&
+                  auth()->user()->status === "passed")
             <li>
-              <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                href="{{ route("organizations.show", $organization_id) }}"><img
+              <a href="{{ route("organizations.show", $organization_id) }}"
+                @class([
+                    "pl-11" => auth()->user()->role === "super",
+                    "pl-2" => auth()->user()->role === "member",
+                    "flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700",
+                ])><img
                   class="inline w-5 h-5 mr-2"
                   src="{{ Vite::asset("resources/icons/organization.svg") }}"
                   alt="">Organization</a>
             </li>
           @endif
+
 
           @can("is-super")
             <li>
@@ -127,6 +141,7 @@
             </li>
           @endcan
 
+          {{--           
           <li>
             <a class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 "
               href="#">
@@ -138,7 +153,7 @@
 
               <span class="ml-3" sidebar-toggle-item>Settings</span>
             </a>
-          </li>
+          </li> --}}
 
         </ul>
       </div>

@@ -22,8 +22,7 @@
 
               <h1
                 class="text-xl font-semibold text-gray-900 -translate-y-3 sm:text-2xl dark:text-white">
-                All
-                Organizations</h1>
+                All Organizations</h1>
             </div>
             <div
               class="flex items-center justify-between sm:flex md:divide-x md:divide-gray-100 dark:divide-gray-700">
@@ -178,7 +177,6 @@
                           class="h-14 hover:bg-gray-100 dark:hover:bg-gray-700">
                           <td class="w-4 p-4">
                             <x-forms.checkbox type="single" />
-
                           </td>
 
                           <td
@@ -199,7 +197,15 @@
 
                           <td
                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ $organization->max_members }}</td>
+
+                            @if (array_key_exists($organization->id, $joinedMembers))
+                              {{ $joinedMembers[$organization->id]->members ?? 0 }}
+                            @else
+                              0
+                            @endif
+
+
+                          </td>
 
                           <td
                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">

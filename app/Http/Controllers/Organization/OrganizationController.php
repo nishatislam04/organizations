@@ -8,6 +8,7 @@ use App\Models\Organization\Organization;
 use App\Models\Subscription\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrganizationController extends Controller {
     /**
@@ -17,6 +18,22 @@ class OrganizationController extends Controller {
         $query = $request->input("query") ?? "";
         $sortBy = $request->input("sortBy");
         $sortDir = $request->input("sortDir");
+
+        // calculate joined members
+        $users = User::all();
+        $joinedMembers = [];
+        foreach ($users as $user) {
+            if ($user->organization_id === null)
+                continue;
+            $joinedMembers[$user->organization_id] =  User::selectRaw("organization_id, COUNT(organization_id) as members")
+                ->where("status", "passed")
+                ->where("organization_id", $user->organization_id)
+                ->where("role", "member")
+                ->groupBy("organization_id")
+                ->first();
+        }
+
+        // dd($joinedMembers);
 
         // sorted
         if ($sortBy || $sortDir) {
@@ -29,7 +46,7 @@ class OrganizationController extends Controller {
                 ->orderBy($sortBy, $sortDir)
                 ->simplePaginate(5);
 
-            return view("organizations.index", compact("organizations", "sortBy", "sortDir"));
+            return view("organizations.index", compact("organizations", "joinedMembers", "sortBy", "sortDir"));
         }
 
         if (empty($query)) {
@@ -74,11 +91,9 @@ class OrganizationController extends Controller {
             session()->flash("search_result", $count);
         }
 
-        // dd($organizations);
-
         return view(
             "organizations.index",
-            compact("organizations", "sortBy", "sortDir")
+            compact("organizations", "joinedMembers",  "sortBy", "sortDir")
         );
     }
 
@@ -160,6 +175,8 @@ class OrganizationController extends Controller {
         $user->status = null;
         $user->organization_id = null;
         $user->joining_date = null;
+        $user->penalty_charges = null;
+        $user->last_penalty_date = null;
         $user->save();
 
         return redirect()->route("dashboard.index");

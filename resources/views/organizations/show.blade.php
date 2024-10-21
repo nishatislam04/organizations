@@ -102,7 +102,7 @@
                       <p class="font-medium text-gray-400">Created At:</p>
                       <p
                         class="text-lg font-semibold text-gray-500 dark:text-gray-300">
-                        {{ $organization->created_at->format("Y-m-d H:i:s") }}
+                        {{ $organization->created_at->format("d-m-Y") }}
                       </p>
                     </div>
 

@@ -130,34 +130,13 @@ class UserController extends Controller {
 
     function approve(User $user) {
 
-        // update org with user id
         $organization = Organization::find($user->organization_id);
-        $organization->user_id = $user->id;
-        $organization->save();
 
         $user->joining_date = date("d-n-Y");
         $user->status = "passed";
         $user->save();
 
         Mail::to($user->email)->queue(new UserApprovedMail($organization, $user));
-
-        // update rest of the users when 
-        // current user got assigned to the current org
-        $org_id = $user->organization_id;
-
-        $rejectedUsers = User::where([
-            ['id', '!=', $user->id],
-            ['organization_id', '=', $org_id],
-            ['status', '=', 'pending'],
-        ])->get();
-
-        foreach ($rejectedUsers as $user) {
-            $user->status = null;
-            $user->joining_date = null;
-            $user->organization_id = null;
-            $user->save();
-            Mail::to($user->email)->queue(new UserRejectedMail());
-        }
 
         return redirect()->route("users.index")->with("success", "user approve success");
     }

@@ -73,7 +73,7 @@
                       <th
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                         scope="col">
-                        ID
+                        Role
                       </th>
                       <th
                         class="flex items-center gap-2 p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
@@ -83,12 +83,12 @@
                       <th
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                         scope="col">
-                        Organization Name
+                        Org Name
                       </th>
                       <th
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                         scope="col">
-                        Organization Id
+                        Org Id
                       </th>
                       <th
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
@@ -123,7 +123,7 @@
 
                         <td
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          {{ $user->id }}
+                          {{ $user->role }}
                         </td>
 
                         <td
@@ -155,7 +155,6 @@
                                 <img class="w-4 h-4 mr-2"
                                   src="{{ Vite::asset("resources/icons/edit.svg") }}"
                                   alt="">
-                                Edit
                               </x-buttons.button>
                             @endcan
 
@@ -168,7 +167,6 @@
                                 <img class="w-4 h-4 mr-2"
                                   src="{{ Vite::asset("resources/icons/delete.svg") }}"
                                   alt="">
-                                Delete
                               </x-buttons.button>
                             @endcan
                           @else
@@ -180,7 +178,6 @@
                               <img class="w-4 h-4 mr-2"
                                 src="{{ Vite::asset("resources/icons/approve.svg") }}"
                                 alt="">
-                              Approve
                             </x-buttons.button>
 
                             <x-buttons.button
@@ -191,7 +188,6 @@
                               <img class="w-4 h-4 mr-2"
                                 src="{{ Vite::asset("resources/icons/reject.svg") }}"
                                 alt="">
-                              Reject
                             </x-buttons.button>
                           @endif
                         </td>

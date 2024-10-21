@@ -36,7 +36,7 @@ class GoogleController extends Controller {
                     $user->avatar = $googleUser->getAvatar();
                     $user->google_id = $googleUser->getId();
                     $user->organization_id = session()->get("joining_org");
-                    $user->status = "pending";
+                    $user->status = $user->status ?? null;
                     $user->save();
                 } else {
                     $user->avatar = $googleUser->getAvatar();
@@ -51,7 +51,7 @@ class GoogleController extends Controller {
                     'email' => $googleUser->getEmail(),
                     'google_id' => $googleUser->getId(),
                     'password' => bcrypt('1234'),
-                    "status" => "pending",
+                    "status" =>  null,
                     "organization_id" => session()->get("joining_org"),
                     "avatar" => $googleUser->getAvatar()
                 ]);

@@ -3,15 +3,21 @@ document.addEventListener("click", function (ev) {
   const id = btn.dataset.userId;
 
   // approve
-  if (ev.target.id === "approve-user-btn") {
+  if (ev.target.closest("#approve-user-btn")) {
     modal_overlay('approve-user-modal');
+
+    const target = ev.target.closest("#approve-user-btn");
+    const id = target.dataset.userId;
 
     document.querySelector("#approve-user-form").action = `http://nio.com/users/${id}/approve`
   }
 
   // reject
-  if (ev.target.id === "reject-user-btn") {
+  if (ev.target.closest("#reject-user-btn")) {
     modal_overlay('reject-user-modal')
+
+    const target = ev.target.closest("#reject-user-btn");
+    const id = target.dataset.userId;
 
     document.querySelector("#reject-user-form").action = `http://nio.com/users/${id}/reject`
     console.log(document.querySelector("#reject-user-form").action = `http://nio.com/users/${id}/reject`)
