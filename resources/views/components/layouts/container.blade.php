@@ -2,7 +2,7 @@
 
 <x-layouts.nav :search_route="$search_route" />
 
-<div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
+<div class="h-full flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
 
   @auth
 

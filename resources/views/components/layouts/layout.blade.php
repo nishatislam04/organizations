@@ -53,7 +53,7 @@
     </script>
   </head>
 
-  <body class=""
+  <body class="h-screen"
     {{ $attributes->merge(["class" => "bg-gray-50 dark:bg-gray-800 overflow-hidden" . ($bodyOverflowHidden === "true" ? " overflow-hidden" : "")]) }}>
 
     {{ $slot }}
