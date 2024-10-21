@@ -31,21 +31,20 @@ class GoogleController extends Controller {
             $user = AuthUser::where('email', $googleUser->getEmail())->first();
 
             if ($user) {
-
                 if (is_null($user->google_id)) {
                     $user->avatar = $googleUser->getAvatar();
                     $user->google_id = $googleUser->getId();
-                    $user->organization_id = session()->get("joining_org");
+                    $user->organization_id = $user->organization_id ?? session()->get("joining_org");
                     $user->status = $user->status ?? null;
                     $user->save();
                 } else {
+                    // dd($user);
                     $user->avatar = $googleUser->getAvatar();
                     $user->organization_id = $user->organization_id ?? session()->get("joining_org");
                     $user->status =  $user->status === "passed" ? "passed" : "pending";
                     $user->save();
                 }
             } else {
-
                 $user = AuthUser::create([
                     'username' => $googleUser->getName(),
                     'email' => $googleUser->getEmail(),
@@ -58,7 +57,6 @@ class GoogleController extends Controller {
             }
 
             Auth::login($user);
-
             return redirect()->route('dashboard.index');
         } catch (Exception $e) {
             return redirect('/login')->withErrors(['error' => 'Unable to login, try again.']);

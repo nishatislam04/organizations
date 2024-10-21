@@ -62,7 +62,7 @@ Route::controller(MemberController::class)
   );
 
 
-Route::middleware(["auth"])
+Route::middleware(["auth", "super-admin"])
   ->controller(OrganizationController::class)
   ->prefix("organizations")
   ->name("organizations.")
@@ -73,7 +73,7 @@ Route::middleware(["auth"])
 
     Route::get("/{organization}/edit", "edit")->name("edit");
 
-    Route::get("/{organization}", "show")->name("show");
+    Route::get("/{organization}", "show")->name("show")->withoutMiddleware("super-admin");
 
     Route::post("/{organizaion}/leave", "leave")->name("leave");
 
@@ -122,7 +122,7 @@ Route::controller(SubscriptionController::class)
 Route::middleware(['auth', "super"])
   ->controller(InstallmentController::class)
   ->prefix("installments")
-  ->name("installments")
+  ->name("installments.")
   ->group(function () {
     Route::get("/penalty-pay", "penaltyPayView")->name("penaltyPayView");
 

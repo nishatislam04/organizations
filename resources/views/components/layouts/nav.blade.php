@@ -72,7 +72,10 @@
               id="user-menu-button-2" data-dropdown-toggle="dropdown-2"
               type="button" aria-expanded="false">
               <span class="sr-only">Open user menu</span>
-              @if (is_null(auth()->user()->google_id))
+              @if (is_null(auth()->user()->avatar))
+                <img class="w-8 h-8 rounded-full"
+                  src="https://placehold.co/30x30" alt="">
+              @elseif (is_null(auth()->user()->google_id))
                 <img class="w-8 h-8 rounded-full"
                   src="{{ asset("storage/uploads/" . auth()->user()->avatar) }}"
                   alt="user photo">

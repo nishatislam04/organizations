@@ -53,5 +53,8 @@ class GateServiceProvider extends ServiceProvider {
         Gate::define("user-delete", function (User $user) {
             return $user->role === "super";
         });
+
+        Gate::define("can-view-org", function (User $user) {
+        });
     }
 }

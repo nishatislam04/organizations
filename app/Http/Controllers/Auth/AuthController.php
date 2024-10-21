@@ -55,8 +55,8 @@ class AuthController extends Controller {
         ) {
             $request->session()->regenerate();
 
-            $user->organization_id = session()->get("joining_org");
-            $user->status = "pending";
+            $user->organization_id = $user->organization_id ?? session()->get("joining_org");
+            $user->status = $user->status ?? "pending";
             $user->save();
 
             return redirect()->route("dashboard.index");
