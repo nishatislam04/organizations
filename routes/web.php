@@ -49,17 +49,17 @@ Route::get("/dashboard", [DashboardController::class, "dashboard"])
 
 Route::middleware("guest")->prefix("organizations")->group(function () {
   Route::get("/listings", [OrganizationController::class, "listings"])->name("organizations.listings")->withoutMiddleware("guest");
-
-  Route::controller(MemberController::class)
-    ->prefix("/{organization}")
-    ->name("members.")
-    ->group(
-      function () {
-        Route::post("/join", "store")->name("join");
-        Route::post("/hide", "hide")->name("hide");
-      }
-    )->withoutMiddleware('guest');
 });
+
+Route::controller(MemberController::class)
+  ->prefix("/organizations/{organization}")
+  ->name("members.")
+  ->group(
+    function () {
+      Route::post("/join", "store")->name("join");
+      Route::post("/hide", "hide")->name("hide");
+    }
+  );
 
 
 Route::middleware(["auth"])
