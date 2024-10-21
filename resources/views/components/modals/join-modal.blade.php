@@ -26,7 +26,7 @@
 
     <div class="flex justify-end">
 
-      <form id="join-organization-form" method="POST" method="POST">
+      <form id="join-organization-form" method="POST" action="#">
         @csrf
 
         <x-buttons.button

@@ -175,7 +175,7 @@ class OrganizationController extends Controller {
         $user->status = null;
         $user->organization_id = null;
         $user->joining_date = null;
-        $user->penalty_charges = null;
+        $user->penalty_charges = 0;
         $user->last_penalty_date = null;
         $user->save();
 

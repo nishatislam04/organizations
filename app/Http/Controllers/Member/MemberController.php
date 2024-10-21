@@ -27,6 +27,7 @@ class MemberController extends Controller {
      * Store a newly created resource in storage.
      */
     public function store(Request $request, Organization $organization) {
+
         if (!Auth::check()) {
             $organizationId = $organization->id;
             session()->put("joining_org", $organizationId);
