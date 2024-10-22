@@ -31,10 +31,8 @@
                   <x-buttons.button
                     class="absolute right-0 bottom-0 text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
                     type="a" :href='route("users.create")'>
-                    <svg class="inline w-5 h-5 mr-2" fill="white">
-                      <use xlink:href="{{ asset("sprite.svg#create") }}">
-                      </use>
-                    </svg>
+                    <x-icon.icon class="inline w-5 h-5 mr-2" fill="white"
+                      icon="create" />
                     Create a new User
                   </x-buttons.button>
                 @endcan
@@ -153,11 +151,8 @@
                                 data-user-id="{{ $user->id }}"
                                 type="a"
                                 href='{{ route("users.edit", $user->id) }}'>
-                                <svg class="w-4 h-4 mr-2" fill="white">
-                                  <use
-                                    xlink:href="{{ asset("sprite.svg#edit") }}">
-                                  </use>
-                                </svg>
+                                <x-icon.icon class="w-4 h-4 mr-2"
+                                  fill="white" icon="edit" />
                               </x-buttons.button>
                             @endcan
 
@@ -167,11 +162,8 @@
                                 id="delete-user-btn"
                                 data-user-id="{{ $user->id }}"
                                 type="button">
-                                <svg class="w-4 h-4 mr-2" fill="white">
-                                  <use
-                                    xlink:href="{{ asset("sprite.svg#delete") }}">
-                                  </use>
-                                </svg>
+                                <x-icon.icon class="w-4 h-4 mr-2"
+                                  fill="white" icon="delete" />
                               </x-buttons.button>
                             @endcan
                           @else
@@ -180,11 +172,8 @@
                               id="approve-user-btn"
                               data-user-id="{{ $user->id }}"
                               type="button">
-                              <svg class="w-4 h-4 mr-2" fill="white">
-                                <use
-                                  xlink:href="{{ asset("sprite.svg#approve") }}">
-                                </use>
-                              </svg>
+                              <x-icon.icon class="w-4 h-4 mr-2"
+                                fill="white" icon="approve" />
                             </x-buttons.button>
 
                             <x-buttons.button
@@ -192,11 +181,8 @@
                               id="reject-user-btn"
                               data-user-id="{{ $user->id }}"
                               type="button">
-                              <svg class="w-4 h-4 mr-2" fill="white">
-                                <use
-                                  xlink:href="{{ asset("sprite.svg#reject") }}">
-                                </use>
-                              </svg>
+                              <x-icon.icon class="w-4 h-4 mr-2"
+                                fill="white" icon="reject" />
                             </x-buttons.button>
                           @endif
                         </td>

@@ -44,41 +44,29 @@
                 class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
                 data-collapse-toggle="dropdown-crud" type="button"
                 aria-controls="dropdown-crud">
-                <svg
+                <x-icon.icon
                   class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                  fill="gray">
-                  <use xlink:href="{{ asset("sprite.svg#crud") }}"></use>
-                </svg>
-
-
+                  fill="gray" icon="crud" />
                 <span class="flex-1 ml-3 text-left whitespace-nowrap"
                   sidebar-toggle-item>CRUD</span>
-
-                <svg class="w-6 h-6" sidebar-toggle-item fill="gray">
-                  <use xlink:href="{{ asset("sprite.svg#arrow-down") }}">
-                  </use>
-                </svg>
-
-
+                <x-icon.icon class="w-6 h-6" sidebar-toggle-item
+                  fill="gray" icon="arrow-down" />
               </button>
               <ul class="hidden py-2 space-y-2 " id="dropdown-crud">
                 <li>
                   <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                    href="{{ route("organizations.index") }}"><svg
-                      class="inline-block w-5 h-5 mr-2" fill="gray">
-                      <use
-                        xlink:href="{{ asset("sprite.svg#organizations") }}">
-                      </use>
-                    </svg>Organizations</a>
+                    href="{{ route("organizations.index") }}">
+                    <x-icon.icon class="inline-block w-5 h-5 mr-2"
+                      fill="gray" icon="organizations" />
+                    Organizations</a>
                 </li>
                 @can("is-super")
                   <li>
                     <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                      href="{{ route("users.index") }}"><svg
-                        class="inline w-5 h-5 mr-2" fill="gray">
-                        <use xlink:href="{{ asset("sprite.svg#users") }}">
-                        </use>
-                      </svg>Users</a>
+                      href="{{ route("users.index") }}">
+                      <x-icon.icon class="inline w-5 h-5 mr-2" fill="gray"
+                        icon="users" />
+                      Users</a>
                   </li>
                 @endcan
               </ul>
@@ -92,13 +80,10 @@
                     "pl-11" => auth()->user()->role === "super",
                     "pl-2" => auth()->user()->role === "member",
                     "flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700",
-                ])><svg
-                  class="inline-block w-5 h-5 mr-2" fill="gray">
-                  <use
-                    xlink:href="{{ asset("sprite.svg#organizations") }}">
-                  </use>
-                </svg>Organizations</a>
-
+                ])>
+                <x-icon.icon class="inline-block w-5 h-5 mr-2"
+                  fill="gray" icon="organizations" />
+                Organizations</a>
             </li>
           @endif
 
@@ -111,12 +96,10 @@
                     "pl-11" => auth()->user()->role === "super",
                     "pl-2" => auth()->user()->role === "member",
                     "flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700",
-                ])><svg
-                  class="inline-block w-5 h-5 mr-2" fill="gray">
-                  <use
-                    xlink:href="{{ asset("sprite.svg#organization") }}">
-                  </use>
-                </svg>Organization</a>
+                ])>
+                <x-icon.icon class="inline-block w-5 h-5 mr-2"
+                  fill="gray" icon="organization" />
+                Organization</a>
 
             </li>
           @endif
@@ -129,31 +112,21 @@
                 data-collapse-toggle="dropdown-pages" type="button"
                 aria-controls="dropdown-pages">
 
-                <svg
+                <x-icon.icon
                   class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                  fill="gray">
-                  <use xlink:href="{{ asset("sprite.svg#pages") }}"></use>
-                </svg>
-
+                  fill="gray" icon="pages" />
                 <span class="flex-1 ml-3 text-left whitespace-nowrap"
                   sidebar-toggle-item>Listings</span>
-
-                <svg class="w-6 h-6" sidebar-toggle-item fill="gray">
-                  <use xlink:href="{{ asset("sprite.svg#arrow-down") }}">
-                  </use>
-                </svg>
-
+                <x-icon.icon class="w-6 h-6" sidebar-toggle-item
+                  fill="gray" icon="arrow-down" />
               </button>
               <ul class="hidden py-2 space-y-2" id="dropdown-pages">
                 <li>
                   <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-                    href="{{ route("organizations.listings") }}"><svg
-                      class="inline-block w-5 h-5 mr-2" fill="gray">
-                      <use
-                        xlink:href="{{ asset("sprite.svg#organizations") }}">
-                      </use>
-                    </svg>Organizations</a>
-
+                    href="{{ route("organizations.listings") }}">
+                    <x-icon.icon class="inline-block w-5 h-5 mr-2"
+                      fill="gray" icon="organizations" />
+                    Organizations</a>
                 </li>
               </ul>
             </li>

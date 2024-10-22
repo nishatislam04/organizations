@@ -4,9 +4,7 @@
     id="toast-success" role="alert">
     <div
       class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
-      <img class="w-5 h-5"
-        src="{{ Vite::asset("resources/icons/success-icon-sm.svg") }}"
-        alt="">
+      <x-icon.icon class="w-5 h-5" fill="white" icon="success-sm" />
       <span class="sr-only">Check icon</span>
     </div>
     <div class="text-sm font-semibold text-green-500 capitalize ms-3">
@@ -17,8 +15,8 @@
       data-dismiss-target="#toast-success" type="button"
       aria-label="Close">
       <span class="sr-only">Close</span>
-      <img src="{{ Vite::asset("resources/icons/close-icon.svg") }}"
-        alt="">
+      <x-icon.icon class="w-5 h-5" fill="white" icon="close" />
+
     </button>
   </div>
 @endif

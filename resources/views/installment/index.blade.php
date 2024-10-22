@@ -69,10 +69,10 @@
 
                   <p class="text-2xl text-gray-400 ">
                     Penalty Charges :
-                    <span>{{ auth()->user()->penalty_charges }} <img
-                        class="inline w-6 h-6 -mt-2 -ml-2"
-                        src="{{ Vite::asset("resources/icons/taka.svg") }}"
-                        alt="2"></span>
+                    <span>{{ auth()->user()->penalty_charges }}
+                      <x-icon.icon class="inline w-6 h-6 -mt-2 -ml-2"
+                        fill="gray" icon="taka" />
+                    </span>
                   </p>
 
                   <x-buttons.button
@@ -111,10 +111,9 @@
               class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Installment Pay Amount:
               <span class="font-normal text-gray-600 dark:text-gray-400">
-                {{ number_format($details->installmentPerAmount) }} <img
-                  class="inline w-5 h-5"
-                  src="{{ Vite::asset("resources/icons/taka.svg") }}"
-                  alt="">
+                {{ number_format($details->installmentPerAmount) }}
+                <x-icon.icon class="inline w-5 h-5" fill="gray"
+                  icon="taka" />
               </span>
             </p>
 
@@ -123,9 +122,8 @@
               Installment Penalty Amount:
               <span class="font-normal text-gray-600 dark:text-gray-400">
                 {{ number_format($details->installmentPenaltyAmount) }}
-                <img class="inline w-5 h-5"
-                  src="{{ Vite::asset("resources/icons/taka.svg") }}"
-                  alt="">
+                <x-icon.icon class="inline w-5 h-5" fill="gray"
+                  icon="taka" />
               </span>
             </p>
           </div>
@@ -241,9 +239,8 @@
                                 class="inline-flex items-center px-3 py-2 text-sm text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                 id="installment-pay-btn" type="a"
                                 href='{{ route("installments.payView", $installment->id) }}'>
-                                <img class="w-4 h-4 mr-2"
-                                  src="{{ Vite::asset("resources/icons/success-icon.svg") }}"
-                                  alt="">
+                                <x-icon.icon class="w-4 h-4 mr-2"
+                                  fill="" icon="success" />
                                 Pay
                               </x-buttons.button>
                             @endif

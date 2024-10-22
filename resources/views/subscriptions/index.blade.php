@@ -140,11 +140,8 @@
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                           <span class="flex gap-1 ">
                             {{ number_format($subscription->per_amount) }}
-                            <svg class="w-5 h-5" fill="gray">
-                              <use
-                                xlink:href="{{ asset("sprite.svg#taka") }}">
-                              </use>
-                            </svg>
+                            <x-icon.icon class="w-5 h-5" fill="gray"
+                              icon="taka" />
                           </span>
                         </td>
 
@@ -152,11 +149,8 @@
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                           <span class="flex gap-1 ">
                             {{ number_format($subscription->penalty_amount) }}
-                            <svg class="w-5 h-5" fill="gray">
-                              <use
-                                xlink:href="{{ asset("sprite.svg#taka") }}">
-                              </use>
-                            </svg>
+                            <x-icon.icon class="w-5 h-5" fill="gray"
+                              icon="taka" />
                           </span>
                         </td>
 

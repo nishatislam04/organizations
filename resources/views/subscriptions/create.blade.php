@@ -16,10 +16,7 @@
               class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white"
               type="a"
               href='{{ route("organizations.show", $organization->id) }}'>
-              <svg class="w-5 h-5" fill="gray">
-                <use xlink:href="{{ asset("sprite.svg#close") }}">
-                </use>
-              </svg>
+              <x-icon.icon class="w-5 h-5" fill="gray" icon="close" />
             </x-buttons.button>
           </div>
 

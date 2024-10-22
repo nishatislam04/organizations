@@ -11,31 +11,19 @@
           aria-controls="sidebar">
 
           {{-- Hamburger Icon --}}
-          <svg class="w-6 h-6" id="toggleSidebarMobileHamburger"
-            fill="gray">
-            <use
-              xlink:href="{{ asset("sprite.svg#toggel-sidebar-mobile-hamburger") }}">
-            </use>
-          </svg>
+          <x-icon.icon class="w-6 h-6" id="toggleSidebarMobileHamburger"
+            fill="gray" icon="toggel-sidebar-mobile-hamburger" />
 
           {{-- Close Icon --}}
-          <svg class="hidden w-6 h-6" id="toggleSidebarMobileClose"
-            fill="gray">
-            <use
-              xlink:href="{{ asset("sprite.svg#toggle-sidebar-mobile-close") }}">
-            </use>
-          </svg>
-
+          <x-icon.icon class="hidden w-6 h-6" id="toggleSidebarMobileClose"
+            fill="gray" icon="toggle-sidebar-mobile-close" />
         </button>
 
 
         <a class="flex ml-2 md:mr-24"
           href="{{ route("dashboard.index") }}">
-
-          <svg class="w-8 h-8 mr-3" fill="gray">
-            <use xlink:href="{{ asset("sprite.svg#logo") }}"></use>
-          </svg>
-
+          <x-icon.icon class="w-8 h-8 mr-3" fill="gray"
+            icon="logo" />
           <span
             class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
         </a>
@@ -48,10 +36,7 @@
         class="p-2 ml-4 text-gray-500 rounded-lg lg:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
         id="toggleSidebarMobileSearch" type="button">
         <span class="sr-only">Search</span>
-
-        <svg class="w-6 h-6" fill="gray">
-          <use xlink:href="{{ asset("sprite.svg#search") }}"></use>
-        </svg>
+        <x-icon.icon class="w-6 h-6" fill="gray" icon="search" />
       </button>
 
       <button
@@ -59,15 +44,11 @@
         id="theme-toggle" data-tooltip-target="tooltip-toggle"
         type="button">
 
-        <svg class="hidden w-5 h-5" id="theme-toggle-dark-icon"
-          fill="gray">
-          <use xlink:href="{{ asset("sprite.svg#dark") }}"></use>
-        </svg>
+        <x-icon.icon class="hidden w-5 h-5" id="theme-toggle-dark-icon"
+          fill="gray" icon="dark" />
 
-        <svg class="hidden w-5 h-5" id="theme-toggle-light-icon"
-          fill="gray">
-          <use xlink:href="{{ asset("sprite.svg#light") }}"></use>
-        </svg>
+        <x-icon.icon class="hidden w-5 h-5" id="theme-toggle-light-icon"
+          fill="gray" icon="light" />
       </button>
       <div
         class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"

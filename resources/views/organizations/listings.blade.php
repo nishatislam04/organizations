@@ -115,11 +115,8 @@
                             id="join-organization-btn"
                             data-item-id="{{ $organization->id }}"
                             type="button">
-                            <svg class="w-4 h-4 mr-2" fill="white">
-                              <use
-                                xlink:href="{{ asset("sprite.svg#join") }}">
-                              </use>
-                            </svg>
+                            <x-icon.icon class="w-4 h-4 mr-2" fill="white"
+                              icon="join" />
                             Join
                           </x-buttons.button>
 
@@ -128,11 +125,8 @@
                             id="hide-organization-btn"
                             data-item-id="{{ $organization->id }}"
                             type="button">
-                            <svg class="w-4 h-4 mr-2" fill="white">
-                              <use
-                                xlink:href="{{ asset("sprite.svg#hide-organization") }}">
-                              </use>
-                            </svg>
+                            <x-icon.icon class="w-4 h-4 mr-2" fill="white"
+                              icon="hide-organization" />
                           </x-buttons.button>
                         </td>
                       @endcannot

@@ -50,9 +50,8 @@
               Paying Amount:
               <span class="font-normal text-gray-600 dark:text-gray-400">
                 {{ number_format($details->installmentPerAmount) }}
-                <img class="inline w-5 h-5"
-                  src="{{ Vite::asset("resources/icons/taka.svg") }}"
-                  alt="">
+                <x-icon.icon class="inline w-5 h-5" fill="gray"
+                  icon="taka" />
               </span>
             </p>
 
@@ -85,9 +84,8 @@
                   data-sub-id="{{ $details->subscriptionId }}"
                   data-org-id="{{ $details->organizationId }}"
                   data-ins-id="{{ $installmentId }}" type="button">
-                  <img class="w-4 h-4 mr-2"
-                    src="{{ Vite::asset("resources/icons/success-icon.svg") }}"
-                    alt="">
+                  <x-icon.icon class="w-4 h-4 mr-2" fill=""
+                    icon="success" />
                   <span class="text-xl">Pay</span>
                 </x-buttons.button>
               </div>
