@@ -65,7 +65,7 @@ class OrganizationController extends Controller {
                         'organizations.*',
                         'organizations.id as organizationId'
                     )
-                    ->simplePaginate(5);
+                    ->simplePaginate(2);
             }
             if (Auth::user()->role === "admin") {
 

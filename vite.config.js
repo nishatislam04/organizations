@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
-import path from 'path';
+import { resolve } from 'path'; // Correctly import resolve from the 'path' module
 
 export default defineConfig({
     plugins: [
@@ -11,23 +11,30 @@ export default defineConfig({
     ],
     resolve: {
         alias: {
-            '@': '/resources',
+            '@': resolve(__dirname, 'resources'), // Correct path alias setup
         },
     },
-    assetsInclude: ['**/*.svg', '**/*.png', '**/*.ico', '**/*.webmanifest'],
-    resolve: {
-        alias: {
-            '@': path.resolve(__dirname, 'resources'),
-        },
-    },
+    assetsInclude: ['**/*.svg', '**/*.png', '**/*.ico', '**/*.webmanifest'], // Assets to include in build process
     server: {
-        host: true,
+        host: true, // Allows using custom domain like nio.com
+        // Enable CORS for development to prevent security errors
+        cors: {
+            origin: 'http://nio.com', // Allow requests from your domain
+            credentials: true, // Allow credentials (cookies, headers) to be sent
+        },
         hmr: {
-            host: 'nio.com',
+            host: 'nio.com', // Ensure Hot Module Replacement works with your custom domain
         },
     },
-
-    //     The host: true option allows Vite to accept connections from custom domains, not just localhost.
-    // The hmr.host setting ensures that Hot Module Replacement(HMR) is served from nio.com, not localhost, which could otherwise cause CORS or routing issues.
+    build: {
+        rollupOptions: {
+            input: {
+                app: resolve(__dirname, 'resources/js/app.js'),
+                sprite: resolve(__dirname, 'resources/icons/sprite.svg'),
+            },
+            output: {
+                assetFileNames: 'assets/[name].[ext]',
+            },
+        },
+    },
 });
-

@@ -26,10 +26,13 @@
             <li>
               <a class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700"
                 href="{{ route("dashboard.index") }}">
-                <img
+                <svg
                   class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                  src="{{ Vite::asset("resources/icons/dashboard.svg") }}"
-                  alt="">
+                  fill="gray">
+                  <use xlink:href="{{ asset("sprite.svg#dashboard") }}">
+                </svg>
+
+
                 <span class="ml-3" sidebar-toggle-item>Dashboard</span>
               </a>
             </li>
@@ -41,36 +44,41 @@
                 class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
                 data-collapse-toggle="dropdown-crud" type="button"
                 aria-controls="dropdown-crud">
-                <img
+                <svg
                   class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                  src="{{ Vite::asset("resources/icons/crud.svg") }}"
-                  alt="">
+                  fill="gray">
+                  <use xlink:href="{{ asset("sprite.svg#crud") }}"></use>
+                </svg>
+
 
                 <span class="flex-1 ml-3 text-left whitespace-nowrap"
                   sidebar-toggle-item>CRUD</span>
-                <img class="w-6 h-6"
-                  src="{{ Vite::asset("resources/icons/arrow-down.svg") }}"
-                  alt="" sidebar-toggle-item>
+
+                <svg class="w-6 h-6" sidebar-toggle-item fill="gray">
+                  <use xlink:href="{{ asset("sprite.svg#arrow-down") }}">
+                  </use>
+                </svg>
+
 
               </button>
               <ul class="hidden py-2 space-y-2 " id="dropdown-crud">
                 <li>
-                  <span>
-
-                  </span>
                   <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                    href="{{ route("organizations.index") }}"><img
-                      class="inline w-5 h-5 mr-2"
-                      src="{{ Vite::asset("resources/icons/organizations.svg") }}"
-                      alt="">Organizations</a>
+                    href="{{ route("organizations.index") }}"><svg
+                      class="inline-block w-5 h-5 mr-2" fill="gray">
+                      <use
+                        xlink:href="{{ asset("sprite.svg#organizations") }}">
+                      </use>
+                    </svg>Organizations</a>
                 </li>
                 @can("is-super")
                   <li>
                     <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 "
-                      href="{{ route("users.index") }}"><img
-                        class="inline w-5 h-5 mr-2"
-                        src="{{ Vite::asset("resources/icons/users.svg") }}"
-                        alt="">Users</a>
+                      href="{{ route("users.index") }}"><svg
+                        class="inline w-5 h-5 mr-2" fill="gray">
+                        <use xlink:href="{{ asset("sprite.svg#users") }}">
+                        </use>
+                      </svg>Users</a>
                   </li>
                 @endcan
               </ul>
@@ -84,10 +92,13 @@
                     "pl-11" => auth()->user()->role === "super",
                     "pl-2" => auth()->user()->role === "member",
                     "flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700",
-                ])><img
-                  class="inline w-5 h-5 mr-2"
-                  src="{{ Vite::asset("resources/icons/organizations.svg") }}"
-                  alt="">Organizations</a>
+                ])><svg
+                  class="inline-block w-5 h-5 mr-2" fill="gray">
+                  <use
+                    xlink:href="{{ asset("sprite.svg#organizations") }}">
+                  </use>
+                </svg>Organizations</a>
+
             </li>
           @endif
 
@@ -100,10 +111,13 @@
                     "pl-11" => auth()->user()->role === "super",
                     "pl-2" => auth()->user()->role === "member",
                     "flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700",
-                ])><img
-                  class="inline w-5 h-5 mr-2"
-                  src="{{ Vite::asset("resources/icons/organization.svg") }}"
-                  alt="">Organization</a>
+                ])><svg
+                  class="inline-block w-5 h-5 mr-2" fill="gray">
+                  <use
+                    xlink:href="{{ asset("sprite.svg#organization") }}">
+                  </use>
+                </svg>Organization</a>
+
             </li>
           @endif
 
@@ -115,27 +129,31 @@
                 data-collapse-toggle="dropdown-pages" type="button"
                 aria-controls="dropdown-pages">
 
-                <img
+                <svg
                   class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                  src="{{ Vite::asset("resources/icons/pages.svg") }}"
-                  alt="">
-
+                  fill="gray">
+                  <use xlink:href="{{ asset("sprite.svg#pages") }}"></use>
+                </svg>
 
                 <span class="flex-1 ml-3 text-left whitespace-nowrap"
                   sidebar-toggle-item>Listings</span>
 
-                <img class="w-6 h-6"
-                  src="{{ Vite::asset("resources/icons/arrow-down.svg") }}"
-                  alt="" sidebar-toggle-item>
+                <svg class="w-6 h-6" sidebar-toggle-item fill="gray">
+                  <use xlink:href="{{ asset("sprite.svg#arrow-down") }}">
+                  </use>
+                </svg>
 
               </button>
               <ul class="hidden py-2 space-y-2" id="dropdown-pages">
                 <li>
                   <a class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-                    href="{{ route("organizations.listings") }}"><img
-                      class="inline w-5 h-5 mr-2"
-                      src="{{ Vite::asset("resources/icons/organizations.svg") }}"
-                      alt="">Organizations</a>
+                    href="{{ route("organizations.listings") }}"><svg
+                      class="inline-block w-5 h-5 mr-2" fill="gray">
+                      <use
+                        xlink:href="{{ asset("sprite.svg#organizations") }}">
+                      </use>
+                    </svg>Organizations</a>
+
                 </li>
               </ul>
             </li>

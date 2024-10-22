@@ -33,10 +33,10 @@
               @can("is-super")
                 <x-buttons.button
                   class="absolute right-0 bottom-0 text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-                  type="a" :href='route("organizations.create")'> <img
-                    class="inline w-5 h-5 mr-2"
-                    src="{{ Vite::asset("resources/icons/create.svg") }}"
-                    alt="">
+                  type="a" :href='route("organizations.create")'>
+                  <svg class="inline w-5 h-5 mr-2" fill="white">
+                    <use xlink:href="{{ asset("sprite.svg#create") }}"></use>
+                  </svg>
                   Create a new Organization
                 </x-buttons.button>
               @endcan
@@ -148,10 +148,11 @@
                               class="inline-flex items-center justify-center px-2 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                               id="updateProductButton" type="a"
                               href='{{ route("organizations.edit", $organizations->id) }}'>
-                              <img class="w-4 h-4 mr-2"
-                                src="{{ Vite::asset("resources/icons/edit.svg") }}"
-                                alt="">
-
+                              <svg class="w-4 h-4 mr-2" fill="white">
+                                <use
+                                  xlink:href="{{ asset("sprite.svg#edit") }}">
+                                </use>
+                              </svg>
                             </x-buttons.button>
                           @endcan
 
@@ -162,9 +163,11 @@
                               id="delete-organization"
                               data-item-id="{{ $organizations->id }}"
                               type="button">
-                              <img class="w-4 h-4 mr-2"
-                                src="{{ Vite::asset("resources/icons/delete.svg") }}"
-                                alt="">
+                              <svg class="w-4 h-4 mr-2" fill="white">
+                                <use
+                                  xlink:href="{{ asset("sprite.svg#delete") }}">
+                                </use>
+                              </svg>
                             </x-buttons.button>
                           @endcan
 
@@ -235,10 +238,11 @@
                                 class="inline-flex items-center justify-center px-2 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                 id="updateProductButton" type="a"
                                 href='{{ route("organizations.edit", $organization->id) }}'>
-                                <img class="w-4 h-4 mr-2"
-                                  src="{{ Vite::asset("resources/icons/edit.svg") }}"
-                                  alt="">
-
+                                <svg class="w-4 h-4 mr-2" fill="white">
+                                  <use
+                                    xlink:href="{{ asset("sprite.svg#edit") }}">
+                                  </use>
+                                </svg>
                               </x-buttons.button>
                             @endcan
 
@@ -249,9 +253,11 @@
                                 id="delete-organization"
                                 data-item-id="{{ $organization->id }}"
                                 type="button">
-                                <img class="w-4 h-4 mr-2"
-                                  src="{{ Vite::asset("resources/icons/delete.svg") }}"
-                                  alt="">
+                                <svg class="w-4 h-4 mr-2" fill="white">
+                                  <use
+                                    xlink:href="{{ asset("sprite.svg#delete") }}">
+                                  </use>
+                                </svg>
                               </x-buttons.button>
                             @endcan
 

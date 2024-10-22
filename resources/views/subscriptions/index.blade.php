@@ -140,9 +140,11 @@
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                           <span class="flex gap-1 ">
                             {{ number_format($subscription->per_amount) }}
-                            <img class="w-5 h-5"
-                              src="{{ Vite::asset("resources/icons/taka.svg") }}"
-                              alt="">
+                            <svg class="w-5 h-5" fill="gray">
+                              <use
+                                xlink:href="{{ asset("sprite.svg#taka") }}">
+                              </use>
+                            </svg>
                           </span>
                         </td>
 
@@ -150,9 +152,11 @@
                           class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                           <span class="flex gap-1 ">
                             {{ number_format($subscription->penalty_amount) }}
-                            <img class="w-5 h-5"
-                              src="{{ Vite::asset("resources/icons/taka.svg") }}"
-                              alt="">
+                            <svg class="w-5 h-5" fill="gray">
+                              <use
+                                xlink:href="{{ asset("sprite.svg#taka") }}">
+                              </use>
+                            </svg>
                           </span>
                         </td>
 

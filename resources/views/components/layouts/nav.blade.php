@@ -11,21 +11,31 @@
           aria-controls="sidebar">
 
           {{-- Hamburger Icon --}}
-          <img class="w-6 h-6" id="toggleSidebarMobileHamburger"
-            src="{{ Vite::asset("resources/icons/toggleSidebarMobileHamburger.svg") }}"
-            alt="Hamburger Menu" />
+          <svg class="w-6 h-6" id="toggleSidebarMobileHamburger"
+            fill="gray">
+            <use
+              xlink:href="{{ asset("sprite.svg#toggel-sidebar-mobile-hamburger") }}">
+            </use>
+          </svg>
 
           {{-- Close Icon --}}
-          <img class="hidden w-6 h-6" id="toggleSidebarMobileClose"
-            src="{{ Vite::asset("resources/icons/toggleSidebarMobileClose.svg") }}"
-            alt="Close Menu" />
+          <svg class="hidden w-6 h-6" id="toggleSidebarMobileClose"
+            fill="gray">
+            <use
+              xlink:href="{{ asset("sprite.svg#toggle-sidebar-mobile-close") }}">
+            </use>
+          </svg>
+
         </button>
 
 
-        <a class="flex ml-2 md:mr-24" href="#">
-          <img class="h-8 mr-3"
-            src="{{ Vite::asset("resources/icons/logo.svg") }}"
-            alt="FlowBite Logo" />
+        <a class="flex ml-2 md:mr-24"
+          href="{{ route("dashboard.index") }}">
+
+          <svg class="w-8 h-8 mr-3" fill="gray">
+            <use xlink:href="{{ asset("sprite.svg#logo") }}"></use>
+          </svg>
+
           <span
             class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Flowbite</span>
         </a>
@@ -39,9 +49,9 @@
         id="toggleSidebarMobileSearch" type="button">
         <span class="sr-only">Search</span>
 
-        <img class="w-6 h-6"
-          src="{{ Vite::asset("resources/icons/search.svg") }}"
-          alt="">
+        <svg class="w-6 h-6" fill="gray">
+          <use xlink:href="{{ asset("sprite.svg#search") }}"></use>
+        </svg>
       </button>
 
       <button
@@ -49,12 +59,15 @@
         id="theme-toggle" data-tooltip-target="tooltip-toggle"
         type="button">
 
-        <img class="hidden w-5 h-5" id="theme-toggle-dark-icon"
-          src="{{ Vite::asset("resources/icons/dark.svg") }}"
-          alt="">
-        <img class="hidden w-5 h-5" id="theme-toggle-light-icon"
-          src="{{ Vite::asset("resources/icons/light.svg") }}"
-          alt="">
+        <svg class="hidden w-5 h-5" id="theme-toggle-dark-icon"
+          fill="gray">
+          <use xlink:href="{{ asset("sprite.svg#dark") }}"></use>
+        </svg>
+
+        <svg class="hidden w-5 h-5" id="theme-toggle-light-icon"
+          fill="gray">
+          <use xlink:href="{{ asset("sprite.svg#light") }}"></use>
+        </svg>
       </button>
       <div
         class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip"

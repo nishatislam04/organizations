@@ -37,7 +37,7 @@
 
         <div class="flex flex-col ">
           <div class="overflow-x-auto">
-            <div class="min-w-full flex justify-center">
+            <div class="flex justify-center min-w-full">
               <table
                 class="w-3/4 max-w-full overflow-y-scroll divide-y divide-gray-200 dark:divide-gray-600">
                 <thead
@@ -115,9 +115,11 @@
                             id="join-organization-btn"
                             data-item-id="{{ $organization->id }}"
                             type="button">
-                            <img class="w-4 h-4 mr-2"
-                              src="{{ Vite::asset("resources/icons/join.svg") }}"
-                              alt="">
+                            <svg class="w-4 h-4 mr-2" fill="white">
+                              <use
+                                xlink:href="{{ asset("sprite.svg#join") }}">
+                              </use>
+                            </svg>
                             Join
                           </x-buttons.button>
 
@@ -126,11 +128,12 @@
                             id="hide-organization-btn"
                             data-item-id="{{ $organization->id }}"
                             type="button">
-                            <img class="w-4 h-4 mr-2"
-                              src="{{ Vite::asset("resources/icons/hide_org.svg") }}"
-                              alt="">Hide
+                            <svg class="w-4 h-4 mr-2" fill="white">
+                              <use
+                                xlink:href="{{ asset("sprite.svg#hide-organization") }}">
+                              </use>
+                            </svg>
                           </x-buttons.button>
-
                         </td>
                       @endcannot
 
