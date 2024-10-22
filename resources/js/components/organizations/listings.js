@@ -1,3 +1,5 @@
+import { setQueryString, getQueryString, modal_overlay } from "./../../helper.js";
+
 document.addEventListener("click", (ev) => {
 
   // join btn listing
@@ -28,27 +30,8 @@ document.addEventListener("click", (ev) => {
   if (ev.target.closest("#join-organization-modal")) {
     modal_overlay("join-organization-modal")
   }
+
   if (ev.target.closest("#hide-organization-modal")) {
     modal_overlay("hide-organization-modal")
   }
 })
-
-function modal_overlay(id) {
-  document.querySelector(`#${id}`)?.classList.toggle("hidden");
-  document.querySelector("#modal-overlay").classList.toggle("hidden");
-}
-
-// build
-function setQueryString(id) {
-  const url = new URL(window.location)
-  url.searchParams.set("id", id)
-  history.pushState(null, '', url);
-}
-
-// get query string
-function getQueryString(item) {
-  const searchParams = new URLSearchParams(window.location.search);
-  if (searchParams.has(item)) {
-    return searchParams.get(item)
-  }
-}

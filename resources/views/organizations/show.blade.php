@@ -144,11 +144,10 @@
         @endif
 
         {{-- leave org --}}
-        <x-modals.leave-org-modal formId="leave-organization-form"
-          typeIcon="warning-icon" headerTitle="Leave Organization"
-          actionConfirmBtn="Yes, I am sure"
-          actionConfirmCancel="No, cancel">Are you sure you want to leave
-          this organization?</x-modal>
+        <x-modals.action-modal name="leave-organization" type="warning"
+          method="POST" header="Leave Organization">
+          Are you sure you want to leave this organization?
+        </x-modals.action-modal>
       </main>
     </div>
 

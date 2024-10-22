@@ -260,16 +260,14 @@
 
 
         {{-- delete view --}}
-        <x-modals.delete-modal formId="delete-organization-form"
-          typeIcon="warning-icon" headerTitle="Delete item"
-          actionConfirmBtn="Yes, I am sure"
-          actionConfirmCancel="No, cancel">Are you sure you want to delete
-          this
-          organization?</x-modal>
+        <x-modals.action-modal name="delete-organization" type="warning"
+          method="DELETE" header="Delete Organization Confirm">
+          Are you sure you want to delete this organization?
+        </x-modals.action-modal>
 
-          @if ($organizations instanceof Illuminate\Pagination\Paginator)
-            {!! $organizations->appends(["query" => request("query")])->links() !!}
-          @endif
+        @if ($organizations instanceof Illuminate\Pagination\Paginator)
+          {!! $organizations->appends(["query" => request("query")])->links() !!}
+        @endif
       </main>
     </div>
 

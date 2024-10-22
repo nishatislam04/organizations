@@ -96,11 +96,10 @@
         </div>
 
         {{-- pay modal --}}
-        <x-modals.installment-pay-modal formId="installment-pay-form"
-          typeIcon="warning-icon" headerTitle="Installment Pay Confirm"
-          actionConfirmBtn="Yes, I am sure"
-          actionConfirmCancel="No, cancel">Are you sure you want to confirm
-          the payment?</x-modal>
+        <x-modals.action-modal name="installment-pay" type="warning"
+          header="Installment Pay Confirm">
+          Are you sure you want to confirm the payment?
+        </x-modals.action-modal>
 
       </main>
     </div>

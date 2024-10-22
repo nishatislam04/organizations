@@ -127,6 +127,7 @@
                             type="button">
                             <x-icon.icon class="w-4 h-4 mr-2" fill="white"
                               icon="hide-organization" />
+                            Hide
                           </x-buttons.button>
                         </td>
                       @endcannot
@@ -138,18 +139,16 @@
             </div>
           </div>
         </div>
-        <x-modals.join-modal formId="join-organization-form"
-          typeIcon="success-icon" headerTitle="Join Organization"
-          actionConfirmBtn="Yes, I am sure"
-          actionConfirmCancel="No, cancel">Are you sure you want to join
-          this organization?
-        </x-modals.join-modal>
-        <x-modals.hide-modal formId="hide-organization-form"
-          typeIcon="warning-icon" headerTitle="Hide Organization"
-          actionConfirmBtn="Yes, I am sure"
-          actionConfirmCancel="No, cancel">Are you sure you want to
-          hide this organization?
-        </x-modals.hide-modal>
+
+        <x-modals.action-modal name="join-organization" type="warning"
+          method="POST" header="Join Organization">
+          Are you sure you want to join this organization?
+        </x-modals.action-modal>
+
+        <x-modals.action-modal name="hide-organization" type="warning"
+          method="POST" header="Hide Organization">
+          Are you sure you want to hide this organization?
+        </x-modals.action-modal>
 
         @if ($organizations instanceof Illuminate\Pagination\Paginator)
           {!! $organizations->appends(["query" => request("query")])->links() !!}

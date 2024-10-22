@@ -197,23 +197,22 @@
         </div>
 
 
-        <x-modals.delete-modal formId="user-delete-form"
-          typeIcon="warning-icon" headerTitle="Delete item"
-          actionConfirmBtn="Yes, I am sure"
-          actionConfirmCancel="No, cancel">Are you sure you want to delete
-          this user?
-          </x-modal>
+        <x-modals.action-modal name="user-delete" type="warning"
+          method="DELETE" header="Delete User">
+          Are you sure you want to delete this user?
+        </x-modals.action-modal>
 
-          <x-modals.approve-modal typeIcon="success-icon"
-            headerTitle="Accept User" actionConfirmBtn="Yes, I am sure"
-            actionConfirmCancel="No, cancel">Are you sure you want to
-            Accept this user?</x-modals.approve-modal>
-          <x-modals.reject-modal typeIcon="warning-icon"
-            headerTitle="Reject user" actionConfirmBtn="Yes, I am sure"
-            actionConfirmCancel="No, cancel">Are you sure you want to
-            reject this user?</x-modals.approve-modal>
+        <x-modals.action-modal name="approve-user" type="warning"
+          method="POST" header="Accept User">
+          Are you sure you want to approve this user?
+        </x-modals.action-modal>
 
-            {!! $users->appends(["query" => request("query")])->links() !!}
+        <x-modals.action-modal name="reject-user" type="warning"
+          method="POST" header="Reject User">
+          Are you sure you want to reject this user?
+        </x-modals.action-modal>
+
+        {!! $users->appends(["query" => request("query")])->links() !!}
       </main>
     </div>
 
