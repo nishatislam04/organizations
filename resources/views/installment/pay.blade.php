@@ -97,7 +97,7 @@
 
         {{-- pay modal --}}
         <x-modals.action-modal name="installment-pay" type="warning"
-          header="Installment Pay Confirm">
+          method="POST" header="Installment Pay Confirm">
           Are you sure you want to confirm the payment?
         </x-modals.action-modal>
 

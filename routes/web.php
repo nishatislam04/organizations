@@ -108,7 +108,7 @@ Route::middleware(["auth", "super"])
   });
 
 Route::controller(SubscriptionController::class)
-  ->middleware(['auth', 'super'])
+  ->middleware(['auth'])
   ->prefix("subscriptions")
   ->name("subscriptions.")
   ->group(function () {
@@ -119,7 +119,7 @@ Route::controller(SubscriptionController::class)
     Route::post("/{organization}/store", "store")->name("store");
   });
 
-Route::middleware(['auth', "super"])
+Route::middleware(['auth'])
   ->controller(InstallmentController::class)
   ->prefix("installments")
   ->name("installments.")

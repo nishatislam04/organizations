@@ -101,7 +101,7 @@ class InstallmentController extends Controller {
         return view("installment.pay", compact("installmentId", "details"));
     }
 
-    function pay(int $organizationId, int $subscriptionId, int $installmentId) {
+    function pay($organizationId, $subscriptionId, $installmentId) {
         InstallmentCollections::create([
             'user_id' => Auth::id(),
             "organization_id" => $organizationId,

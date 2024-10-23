@@ -1,8 +1,8 @@
 
 // build query string
-export function setQueryString(id) {
+export function setQueryString(id, key = "id") {
   const url = new URL(window.location)
-  url.searchParams.set("id", id)
+  url.searchParams.set(key, id)
   history.pushState(null, '', url);
 }
 
