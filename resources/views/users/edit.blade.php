@@ -32,17 +32,21 @@
 
                 <x-forms.form-field>
                   <x-forms.label for="username">UserName </x-forms.label>
-                  <x-forms.input id="username" name="username"
-                    type="text" value="{{ $user->username }}"
-                    placeholder="Enter User UserName" />
+                  <input
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    id="username" name="username" type="text"
+                    value="{{ $user->username }}"
+                    placeholder="Enter User UserName">
                   <x-forms.input-error key="username" />
                 </x-forms.form-field>
 
                 <x-forms.form-field>
                   <x-forms.label for="email">Email </x-forms.label>
-                  <x-forms.input id="email" name="email"
-                    type="email" value="{{ $user->email }}"
-                    placeholder="Enter User Email" />
+                  <input
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    id="email" name="email" type="email"
+                    value="{{ $user->email }}"
+                    placeholder="Enter User Email">
                   <x-forms.input-error key="email" />
                 </x-forms.form-field>
 
