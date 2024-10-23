@@ -73,10 +73,11 @@
             <x-forms.label
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               for="password">Your password</x-forms.label>
-            <x-forms.input
+            <input
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              id="password" name="password" value="password"
-              placeholder="Enter Password" required />
+              id="password" name="password" type="text"
+              placeholder="Enter Password" required>
+
             <x-forms.input-error key="password" />
           </div>
 
@@ -84,12 +85,10 @@
             <x-forms.label
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               for="password-confirmation">Confirm password</x-forms.label>
-            <x-forms.input
+            <input
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              id="password-confirmation" name="password-confirmation"
-              value="password-confirmation"
-              placeholder="Enter Password again" required />
-            <x-forms.input-error key="password-confirmation" />
+              id="password-confirmation" name="password_confirmation"
+              type="text" placeholder="Enter Password again" required>
           </div>
 
           <div class="flex items-center">

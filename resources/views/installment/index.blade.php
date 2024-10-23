@@ -67,19 +67,25 @@
                 <div
                   class="absolute bottom-0 right-0 flex flex-col justify-between gap-8">
 
-                  <p class="text-2xl text-gray-400 ">
-                    Penalty Charges :
-                    <span>{{ auth()->user()->penalty_charges }}
-                      <x-icon.icon class="inline w-6 h-6 -mt-2 -ml-2"
-                        fill="gray" icon="taka" />
-                    </span>
-                  </p>
+                  @if (auth()->user()->penalty_charges > 1)
+                    <p class="text-2xl text-gray-400 ">
+                      Penalty Charges :
+                      <span>{{ auth()->user()->penalty_charges }}
+                        <x-icon.icon class="inline w-6 h-6 -mt-2 -ml-2"
+                          fill="gray" icon="taka" />
+                      </span>
+                    </p>
+                    <x-buttons.button
+                      class=" text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+                      type="a" :href='route("installments.penaltyPayView")'>
+                      Pay Penalty
+                    </x-buttons.button>
+                  @else
+                    <p class="-mt-16 text-xl italic text-gray-600">
+                      No Penalty Charges
+                    </p>
+                  @endif
 
-                  <x-buttons.button
-                    class=" text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-                    type="a" :href='route("installments.penaltyPayView")'>
-                    Pay Penalty
-                  </x-buttons.button>
                 </div>
               @endcan
             </div>

@@ -9,6 +9,7 @@ use App\Models\Subscription\Subscription;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class SubscriptionController extends Controller {
@@ -18,6 +19,14 @@ class SubscriptionController extends Controller {
     public function index(Organization $organization) {
         $subscriptions = Subscription::where("organization_id", $organization->id)->latest()
             ->get();
+        $moneyCollected = DB::table('subscriptions')
+            ->join('installment_collections', 'subscriptions.organization_id', '=', 'installment_collections.organization_id')
+            ->where('subscriptions.organization_id', $organization->id)
+            ->where('installment_collections.user_id', Auth::id())
+            ->select('subscriptions.*', 'installment_collections.*', 'subscriptions.per_amount')
+            ->get();
+
+        $paid = count($moneyCollected) * $moneyCollected[0]->per_amount;
 
         $today = CarbonImmutable::createFromFormat("d-m-Y", date("d-m-Y"));
         $tomorrow = $today->addDays();
@@ -29,7 +38,7 @@ class SubscriptionController extends Controller {
             }
         }
 
-        return view("subscriptions.index", compact("organization", "subscriptions"));
+        return view("subscriptions.index", compact("organization", "subscriptions", "paid"));
     }
 
     /**

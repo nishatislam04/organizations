@@ -35,42 +35,51 @@ class InstallmentController extends Controller {
             )
             ->first();
 
+        if (Auth::user()->role === "super")
+            return view("installment.index", compact("installments", "details"));
+
         // penalty calculation
         $today = CarbonImmutable::now();
         $tomorrow = $today->addDays();
         $yestarday = $today->subDays();
         list($currMonth, $currYear) = [date("n"), date("Y")];
         $user = User::find(Auth::id());
+        $userJoinDate = Auth::user()->joining_date;
+        $lastPenaltyDate = Auth::user()->last_penalty_date ? Carbon::createFromFormat("d-m-Y", Auth::user()->last_penalty_date) : null;
 
         foreach ($installments as $installment) {
             $dueDate = Carbon::createFromFormat("d-m-Y", $installment->due_date);
-            // if yestarday is same day as due date, we perform penalty calculation
-            if ($yestarday->isSameDay($dueDate)) {
-                if (is_null($user->last_penalty_date)) {
-                    // check if user paid
-                    $isPayed = InstallmentCollections::where("installment_id", $installment->id)->first();
-                    if (is_null($isPayed)) {
-                        // charge & update last change date
-                        $user->increment("penalty_charges", $subscription->penalty_amount);
-                        $user->last_penalty_date = date("d-m-Y");
-                        $user->save();
-                    } else {
-                        // user already paid
-                        return view("installment.index", compact("installments", "details"));
-                    }
-                } else {
-                    // check 'last_penalty_date' is current due_date
-                    $user_last_penalty_date = Carbon::createFromFormat("d-m-Y", $user->last_penalty_date);
+            // check current installment id exist on installment colections
+            $isInstallmentExist = InstallmentCollections::where("installment_id", $installment->id)->where("user_id", Auth::id())
+                ->first();
 
-                    if ($user_last_penalty_date->isSameDay($dueDate)) {
-                        // user already penalty
-                        return view("installment.index", compact("installments", "details"));
-                    } else {
-                        // charge & penalty
-                        $user->increment("penalty_charges", $subscription->penalty_amount);
-                        $user->last_penalty_date = $today;
+            $penaltyCharge = $installment->subscription->penalty_amount;
+            // parsing to compare month & year only
+
+            if (Carbon::today()->isSameDay($dueDate)) {
+                if (is_null($isInstallmentExist)) {
+                    // check when the user last penalty
+                    $user = Auth::user();
+                    if (is_null($lastPenaltyDate)) {
+                        $user->increment('penalty_charges', $penaltyCharge);
+                        $user->last_penalty_date = $installment->due_date;
+                        $user->save();
+                    } elseif (!$lastPenaltyDate->isSameDay(Carbon::today())) {
+                        $user->increment('penalty_charges', $penaltyCharge);
+                        $user->last_penalty_date = $dueDate;
                         $user->save();
                     }
+
+
+
+
+                    // if () {
+                    //     $user = Auth::user();
+
+                    //     $user->increment('penalty_charges', $penaltyCharge);
+                    //     $user->last_penalty_date = $dueDate;
+                    //     $user->save();
+                    // }
                 }
             }
         }

@@ -93,12 +93,21 @@
                         scope="col">
                         Start From
                       </th>
-                      <th
-                        class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
-                        scope="col">
-                        Complete
-                      </th>
+                      @can("is-super")
+                        <th
+                          class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
+                          scope="col">
+                          Complete
+                        </th>
+                      @endcan
 
+                      @can("is-member")
+                        <th
+                          class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
+                          scope="col">
+                          Total Paid
+                        </th>
+                      @endcan
                     </tr>
                   </thead>
 
@@ -163,11 +172,22 @@
                           {{ $date }}
                         </td>
 
-                        <td
-                          class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                          <span class="text-gray-400">No</span>
-                        </td>
+                        @can("is-super")
+                          <td
+                            class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <span class="text-gray-400">No</span>
+                          </td>
+                        @endcan
 
+                        @can("is-member")
+                          <td
+                            class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <span
+                              class="text-white">{{ number_format($paid) }}
+                              <x-icon.icon class="inline w-5 h-5"
+                                fill="gray" icon="taka" /></span>
+                          </td>
+                        @endcan
                       </tr>
                     @endforeach
 
