@@ -29,7 +29,7 @@
                 <x-forms.form-field class="lg:col-span-3">
                   <x-forms.label for="name">Name</x-forms.label>
                   <x-forms.input id="name" name="name"
-                    type="text" value='{{ old("name") }}'
+                    type="text" value="name"
                     placeholder="Enter Organization Name" />
                   <x-forms.input-error key="name" />
                 </x-forms.form-field>

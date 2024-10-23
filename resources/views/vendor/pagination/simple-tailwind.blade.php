@@ -1,8 +1,8 @@
-<div
-  class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-center dark:bg-gray-800 dark:border-gray-700">
+@if ($paginator->hasPages())
+  <div
+    class="sticky bottom-0 right-0 items-center w-full p-4 bg-white border-t border-gray-200 sm:flex sm:justify-center dark:bg-gray-800 dark:border-gray-700">
 
-  <div class="flex items-center space-x-3">
-    @if ($paginator->hasPages())
+    <div class="flex items-center space-x-3">
       {{-- Previous Page Link --}}
       @if ($paginator->onFirstPage())
         <x-buttons.button
@@ -42,6 +42,6 @@
             icon="next" />
         </x-buttons.button>
       @endif
-    @endif
+    </div>
   </div>
-</div>
+@endif

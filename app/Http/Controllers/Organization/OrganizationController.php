@@ -65,7 +65,7 @@ class OrganizationController extends Controller {
                         'organizations.*',
                         'organizations.id as organizationId'
                     )
-                    ->simplePaginate(2);
+                    ->simplePaginate(5);
             }
             if (Auth::user()->role === "admin") {
 
@@ -100,12 +100,28 @@ class OrganizationController extends Controller {
     function listings() {
         session()->forget("joining_org");
 
+        $user = Auth::user();
         $superName = User::where("role", "super")->first()->username;
-        $organizations = Organization::with("user")->simplePaginate(10);
+        $organizations = Organization::with("user")->simplePaginate(5);
+
+
+        if (is_null($user)) {
+            $showListings = true;
+            return view(
+                "organizations.listings",
+                compact("superName", "organizations", "showListings")
+            );
+        }
+
+        if ($user->status === "pending" && !is_null($user->organization_id)) {
+            $showListings = false;
+        } else {
+            $showListings = true;
+        }
 
         return view(
             "organizations.listings",
-            compact("superName", "organizations")
+            compact("superName", "organizations", "showListings")
         );
     }
 
@@ -134,7 +150,7 @@ class OrganizationController extends Controller {
      */
     public function store(Request $request) {
         $validated = $request->validate([
-            "name" => "required|string|min:3|max:254",
+            "name" => "required|string|min:3|max:254|unique:organizations,name",
             "description" => "required|string",
             "max_members" => "required|integer|min_digits:1"
         ]);

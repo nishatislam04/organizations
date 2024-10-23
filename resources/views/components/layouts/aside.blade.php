@@ -22,7 +22,9 @@
               container visible
               on mobile view. fix the css 'hide' conflict</p>
           </li>
-          @if (!is_null(auth()->user()->organization_id))
+          @if (
+              !is_null(auth()->user()->organization_id) &&
+                  auth()->user()->status === "passed")
             <li>
               <a class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700"
                 href="{{ route("dashboard.index") }}">

@@ -63,7 +63,7 @@ class MemberController extends Controller {
             session()->put('hide-organization', [$id]);
         }
 
-        return redirect()->route("organizations.listings");
+        return redirect()->route("organizations.listings")->with("success", "Organization Hide Success");
     }
 
 
