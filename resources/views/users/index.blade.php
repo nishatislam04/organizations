@@ -197,7 +197,7 @@
         </div>
 
 
-        <x-modals.action-modal name="user-delete" type="warning"
+        <x-modals.action-modal name="delete-user" type="warning"
           method="DELETE" header="Delete User">
           Are you sure you want to delete this user?
         </x-modals.action-modal>

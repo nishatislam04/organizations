@@ -24,7 +24,7 @@ document.addEventListener("click", function (ev) {
     setQueryString(ev.target.closest("#delete-user-btn").dataset.userId)
 
     // show modal & overlay
-    modal_overlay("delete-modal")
+    modal_overlay("delete-user-modal")
 
     document.querySelector("#user-delete-form").action = `http://nio.com/users/${getQueryString('id')}/delete`
   }
@@ -32,9 +32,23 @@ document.addEventListener("click", function (ev) {
 
   // hide overlay
   if (ev.target.closest(".modal-close-btn")
-    && (ev.target.closest('#approve-user-modal') || ev.target.closest('#reject-user-modal'))) {
-    document.querySelector("#approve-user-modal").classList.contains("hidden") ? document.querySelector("#reject-user-modal").classList.toggle("hidden") : document.querySelector("#approve-user-modal").classList.toggle("hidden")
+    && (ev.target.closest('#approve-user-modal') || ev.target.closest('#reject-user-modal') || (ev.target.closest("#delete-user-modal")))) {
     document.querySelector("#modal-overlay").classList.toggle("hidden");
+    // toggle approve modal
+    !document.querySelector("#approve-user-modal").classList.contains("hidden") &&
+      document.querySelector("#approve-user-modal").classList.toggle("hidden");
+
+    // toggle reject modal
+    !document.querySelector("#reject-user-modal").classList.contains("hidden") &&
+      document.querySelector("#reject-user-modal").classList.toggle("hidden");
+
+    // toggle delete modal
+    !document.querySelector("#delete-user-modal").classList.contains("hidden") &&
+      document.querySelector("#delete-user-modal").classList.toggle("hidden");
+
+
+    // document.querySelector("#approve-user-modal").classList.contains("hidden") ? document.querySelector("#reject-user-modal").classList.toggle("hidden") : document.querySelector("#approve-user-modal").classList.toggle("hidden")
+    // document.querySelector("#modal-overlay").classList.toggle("hidden");
     // modal_overlay(modalToClose);
   }
 
