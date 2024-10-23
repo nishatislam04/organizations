@@ -110,9 +110,16 @@
                     <div>
                       <h3 class="text-lg font-semibold text-blue-500">Total
                         Subscriptions</h3>
-                      <p class="text-sm text-gray-500 dark:text-gray-400">
-                        {{ $organization->subscriptions->count() }}
-                        Subscriptions</p>
+                      @if ($organization->subscriptions->count() < 1)
+                        <p
+                          class="text-sm text-gray-500 dark:text-gray-400">
+                          No subscriptions were found</p>
+                      @else
+                        <p
+                          class="text-sm text-gray-500 dark:text-gray-400">
+                          {{ $organization->subscriptions->count() }}
+                          Subscriptions</p>
+                      @endif
                     </div>
                   </div>
 
