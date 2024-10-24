@@ -13,9 +13,11 @@ use App\Http\Controllers\Member\MemberController;
 
 Route::get("/", function () {
   if (Auth::check()) {
-    return is_null(Auth::user()->organization_id) ?
-      redirect()->route("organizations.listings") :
-      redirect()->route("dashboard.index");
+    if (Auth::user()->role === "super")
+      return view("dashboard.dashboard");
+    if (Auth::user()->status === "pending") {
+      return view("organizations.listings");
+    }
   } else {
     return redirect()->route("organizations.listings");
   }
