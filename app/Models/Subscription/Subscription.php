@@ -19,4 +19,8 @@ class Subscription extends Model {
     function installments() {
         return $this->hasMany(Installment::class);
     }
+
+    function organization() {
+        return  $this->belongsTo(Organization::class);
+    }
 }

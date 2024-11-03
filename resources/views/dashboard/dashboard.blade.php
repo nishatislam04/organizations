@@ -13,7 +13,7 @@
 
         {{-- super: top10 users with highest penalty --}}
         <div class="col-start-6 col-end-10 row-start-1 bg-gray-400 row-end-9">
-          <p>top10 installment collection log</p>
+          <p>last10 installment collection log</p>
         </div>
 
         {{-- super: latest subscription --}}

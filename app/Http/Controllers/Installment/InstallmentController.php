@@ -20,7 +20,10 @@ class InstallmentController extends Controller {
     public function index(Subscription $subscription) {
 
         $installments = Installment::where("subscription_id", $subscription->id)
-            ->with("collected")->get();
+            ->with(['collected' => function ($query) {
+                $query->where('user_id', Auth::id()); // Assuming `user_id` links to the auth user
+            }])
+            ->get();
         $details =  Installment::where("subscription_id", $subscription->id)
             ->join("subscriptions", "installments.subscription_id", "=", "subscriptions.id")
             ->join("organizations", "installments.organization_id", "=", "organizations.id")
@@ -34,7 +37,6 @@ class InstallmentController extends Controller {
                 "organizations.name as organizationName"
             )
             ->first();
-
         if (Auth::user()->role === "super")
             return view("installment.index", compact("installments", "details"));
 
@@ -83,7 +85,7 @@ class InstallmentController extends Controller {
                 }
             }
         }
-
+        // dd($installments);
         return view("installment.index", compact("installments", "details"));
     }
 

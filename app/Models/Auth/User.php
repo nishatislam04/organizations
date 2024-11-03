@@ -45,7 +45,7 @@ class User extends Authenticatable {
         return $this->hasMany(Organization::class);
     }
 
-    function joinOrganizations() {
+    function organization() {
         return $this->belongsTo(Organization::class);
     }
 }

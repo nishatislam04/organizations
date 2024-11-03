@@ -2,6 +2,9 @@
 
 namespace App\Models\Installment;
 
+use App\Models\Auth\User;
+use App\Models\Organization\Organization;
+use App\Models\Subscription\Subscription;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,5 +15,17 @@ class InstallmentCollections extends Model {
 
     function installment() {
         return  $this->belongsTo(Installment::class);
+    }
+
+    function organization() {
+        $this->belongsTo(Organization::class);
+    }
+
+    function subscription(){
+        return $this->belongsTo(Subscription::class);
+    }
+
+    function user(){
+        return $this->belongsTo(User::class);
     }
 }
