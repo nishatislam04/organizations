@@ -17,6 +17,7 @@ class SubscriptionController extends Controller {
      * Display a listing of the resource.
      */
     public function index(Organization $organization) {
+        $paid = 0;
         $subscriptions = Subscription::where("organization_id", $organization->id)->latest()
             ->get();
         $moneyCollected = DB::table('subscriptions')
@@ -26,7 +27,10 @@ class SubscriptionController extends Controller {
             ->select('subscriptions.*', 'installment_collections.*', 'subscriptions.per_amount')
             ->get();
 
-        $paid = count($moneyCollected) * $moneyCollected[0]->per_amount;
+        if (count($moneyCollected) > 1) {
+            $paid = count($moneyCollected) * $moneyCollected[0]->per_amount;
+        }
+
 
         $today = CarbonImmutable::createFromFormat("d-m-Y", date("d-m-Y"));
         $tomorrow = $today->addDays();

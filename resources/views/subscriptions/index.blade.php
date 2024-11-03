@@ -183,7 +183,7 @@
                           <td
                             class="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <span
-                              class="text-white">{{ number_format($paid) }}
+                              class="text-white">{{ number_format($paid ?? 0) }}
                               <x-icon.icon class="inline w-5 h-5"
                                 fill="gray" icon="taka" /></span>
                           </td>
