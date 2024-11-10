@@ -56,7 +56,7 @@ class DashboardController extends Controller {
             ->orderByDesc('subscription_count')
             ->take(3)
             ->get();
-        dd($topInstallmentCollection);
+        // dd($topInstallmentCollection);
 
 
         if ($user->role === "super") {
