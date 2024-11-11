@@ -8,10 +8,8 @@ use App\Models\Installment\Installment;
 use App\Models\Installment\InstallmentCollections;
 use App\Models\Organization\Organization;
 use App\Models\Subscription\Subscription;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 
 class DashboardController extends Controller {
@@ -19,26 +17,29 @@ class DashboardController extends Controller {
         $user = Auth::user();
         $organizations = Organization::with("user")->simplePaginate(5);
 
-        if (Auth::user()->role === "super") $superUserData =  $this->getSuperUserData();
-
+        if (Auth::user()->role === "super")
+            $superUserData =  $this->getSuperUserData();
 
         if (Auth::user()->role === "admin")
             $adminUserData = $this->getAdminUserData();
 
-        if ($user->role === "super") {
+        if (Auth::user()->role === "member")
+            $memberUserData =  $this->memberUserData();
+
+
+        if ($user->role === "super")
             return view("dashboard.dashboard", [
                 "superUserData" => $superUserData,
             ]);
-        }
 
         if ($user->role === "admin")
             return view("dashboard.dashboard", [
                 "adminUserData" => $adminUserData
-                // "overview" => $overview,
-                // "mostPenaltyChargedUsers" => $mostPenaltyChargedUsers,
-                // "organizationActiveSince" => $organizationActiveSince,
-                // "topSubscriptions" => $topSubscriptions,
-                // "lastInstallmentCollections" => $lastInstallmentCollections
+            ]);
+
+        if ($user->role === "member")
+            return view("dashboard.dashboard", [
+                "memberUserData" => $memberUserData
             ]);
 
 
@@ -135,6 +136,19 @@ class DashboardController extends Controller {
             "organizationActiveSince" => $organizationActiveSince,
             "topSubscriptions" => $topSubscriptions,
             "lastInstallmentCollections" => $lastInstallmentCollections
+        ];
+    }
+
+    function memberUserData() {
+        $organization = Organization::where("id", Auth::user()->organization_id)->first();
+        $topSubscriptions = Subscription::where("organization_id", Auth::user()->organization_id)->take(5)->get();
+
+        $allPaymentHistory = InstallmentCollections::where("user_id", Auth::id())->with("subscription")->get();
+
+        return [
+            "organization" => $organization,
+            "topSubscriptions" => $topSubscriptions,
+            "allPaymentHistories" => $allPaymentHistory
         ];
     }
 }
