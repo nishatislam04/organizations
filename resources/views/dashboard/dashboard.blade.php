@@ -273,7 +273,7 @@
 
               <!-- Table Body -->
               <tbody>
-                @foreach ($lastInstallmentCollections as $lastInstallmentCollection)
+                @foreach ($adminUserData["lastInstallmentCollections"] as $lastInstallmentCollection)
                   <tr
                     class="transition duration-150 ease-in-out hover:bg-gray-50">
                     <td
@@ -308,19 +308,19 @@
               class="flex items-center justify-between p-3 rounded-md bg-blue-50">
               <p class="font-medium text-gray-600">Total Members</p>
               <p class="text-xl font-semibold text-blue-600">
-                {{ $overview->total_members }}</p>
+                {{ $adminUserData["overview"]->total_members }}</p>
             </div>
             <div
               class="flex items-center justify-between p-3 rounded-md bg-green-50">
               <p class="font-medium text-gray-600">Total Subscriptions</p>
               <p class="text-xl font-semibold text-green-600">
-                {{ $overview->total_subscriptions }}</p>
+                {{ $adminUserData["overview"]->total_subscriptions }}</p>
             </div>
             <div
               class="flex items-center justify-between p-3 rounded-md bg-yellow-50">
               <p class="font-medium text-gray-600">Total Installments</p>
               <p class="text-xl font-semibold text-yellow-600">
-                {{ $overview->total_installments }}</p>
+                {{ $adminUserData["overview"]->total_installments }}</p>
             </div>
           </div>
         </div>
@@ -334,13 +334,13 @@
           <p class="mt-10 text-xl font-bold text-gray-800">
             Created on:
             <span
-              class="text-gray-600">{{ $organizationActiveSince->created_at->format("F, d, Y") }}</span>
+              class="text-gray-600">{{ $adminUserData["organizationActiveSince"]->created_at->format("F, d, Y") }}</span>
           </p>
 
           <p class="mt-4 text-xl font-bold text-gray-800">
             Active for:
             <span
-              class="text-green-600">{{ round($organizationActiveSince->created_at->diffInDays(today())) }}
+              class="text-green-600">{{ round($adminUserData["organizationActiveSince"]->created_at->diffInDays(today())) }}
               days</span>
           </p>
         </div>
@@ -366,7 +366,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($mostPenaltyChargedUsers as $user)
+                @foreach ($adminUserData["mostPenaltyChargedUsers"] as $user)
                   <tr class="hover:bg-gray-100">
                     <td
                       class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
@@ -416,7 +416,7 @@
 
               <!-- Table Body -->
               <tbody>
-                @foreach ($topSubscriptions as $topSubscription)
+                @foreach ($adminUserData["topSubscriptions"] as $topSubscription)
                   <tr
                     class="transition duration-150 ease-in-out hover:bg-gray-50">
                     <td

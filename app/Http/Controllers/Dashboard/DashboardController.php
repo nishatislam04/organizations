@@ -22,34 +22,8 @@ class DashboardController extends Controller {
         if (Auth::user()->role === "super") $superUserData =  $this->getSuperUserData();
 
 
-        // if (Auth::user()->role === "admin") {
-        $organizationId = Auth::user()->organization_id;
-        $latestSubscriptions = Subscription::latest()
-            ->take(5)
-            ->get();
-
-        $overview = DB::table('users')
-            ->select([
-                DB::raw("(SELECT COUNT(*) FROM users WHERE organization_id = {$organizationId}) AS total_members"),
-                DB::raw("(SELECT COUNT(*) FROM subscriptions WHERE organization_id = {$organizationId}) AS total_subscriptions"),
-                DB::raw("(SELECT COUNT(*) FROM installment_collections WHERE organization_id = {$organizationId}) AS total_installments")
-            ])
-            ->first();
-
-        $mostPenaltyChargedUsers = User::where('organization_id', Auth::user()->organization_id)
-            ->where('penalty_charges', '>', 0)
-            ->orderBy('penalty_charges', 'desc')
-            ->take(5)
-            ->get();
-
-        $organizationActiveSince = Organization::where("user_id", Auth::user()->id)->first();
-
-        $topSubscriptions = Subscription::where("organization_id", Auth::user()->organization_id)->take(5)->get();
-
-        $lastInstallmentCollections = InstallmentCollections::where("organization_id", Auth::user()->organization_id)->with("subscription")->with("user")->take(5)->get();
-
-        // dd($lastInstallmentCollections);
-        // }
+        if (Auth::user()->role === "admin")
+            $adminUserData = $this->getAdminUserData();
 
         if ($user->role === "super") {
             return view("dashboard.dashboard", [
@@ -59,12 +33,12 @@ class DashboardController extends Controller {
 
         if ($user->role === "admin")
             return view("dashboard.dashboard", [
-                "overview" => $overview,
-                "mostPenaltyChargedUsers" => $mostPenaltyChargedUsers,
-                "organizationActiveSince" => $organizationActiveSince,
-                "topSubscriptions" => $topSubscriptions,
-                "lastInstallmentCollections" => $lastInstallmentCollections
-                // "adminUserData" => $superUserData,
+                "adminUserData" => $adminUserData
+                // "overview" => $overview,
+                // "mostPenaltyChargedUsers" => $mostPenaltyChargedUsers,
+                // "organizationActiveSince" => $organizationActiveSince,
+                // "topSubscriptions" => $topSubscriptions,
+                // "lastInstallmentCollections" => $lastInstallmentCollections
             ]);
 
 
@@ -127,5 +101,40 @@ class DashboardController extends Controller {
     }
 
     function getAdminUserData() {
+        $organizationId = Auth::user()->organization_id;
+
+
+        $latestSubscriptions = Subscription::latest()
+            ->take(5)
+            ->get();
+
+        $overview = DB::table('users')
+            ->select([
+                DB::raw("(SELECT COUNT(*) FROM users WHERE organization_id = {$organizationId}) AS total_members"),
+                DB::raw("(SELECT COUNT(*) FROM subscriptions WHERE organization_id = {$organizationId}) AS total_subscriptions"),
+                DB::raw("(SELECT COUNT(*) FROM installment_collections WHERE organization_id = {$organizationId}) AS total_installments")
+            ])
+            ->first();
+
+        $mostPenaltyChargedUsers = User::where('organization_id', Auth::user()->organization_id)
+            ->where('penalty_charges', '>', 0)
+            ->orderBy('penalty_charges', 'desc')
+            ->take(5)
+            ->get();
+
+        $organizationActiveSince = Organization::where("user_id", Auth::user()->id)->first();
+
+        $topSubscriptions = Subscription::where("organization_id", Auth::user()->organization_id)->take(5)->get();
+
+        $lastInstallmentCollections = InstallmentCollections::where("organization_id", Auth::user()->organization_id)->with("subscription")->with("user")->take(5)->get();
+
+        return [
+            "latestSubscriptions" => $latestSubscriptions,
+            "overview" => $overview,
+            "mostPenaltyChargedUsers" => $mostPenaltyChargedUsers,
+            "organizationActiveSince" => $organizationActiveSince,
+            "topSubscriptions" => $topSubscriptions,
+            "lastInstallmentCollections" => $lastInstallmentCollections
+        ];
     }
 }
