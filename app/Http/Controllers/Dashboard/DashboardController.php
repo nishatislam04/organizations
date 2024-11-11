@@ -4,29 +4,69 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Auth\User;
+use App\Models\Installment\Installment;
 use App\Models\Installment\InstallmentCollections;
 use App\Models\Organization\Organization;
 use App\Models\Subscription\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+
 
 class DashboardController extends Controller {
     function dashboard() {
         $user = Auth::user();
         $organizations = Organization::with("user")->simplePaginate(5);
 
-        $superUserData =  $this->getSuperUserData();
+        if (Auth::user()->role === "super") $superUserData =  $this->getSuperUserData();
 
-        // dd($superUserData);
 
+        // if (Auth::user()->role === "admin") {
+        $organizationId = Auth::user()->organization_id;
+        $latestSubscriptions = Subscription::latest()
+            ->take(5)
+            ->get();
+
+        $overview = DB::table('users')
+            ->select([
+                DB::raw("(SELECT COUNT(*) FROM users WHERE organization_id = {$organizationId}) AS total_members"),
+                DB::raw("(SELECT COUNT(*) FROM subscriptions WHERE organization_id = {$organizationId}) AS total_subscriptions"),
+                DB::raw("(SELECT COUNT(*) FROM installment_collections WHERE organization_id = {$organizationId}) AS total_installments")
+            ])
+            ->first();
+
+        $mostPenaltyChargedUsers = User::where('organization_id', Auth::user()->organization_id)
+            ->where('penalty_charges', '>', 0)
+            ->orderBy('penalty_charges', 'desc')
+            ->take(5)
+            ->get();
+
+        $organizationActiveSince = Organization::where("user_id", Auth::user()->id)->first();
+
+        $topSubscriptions = Subscription::where("organization_id", Auth::user()->organization_id)->take(5)->get();
+
+        $lastInstallmentCollections = InstallmentCollections::where("organization_id", Auth::user()->organization_id)->with("subscription")->with("user")->take(5)->get();
+
+        // dd($lastInstallmentCollections);
+        // }
 
         if ($user->role === "super") {
             return view("dashboard.dashboard", [
                 "superUserData" => $superUserData,
-
             ]);
         }
+
+        if ($user->role === "admin")
+            return view("dashboard.dashboard", [
+                "overview" => $overview,
+                "mostPenaltyChargedUsers" => $mostPenaltyChargedUsers,
+                "organizationActiveSince" => $organizationActiveSince,
+                "topSubscriptions" => $topSubscriptions,
+                "lastInstallmentCollections" => $lastInstallmentCollections
+                // "adminUserData" => $superUserData,
+            ]);
+
 
         if ($user->status === "passed" && !is_null($user->organization_id)) {
             return view("dashboard.dashboard");
@@ -61,7 +101,7 @@ class DashboardController extends Controller {
         $latestCompleteSubscriptions = Subscription::where("complete", "yes")
             ->with("organization")
             ->latest()
-            ->take(8)
+            ->take(10)
             ->get();
 
         $topInstallmentCollections =

@@ -165,10 +165,10 @@
           </div>
         </div>
 
-        {{-- super: latest 8 complete subscription --}}
+        {{-- super: latest 10 complete subscription --}}
         <div
           class="col-start-6 col-end-10 row-start-1 bg-gray-100 row-end-9">
-          <p class="mb-2 text-lg font-semibold text-gray-800">Latest8
+          <p class="mb-2 text-lg font-semibold text-gray-800">Latest10
             complete subscription</p>
 
           <div
@@ -246,33 +246,202 @@
       @can("is-admin")
         {{-- listing latest 3 subscription --}}
         <div
-          class="hidden col-start-1 col-end-7 row-start-7 bg-gray-400 row-end-12">
-          <p>listing latest 3 subscriptions</p>
+          class="col-start-1 col-end-7 row-start-7 bg-gray-100 rounded-lg shadow-md row-end-12">
+          <p class="mb-4 text-xl font-bold text-gray-700">Last5 Installment
+            Pay</p>
+
+          <div
+            class="overflow-auto border border-gray-300 rounded-lg max-h-[12rem]">
+            <table
+              class="min-w-full text-left bg-white rounded-lg shadow-sm ">
+              <thead class="text-gray-700 bg-gray-100">
+                <tr>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    Name</th>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    Subs. Name</th>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    Pay Amount</th>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    Paid Date</th>
+                </tr>
+              </thead>
+
+              <!-- Table Body -->
+              <tbody>
+                @foreach ($lastInstallmentCollections as $lastInstallmentCollection)
+                  <tr
+                    class="transition duration-150 ease-in-out hover:bg-gray-50">
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $lastInstallmentCollection->user->username }}</td>
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $lastInstallmentCollection->subscription->name }}
+                    </td>
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $lastInstallmentCollection->subscription->per_amount }}
+                    </td>
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $lastInstallmentCollection->created_at }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {{-- show next (upcomig installment details) --}}
+        {{-- overview --}}
         <div
-          class="hidden col-start-7 col-end-10 row-start-7 bg-gray-400 row-end-12">
-          <p>upcoming installment details</p>
+          class="col-start-7 col-end-10 row-start-7 p-4 bg-white rounded-lg shadow-lg row-end-12">
+          <p class="mb-4 text-xl font-bold text-gray-700">Organization
+            Overview</p>
+
+          <div class="space-y-2">
+            <div
+              class="flex items-center justify-between p-3 rounded-md bg-blue-50">
+              <p class="font-medium text-gray-600">Total Members</p>
+              <p class="text-xl font-semibold text-blue-600">
+                {{ $overview->total_members }}</p>
+            </div>
+            <div
+              class="flex items-center justify-between p-3 rounded-md bg-green-50">
+              <p class="font-medium text-gray-600">Total Subscriptions</p>
+              <p class="text-xl font-semibold text-green-600">
+                {{ $overview->total_subscriptions }}</p>
+            </div>
+            <div
+              class="flex items-center justify-between p-3 rounded-md bg-yellow-50">
+              <p class="font-medium text-gray-600">Total Installments</p>
+              <p class="text-xl font-semibold text-yellow-600">
+                {{ $overview->total_installments }}</p>
+            </div>
+          </div>
         </div>
 
         {{-- show top3 non missed installment pay user --}}
         <div
-          class="hidden col-start-10 col-end-13 row-start-1 row-end-6 bg-gray-400">
-          <p>top3 non-missed installment pay user</p>
+          class="col-start-10 col-end-13 row-start-1 row-end-6 p-6 bg-white border border-gray-300 rounded-lg shadow-md">
+          <p class="mb-2 text-2xl font-semibold text-gray-700">Organization
+            Active Status</p>
+
+          <p class="mt-10 text-xl font-bold text-gray-800">
+            Created on:
+            <span
+              class="text-gray-600">{{ $organizationActiveSince->created_at->format("F, d, Y") }}</span>
+          </p>
+
+          <p class="mt-4 text-xl font-bold text-gray-800">
+            Active for:
+            <span
+              class="text-green-600">{{ round($organizationActiveSince->created_at->diffInDays(today())) }}
+              days</span>
+          </p>
         </div>
 
-        {{-- show top5 most missed installment pay user --}}
+        {{-- show top5 most penalty charged users --}}
         <div
-          class="hidden col-start-10 col-end-13 row-start-6 bg-gray-400 row-end-12">
-          <p>top5 most missed installment pay user</p>
+          class="col-start-10 col-end-13 row-start-6 p-4 bg-gray-100 rounded-lg shadow-md row-end-12">
+          <p class="mb-4 text-lg font-bold text-gray-700">Most Penalty
+            Charged Users</p>
+
+          <div
+            class="overflow-auto border border-gray-300 rounded-lg max-h-80">
+            <table
+              class="min-w-full text-left bg-white border-collapse shadow-sm table-auto">
+              <thead class="text-gray-700 bg-gray-200">
+                <tr>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    Name</th>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    Charged</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($mostPenaltyChargedUsers as $user)
+                  <tr class="hover:bg-gray-100">
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $user->username }}</td>
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $user->penalty_charges }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {{-- listing last5 installments : how many paid & how many was supposed to pay  --}}
+        {{-- listing Top5 Subscriptions Overview  --}}
         <div
-          class="hidden col-start-1 col-end-10 row-start-1 row-end-7 bg-gray-400">
-          <p>listing last5 installments : how many paid & how many was
-            supposed to pay</p>
+          class="col-start-1 col-end-10 row-start-1 row-end-7 p-1 px-3 rounded-lg shadow-lg bg-gray-50">
+          <p class="mb-2 text-2xl font-bold text-gray-800">Top 5
+            Subscriptions Overview</p>
+
+          <div
+            class="overflow-auto border border-gray-300 rounded-lg max-h-96">
+            <table
+              class="min-w-full text-left bg-white rounded-lg shadow-sm h-[15rem]">
+              <thead class="text-gray-700 bg-gray-100">
+                <tr>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    Name</th>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    Type</th>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    Pay Per Amount</th>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    Penalty Amount</th>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    Start</th>
+                  <th
+                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                    End</th>
+                </tr>
+              </thead>
+
+              <!-- Table Body -->
+              <tbody>
+                @foreach ($topSubscriptions as $topSubscription)
+                  <tr
+                    class="transition duration-150 ease-in-out hover:bg-gray-50">
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topSubscription->name }}</td>
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topSubscription->type }}</td>
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topSubscription->per_amount }}</td>
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topSubscription->penalty_amount }}</td>
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topSubscription->start }}</td>
+                    <td
+                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topSubscription->end }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
       @endcan
       {{-- ADMN END --}}
@@ -281,7 +450,8 @@
       {{-- MEMBER START --}}
       @can("is-member")
         {{-- organization overview --}}
-        <div class="col-start-1 col-end-8 row-start-1 bg-gray-400 row-end-8">
+        <div
+          class="col-start-1 col-end-8 row-start-1 bg-gray-400 row-end-8">
           <p>organization overview</p>
         </div>
 

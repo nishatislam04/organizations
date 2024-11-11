@@ -2,6 +2,7 @@
 
 namespace App\Models\Subscription;
 
+use App\Models\Auth\User;
 use App\Models\Installment\Installment;
 use App\Models\Organization\Organization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

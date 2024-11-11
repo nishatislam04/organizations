@@ -20,7 +20,7 @@ class AuthController extends Controller {
 
         session()->has("joining_org") ?
             $organizations = [] :
-            $organizations = Organization::where("user_id", null)->get();
+            $organizations = Organization::all();
 
         return view("auth.register", compact("organizations"));
     }

@@ -21,11 +21,18 @@ class InstallmentCollections extends Model {
         $this->belongsTo(Organization::class);
     }
 
-    function subscription(){
+    function subscription() {
         return $this->belongsTo(Subscription::class);
     }
+    function subscriptionInstallemnt() {
+        return $this->installment->belongsTo(Subscription::class);
+    }
 
-    function user(){
+    function user() {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeFromUserOrganization($query, $organizationId) {
+        return $query->where('organization_id', $organizationId);
     }
 }
