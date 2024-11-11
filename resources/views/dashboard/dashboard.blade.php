@@ -33,7 +33,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($topInstallmentCollections as $topInstallmentCollection)
+                @foreach ($superUserData["topInstallmentCollections"] as $topInstallmentCollection)
                   <tr class="hover:bg-gray-100">
                     <td
                       class="p-2 text-sm text-gray-800 border-b border-gray-200">
@@ -86,7 +86,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($lastInstallmentCollections as $lastInstallmentCollection)
+                @foreach ($superUserData["lastInstallmentCollections"] as $lastInstallmentCollection)
                   <tr class="hover:bg-gray-100">
                     <td
                       class="p-2 text-sm text-gray-800 border-b border-gray-200">
@@ -112,7 +112,6 @@
             </table>
           </div>
         </div>
-
 
         {{-- super: latest subscription --}}
         <div
@@ -146,19 +145,20 @@
                 <tr class="hover:bg-gray-100">
                   <td
                     class="p-3 text-sm text-gray-800 border-b border-gray-200">
-                    {{ $latestSubscription->name }}.</td>
+                    {{ $superUserData["latestSubscription"]->name }}.</td>
                   <td
                     class="p-3 text-sm text-gray-800 border-b border-gray-200">
-                    {{ $latestSubscription->type }}.</td>
+                    {{ $superUserData["latestSubscription"]->type }}.</td>
                   <td
                     class="p-3 text-sm text-gray-800 border-b border-gray-200">
-                    {{ $latestSubscription->total }}.</td>
+                    {{ $superUserData["latestSubscription"]->total }}.</td>
                   <td
                     class="p-3 text-sm text-gray-800 border-b border-gray-200">
-                    {{ $latestSubscription->per_amount }}.</td>
+                    {{ $superUserData["latestSubscription"]->per_amount }}.
+                  </td>
                   <td
                     class="p-3 text-sm text-gray-800 border-b border-gray-200">
-                    {{ $latestSubscription->start }}.</td>
+                    {{ $superUserData["latestSubscription"]->start }}.</td>
                 </tr>
               </tbody>
             </table>
@@ -186,7 +186,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($latestCompleteSubscription as $latest)
+                @foreach ($superUserData["latestCompleteSubscriptions"] as $latest)
                   <tr class="hover:bg-gray-100">
                     <td
                       class="p-3 text-sm text-gray-800 border-b border-gray-200">
@@ -224,7 +224,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($userJoiningRequests as $userJoiningRequest)
+                @foreach ($superUserData["userJoiningRequests"] as $userJoiningRequest)
                   <tr class="hover:bg-gray-100">
                     <td
                       class="p-3 text-sm text-gray-800 border-b border-gray-200">

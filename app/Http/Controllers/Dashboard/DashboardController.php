@@ -16,6 +16,26 @@ class DashboardController extends Controller {
         $user = Auth::user();
         $organizations = Organization::with("user")->simplePaginate(5);
 
+        $superUserData =  $this->getSuperUserData();
+
+        // dd($superUserData);
+
+
+        if ($user->role === "super") {
+            return view("dashboard.dashboard", [
+                "superUserData" => $superUserData,
+
+            ]);
+        }
+
+        if ($user->status === "passed" && !is_null($user->organization_id)) {
+            return view("dashboard.dashboard");
+        } else {
+            return redirect()->route("organizations.listings", compact("organizations"));
+        }
+    }
+
+    function getSuperUserData() {
         $latestSubscription = Subscription::with("organization")
             ->latest()
             ->first();
@@ -57,23 +77,15 @@ class DashboardController extends Controller {
             ->take(3)
             ->get();
 
-        // dd($lastInstallmentCollections);
+        return [
+            "latestSubscription" => $latestSubscription,
+            "userJoiningRequests" => $userJoiningRequests,
+            "lastInstallmentCollections" => $lastInstallmentCollections,
+            "latestCompleteSubscriptions" => $latestCompleteSubscriptions,
+            "topInstallmentCollections" => $topInstallmentCollections
+        ];
+    }
 
-
-        if ($user->role === "super") {
-            return view("dashboard.dashboard", [
-                "latestSubscription" => $latestSubscription,
-                "userJoiningRequests" => $userJoiningRequests,
-                "lastInstallmentCollections" => $lastInstallmentCollections,
-                "latestCompleteSubscription" => $latestCompleteSubscriptions,
-                "topInstallmentCollections" => $topInstallmentCollections
-            ]);
-        }
-
-        if ($user->status === "passed" && !is_null($user->organization_id)) {
-            return view("dashboard.dashboard");
-        } else {
-            return redirect()->route("organizations.listings", compact("organizations"));
-        }
+    function getAdminUserData() {
     }
 }
