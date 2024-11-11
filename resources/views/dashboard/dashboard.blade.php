@@ -7,30 +7,236 @@
       {{-- SUPER START --}}
       {{-- Super: top3 installment collection --}}
       @can("is-super")
-        <div class="col-start-1 col-end-6 row-start-1 row-end-6 bg-gray-400 ">
-          <p>top3 installment collection</p>
+        <div
+          class="col-start-1 col-end-6 row-start-1 row-end-6 px-3 bg-gray-100 rounded-lg shadow-lg">
+          <p class="mb-2 text-lg font-semibold text-gray-800">Top3 Installment
+            Collection</p>
+
+          <div
+            class="max-w-full overflow-auto border border-gray-300 max-h-96">
+            <table
+              class="w-full text-left bg-white border-collapse rounded-lg shadow table-auto">
+              <thead class="text-gray-700 bg-gray-200">
+                <tr>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Susbs. Name</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Org. Name</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Per Price</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Collected Count</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($topInstallmentCollections as $topInstallmentCollection)
+                  <tr class="hover:bg-gray-100">
+                    <td
+                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topInstallmentCollection->name }}</td>
+                    <td
+                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topInstallmentCollection->organization_name }}
+                    </td>
+                    <td
+                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topInstallmentCollection->per_amount }}</td>
+                    <td
+                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topInstallmentCollection->subscription_count }}
+                    </td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {{-- super: top10 users with highest penalty --}}
-        <div class="col-start-6 col-end-10 row-start-1 bg-gray-400 row-end-9">
-          <p>last10 installment collection log</p>
+        {{-- super: last 10 installment collection log --}}
+        <div
+          class="flex flex-col justify-center col-start-1 col-end-10 bg-gray-100 rounded-lg shadow-lg row-start-9 row-end-13">
+          <p class="mb-2 text-lg font-semibold text-gray-800">Last10
+            Installment Collection Log</p>
+
+          <div
+            class="max-w-full overflow-auto border border-gray-300 max-h-80">
+            <table
+              class="w-full text-left bg-white border-collapse rounded-lg shadow table-auto">
+              <thead class="text-gray-700 bg-gray-200">
+                <tr>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Subs. Name</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Org. Name</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Paid</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Username</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Pay Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($lastInstallmentCollections as $lastInstallmentCollection)
+                  <tr class="hover:bg-gray-100">
+                    <td
+                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $lastInstallmentCollection->subscription_name }}
+                    </td>
+                    <td
+                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $lastInstallmentCollection->organization_name }}
+                    </td>
+                    <td
+                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $lastInstallmentCollection->subscription_per_amount }}
+                    </td>
+                    <td
+                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $lastInstallmentCollection->username }}</td>
+                    <td
+                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $lastInstallmentCollection->created_at }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
+
 
         {{-- super: latest subscription --}}
-        <div class="col-start-1 col-end-6 row-start-6 bg-gray-400 row-end-9">
-          <p>latest subscription</p>
+        <div
+          class="col-start-1 col-end-6 row-start-6 p-1 mt-1 bg-gray-100 row-end-9">
+          <p class="mb-1 text-lg font-semibold text-gray-800">Latest
+            Subscription</p>
+
+          <div class="overflow-x-auto">
+            <table
+              class="w-full text-left bg-white border-collapse rounded-lg shadow table-auto">
+              <thead class="text-gray-700 bg-gray-200">
+                <tr>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Name</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Type</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Count</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Amount</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Start</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="hover:bg-gray-100">
+                  <td
+                    class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    {{ $latestSubscription->name }}.</td>
+                  <td
+                    class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    {{ $latestSubscription->type }}.</td>
+                  <td
+                    class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    {{ $latestSubscription->total }}.</td>
+                  <td
+                    class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    {{ $latestSubscription->per_amount }}.</td>
+                  <td
+                    class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    {{ $latestSubscription->start }}.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {{-- super: latest 3 complete subscription --}}
+        {{-- super: latest 8 complete subscription --}}
         <div
-          class="col-start-1 col-end-10 bg-gray-400 row-start-9 row-end-13">
-          <p>Latest 3 complete subscription</p>
+          class="col-start-6 col-end-10 row-start-1 bg-gray-100 row-end-9">
+          <p class="mb-2 text-lg font-semibold text-gray-800">Latest8
+            complete subscription</p>
+
+          <div
+            class="max-w-full overflow-auto border border-gray-300 rounded-lg max-h-[23rem]">
+            <table
+              class="w-full text-left bg-white border-collapse rounded-lg shadow table-auto">
+              <thead class="text-gray-700 bg-gray-200">
+                <tr>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Subs. Name</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Org. Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($latestCompleteSubscription as $latest)
+                  <tr class="hover:bg-gray-100">
+                    <td
+                      class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $latest->name }}.</td>
+                    <td
+                      class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $latest->organization->name }}.
+                    </td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        {{-- super: show first 10 users joining approval --}}
+        {{-- super: show first 15 users joining approval --}}
         <div
-          class="col-start-10 col-end-13 row-start-1 bg-gray-400 row-end-10">
-          <p>Top15 user joining</p>
+          class="h-full min-h-[550px] col-start-10 col-end-13 row-start-1 mt-2 bg-gray-100 rounded-lg shadow-lg row-end-8">
+          <p class="mb-2 text-lg font-semibold text-gray-800">Top15 User
+            Joining Approval</p>
+
+          <div
+            class="h-full min-h-[550px] max-w-full overflow-auto border border-gray-300">
+            <table
+              class="w-full text-left bg-white border-collapse shadow table-auto">
+              <thead class="text-gray-700 bg-gray-200">
+                <tr>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Name</th>
+                  <th
+                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                    Org. Name</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($userJoiningRequests as $userJoiningRequest)
+                  <tr class="hover:bg-gray-100">
+                    <td
+                      class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $userJoiningRequest->username }}.</td>
+                    <td
+                      class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $userJoiningRequest->organization->name }}.</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
       @endcan
       {{-- SUPER END --}}

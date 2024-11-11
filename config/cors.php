@@ -15,11 +15,11 @@ return [
     |
     */
 
-    'paths' => ['api/*', '/login', '/logout', 'resources/js/*', 'build/*'],
+    'paths' => ['*'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://nio.com', 'http://localhost:5173'],
+    'allowed_origins' => ['*', " http://nio.com:5173/@vite/client"],
 
     'allowed_origins_patterns' => [],
 

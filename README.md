@@ -34,8 +34,8 @@ The Organization Management System simplifies managing multiple organizations wi
 
 1. **Clone the Repository**
     ```bash
-    git clone https://github.com/your-username/organization-management-system.git
-    cd organization-management-system
+    git clone https://github.com/nio04/organizations.git
+    cd organizations
     ```
 
 2. **Install Dependencies**
@@ -80,15 +80,9 @@ The Organization Management System simplifies managing multiple organizations wi
 
 ## Future Updates
 
-1. **Extend Payment Gateway Integration**
-2. **Additional Subscription Types**
-3. **Detailed Reporting and Analytics**
-
----
-
-## Contributing
-
-Contributions are welcome! If you’d like to add features or fix issues, please fork the repository and make a pull request.
-
----
+1. **Update Dashboard**
+2. **Make Responsive**
+3. **FB Login**
+3. **Add Chart**
+4. **Update ReadMe**
 

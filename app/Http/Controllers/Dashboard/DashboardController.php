@@ -33,7 +33,7 @@ class DashboardController extends Controller {
                 'organizations.name as organization_name',
                 'subscriptions.name as subscription_name',
                 'subscriptions.per_amount as subscription_per_amount',
-                'users.username as user_username'
+                'users.username as username'
             )
             ->orderBy('installment_collections.created_at', 'desc')
             ->take(15)
@@ -41,10 +41,10 @@ class DashboardController extends Controller {
         $latestCompleteSubscriptions = Subscription::where("complete", "yes")
             ->with("organization")
             ->latest()
-            ->take(3)
+            ->take(8)
             ->get();
 
-        $topInstallmentCollection =
+        $topInstallmentCollections =
             InstallmentCollections::select(
                 'installment_collections.subscription_id',
                 DB::raw('COUNT(installment_collections.subscription_id) AS subscription_count')
@@ -56,11 +56,18 @@ class DashboardController extends Controller {
             ->orderByDesc('subscription_count')
             ->take(3)
             ->get();
-        // dd($topInstallmentCollection);
+
+        // dd($lastInstallmentCollections);
 
 
         if ($user->role === "super") {
-            return view("dashboard.dashboard");
+            return view("dashboard.dashboard", [
+                "latestSubscription" => $latestSubscription,
+                "userJoiningRequests" => $userJoiningRequests,
+                "lastInstallmentCollections" => $lastInstallmentCollections,
+                "latestCompleteSubscription" => $latestCompleteSubscriptions,
+                "topInstallmentCollections" => $topInstallmentCollections
+            ]);
         }
 
         if ($user->status === "passed" && !is_null($user->organization_id)) {
