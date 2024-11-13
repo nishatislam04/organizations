@@ -65,14 +65,14 @@ The Organization Management System simplifies managing multiple organizations wi
 
 ## Screenshots
 
-1. **Dashboard View**
-   ![Dashboard View](path/to/dashboard-screenshot.png)
+1. **Super User Dashboard View**
+   ![Dashboard View](resources/images/assets/dashboard/super_dashboard.jpg)
 
-2. **Subscription Management**
-   ![Subscription Management](path/to/subscription-screenshot.png)
+2. **Admin User Dashboard**
+   ![Subscription Management](resources/images/assets/dashboard/admin_dashboard.png)
 
-3. **Installment Payment History**
-   ![Payment History](path/to/payment-history-screenshot.png)
+3. **Member User Dashboard**
+   ![Payment History](resources/images/assets/dashboard/member_dashboard.png)
 
 *Add your screenshots in the `assets` directory of your project, and reference them as shown above.*
 
