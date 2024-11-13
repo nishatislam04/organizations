@@ -71,11 +71,10 @@
                   src="https://placehold.co/30x30" alt="">
               @elseif (is_null(auth()->user()->google_id))
                 <img class="w-8 h-8 rounded-full"
-                  src="{{ asset("storage/uploads/" . auth()->user()->avatar) }}"
-                  alt="user photo">
+                  src="{{ asset("storage/uploads/" . auth()->user()->avatar) }}">
               @else
                 <img class="w-8 h-8 rounded-full"
-                  src="{{ auth()->user()->avatar }}" alt="user photo">
+                  src="{{ auth()->user()->avatar }}">
               @endif
 
             </button>
@@ -100,10 +99,10 @@
                   href="{{ route("dashboard.index") }}"
                   role="menuitem">Dashboard</a>
               </li>
-              <li>
+              {{-- <li>
                 <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                   href="#" role="menuitem">Settings</a>
-              </li>
+              </li> --}}
               <li>
                 <form action="{{ route("logout") }}" method="POST">
                   @csrf

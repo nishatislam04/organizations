@@ -11,16 +11,28 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Member\MemberController;
 
+// Route::get("/", function () {
+//   if (Auth::check()) {
+//     if (Auth::user()->role === "super")
+//       return view("dashboard.dashboard");
+//     if (Auth::user()->status === "pending") {
+//       return view("organizations.listings");
+//     }
+//   } else {
+//     return redirect()->route("organizations.listings");
+//   }
+// });
+
 Route::get("/", function () {
   if (Auth::check()) {
-    if (Auth::user()->role === "super")
-      return view("dashboard.dashboard");
-    if (Auth::user()->status === "pending") {
+    if (Auth::user()->role === "super") {
+      return redirect()->route("dashboard.index");
+    } elseif (Auth::user()->status === "pending") {
       return view("organizations.listings");
     }
-  } else {
-    return redirect()->route("organizations.listings");
   }
+  // Redirect guests to the organization listings page
+  return redirect()->route("organizations.listings");
 });
 
 Route::middleware("guest")->controller(GoogleController::class)->group(function () {

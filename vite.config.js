@@ -16,7 +16,7 @@ export default defineConfig({
     },
     assetsInclude: ['**/*.svg', '**/*.png', '**/*.ico', '**/*.webmanifest'], // Assets to include in build process
     server: {
-        host: true, // Allows using custom domain like nio.com
+        host: "nio.com", // Allows using custom domain like nio.com
         // Enable CORS for development to prevent security errors
         cors: {
             origin: 'http://nio.com', // Allow requests from your domain
@@ -25,6 +25,9 @@ export default defineConfig({
         hmr: {
             host: 'nio.com', // Ensure Hot Module Replacement works with your custom domain
         },
+        port: 5714,
+        cors: true,
+
     },
     build: {
         rollupOptions: {

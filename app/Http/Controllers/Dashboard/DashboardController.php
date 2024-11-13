@@ -143,7 +143,7 @@ class DashboardController extends Controller {
         $organization = Organization::where("id", Auth::user()->organization_id)->first();
         $topSubscriptions = Subscription::where("organization_id", Auth::user()->organization_id)->take(5)->get();
 
-        $allPaymentHistory = InstallmentCollections::where("user_id", Auth::id())->with("subscription")->get();
+        $allPaymentHistory = InstallmentCollections::where("user_id", Auth::id())->with("subscription")->orderBy("created_at", "desc")->get();
 
         return [
             "organization" => $organization,

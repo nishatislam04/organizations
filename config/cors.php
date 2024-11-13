@@ -15,11 +15,13 @@ return [
     |
     */
 
-    'paths' => ['*'],
+
+    'paths' => ['*', '/@vite/*'], // Ensure the Vite client path is included
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*', " http://nio.com:5173/@vite/client"],
+    // Use a wildcard pattern to allow all ports on nio.com if Vite port changes
+    'allowed_origins' => ['http://nio.com:*'],
 
     'allowed_origins_patterns' => [],
 
@@ -30,4 +32,5 @@ return [
     'max_age' => 0,
 
     'supports_credentials' => false,
+
 ];

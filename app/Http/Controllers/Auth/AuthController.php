@@ -33,8 +33,8 @@ class AuthController extends Controller {
 
         $validated = $request->validate(
             [
-                "username" => "required|string|min:3|max:254",
-                "password" => "required|min:3|max:254"
+                "username" => "required|string",
+                "password" => "required"
             ]
         );
         $remember = $request->remember ? true : false;
@@ -76,7 +76,7 @@ class AuthController extends Controller {
         $validated = $request->validate(
             [
                 'username' => "required|string|min:3|max:254|unique:users,username",
-                "email" => "required|email|min:5|max:254",
+                "email" => "required|unique:users,email|email|min:5|max:254",
                 "organization_id" => "nullable|integer",
                 "avatar" => 'nullable|image|mimes:jpg,jpeg,png,bmp|max:1024',
                 "password" => "required|confirmed|min:3|max:254"

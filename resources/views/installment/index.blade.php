@@ -148,19 +148,22 @@
                         scope="col">
                         Index
                       </th>
-                      @if (auth()->user()->role !== "super")
+
+                      @if (auth()->user()->role === "member")
                         <th
                           class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                           scope="col">
                           Paid
                         </th>
                       @endif
+
                       <th
                         class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                         scope="col">
                         Due Date
                       </th>
-                      @if (auth()->user()->role !== "super")
+
+                      @if (auth()->user()->role === "member")
                         <th
                           class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                           scope="col">
@@ -214,7 +217,7 @@
                           {{ $key + 1 }}
                         </td>
 
-                        @if (auth()->user()->role !== "super")
+                        @if (auth()->user()->role === "member")
                           <td
                             class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
                             {{ $isPaid ? "Paid" : "Unpaid" }}
@@ -227,7 +230,7 @@
                         </td>
 
                         <!-- Action Button (for non-super users) -->
-                        @if (auth()->user()->role !== "super")
+                        @if (auth()->user()->role === "member")
                           <td
                             class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
                             @if ($isPaid)
