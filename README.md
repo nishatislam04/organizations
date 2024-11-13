@@ -58,6 +58,7 @@ The Organization Management System simplifies managing multiple organizations wi
 
 5. **Run the Application**
     ```bash
+    npm run dev
     php artisan serve
     ```
 
@@ -65,16 +66,41 @@ The Organization Management System simplifies managing multiple organizations wi
 
 ## Screenshots
 
-1. **Super User Dashboard View**
-   ![Dashboard View](resources/images/assets/dashboard/super_dashboard.jpg)
+1. **Homepage View**
+    ![Homepage View](resources/images/assets/view/homepage.png)
 
-2. **Admin User Dashboard**
-   ![Subscription Management](resources/images/assets/dashboard/admin_dashboard.png)
+2. **Login View**
+   ![Login view](resources/images/assets/auth/login.png)
 
-3. **Member User Dashboard**
-   ![Payment History](resources/images/assets/dashboard/member_dashboard.png)
+3. **Register View**
+   ![Register View](resources/images/assets/auth/resgister.png)
 
-*Add your screenshots in the `assets` directory of your project, and reference them as shown above.*
+4. **Super User Dashboard View**
+   ![Super User Dashboard View](resources/images/assets/dashboard/super_dashboard.jpg)
+
+5. **Admin User Dashboard**
+   ![Admin User Dashboard View](resources/images/assets/dashboard/admin_dashboard.png)
+
+6. **Member User Dashboard**
+   ![Member User Dashboard View](resources/images/assets/dashboard/member_dashboard.png)
+
+7. **Organization Listings**
+    ![Organization Listings](resources/images/assets/listings/organization_listings.jpg)
+
+8. **Users Listings**
+    ![User Listings](resources/images/assets/listings/users_listings.jpg)
+
+9. **Subscription Listings**
+    ![Subscription Listings](resources/images/assets/listings/subscription_listings.png)
+
+10. **Installment View**
+    ![Installment View](resources/images/assets/view/installment_view.png)
+
+11. **Organization View**
+    ![Organization View](resources/images/assets/view/organization_view.png)
+
+12. **Member Installment Pay View**
+    ![Member Insatllnent View](resources/images/assets/view/member_installment_payment.png)
 
 ---
 
