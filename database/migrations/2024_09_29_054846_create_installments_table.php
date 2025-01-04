@@ -19,6 +19,7 @@ return new class extends Migration {
             // $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string("due_date");
             $table->string("created_at");
+            $table->string("updated_at");
         });
     }
 

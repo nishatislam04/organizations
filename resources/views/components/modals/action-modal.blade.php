@@ -14,8 +14,8 @@
       </x-buttons.button>
     </div>
 
-    <x-icon.icon class="w-10 h-10 mt-2 mb-4 text-red-600"
-      icon="{{ $type }}" fill="gray" />
+    <x-icon.icon class="w-10 h-10 mt-2 mb-4 text-red-600" icon="{{ $type }}"
+      fill="white" />
 
     <h3 class="mb-6 text-lg text-gray-500 dark:text-gray-400">
       {{ $slot }}
@@ -23,15 +23,11 @@
 
     <div class="flex justify-end">
 
-      <form id="{{ $name }}-form" action="#" method="POST"
-        method="{{ $method }}">
+      <form id="{{ $name }}-form" action="{{ $action ?? '' }}"
+        method="POST">
         @csrf
 
-        @if ($method === "DELETE")
-          @method("DELETE")
-        @elseif ($method === "UPDATE")
-          @method("PUT")
-        @endif
+        @method($method)
 
         <x-buttons.button
           class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2.5 text-center mr-2 dark:focus:ring-red-900"

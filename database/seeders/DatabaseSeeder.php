@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Organization\Organization;
 use App\Models\Subscription\Subscription;
 use App\Models\Auth\User;
+use App\Models\Installment\Installment;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder {
@@ -21,7 +22,7 @@ class DatabaseSeeder extends Seeder {
         Organization::factory(5)->create();
         Subscription::factory(3)->create();
         // Generate 15 unique users with specified attributes
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             User::factory()->create([
                 'username' => fake()->unique()->userName(), // Ensuring unique username
                 'email' => fake()->unique()->email(),
@@ -38,6 +39,14 @@ class DatabaseSeeder extends Seeder {
             ]);
         }
 
-        Organization::factory(5)->create();
+        // seed Installments
+        $subscriptions = Subscription::all();
+
+        // For each subscription, create 5 installments
+        foreach ($subscriptions as $subscription) {
+            Installment::factory()->count(5)->create([
+                'subscription_id' => $subscription->id, // Ensure installments are linked to this subscription
+            ]);
+        }
     }
 }

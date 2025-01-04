@@ -8,6 +8,9 @@ artisan:
 composer:
 	docker exec -it laravel_app composer $(CMD)
 
+route:
+	docker exec -it laravel_app php artisan route:list
+	
 # Run migrations
 migrate:
 	docker exec -it laravel_app php artisan migrate:fresh --seed

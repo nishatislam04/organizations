@@ -37,6 +37,7 @@ class InstallmentController extends Controller {
                 "organizations.name as organizationName"
             )
             ->first();
+
         if (Auth::user()->role === "super")
             return view("installment.index", compact("installments", "details"));
 

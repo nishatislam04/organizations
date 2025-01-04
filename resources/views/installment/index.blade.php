@@ -13,34 +13,34 @@
             <x-modals.flash />
 
             <div class="">
-              @can("is-super-or-admin")
-                <x-buttons.bread-crumb class="mb-10" :links='[
-                    "home" => "dashboard.index",
-                    "organizations" => "organizations.index",
-                    "organizaion" => [
-                        "route" => "organizations.show",
-                        "id" => $details->organizationId,
+              @can('is-super-or-admin')
+                <x-buttons.bread-crumb class="mb-10" :links="[
+                    'home' => 'dashboard.index',
+                    'organizations' => 'organizations.index',
+                    'organizaion' => [
+                        'route' => 'organizations.show',
+                        'id' => $details->organizationId,
                     ],
-                    "subscriptions" => [
-                        "route" => "subscriptions.index",
-                        "id" => "$details->organizationId",
+                    'subscriptions' => [
+                        'route' => 'subscriptions.index',
+                        'id' => $details->organizationId,
                     ],
-                    "installment" => "",
-                ]' />
+                    'installment' => '',
+                ]" />
               @endcan
-              @can("is-member")
-                <x-buttons.bread-crumb class="mb-10" :links='[
-                    "home" => "dashboard.index",
-                    "organizaion" => [
-                        "route" => "organizations.show",
-                        "id" => $details->organizationId,
+              @can('is-member')
+                <x-buttons.bread-crumb class="mb-10" :links="[
+                    'home' => 'dashboard.index',
+                    'organizaion' => [
+                        'route' => 'organizations.show',
+                        'id' => $details->organizationId,
                     ],
-                    "subscriptions" => [
-                        "route" => "subscriptions.index",
-                        "id" => "$details->organizationId",
+                    'subscriptions' => [
+                        'route' => 'subscriptions.index',
+                        'id' => $details->organizationId,
                     ],
-                    "installment" => "",
-                ]' />
+                    'installment' => '',
+                ]" />
               @endcan
 
               {{-- <x-buttons.bread-crumb class="mb-10" /> --}}
@@ -60,9 +60,9 @@
 
               <x-search.search-result />
 
-              @can("is-member")
+              @can('is-member')
                 <p class="mt-1 text-sm text-gray-500 ">Today is :
-                  {{ date("d-m-Y") }}</p>
+                  {{ date('d-m-Y') }}</p>
 
                 <div
                   class="absolute bottom-0 right-0 flex flex-col justify-between gap-8">
@@ -71,13 +71,13 @@
                     <p class="text-2xl text-gray-400 ">
                       Penalty Charges :
                       <span>{{ auth()->user()->penalty_charges }}
-                        <x-icon.icon class="inline w-6 h-6 -mt-2 -ml-2"
-                          fill="gray" icon="taka" />
+                        <x-icon.icon class="inline w-6 h-6 -mt-2 -ml-2" fill="gray"
+                          icon="taka" />
                       </span>
                     </p>
                     <x-buttons.button
                       class=" text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-                      type="a" :href='route("installments.penaltyPayView")'>
+                      type="a" :href="route('installments.penaltyPayView')">
                       Pay Penalty
                     </x-buttons.button>
                   @else
@@ -97,39 +97,33 @@
           <div class="flex flex-col justify-center gap-4 ml-4">
             <h2 class="mb-3 text-4xl font-semibold text-gray-200">
               Installment Details</h2>
-            <p
-              class="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Organization Name:
               <span class="font-normal text-gray-600 dark:text-gray-400">
                 {{ $details->organizationName }}
               </span>
             </p>
 
-            <p
-              class="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Subscription Type:
               <span class="font-normal text-gray-600 dark:text-gray-400">
                 {{ $details->subscriptionType }}
               </span>
             </p>
 
-            <p
-              class="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Installment Pay Amount:
               <span class="font-normal text-gray-600 dark:text-gray-400">
                 {{ number_format($details->installmentPerAmount) }}
-                <x-icon.icon class="inline w-5 h-5" fill="gray"
-                  icon="taka" />
+                <x-icon.icon class="inline w-5 h-5" fill="gray" icon="taka" />
               </span>
             </p>
 
-            <p
-              class="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Installment Penalty Amount:
               <span class="font-normal text-gray-600 dark:text-gray-400">
                 {{ number_format($details->installmentPenaltyAmount) }}
-                <x-icon.icon class="inline w-5 h-5" fill="gray"
-                  icon="taka" />
+                <x-icon.icon class="inline w-5 h-5" fill="gray" icon="taka" />
               </span>
             </p>
           </div>
@@ -149,7 +143,7 @@
                         Index
                       </th>
 
-                      @if (auth()->user()->role === "member")
+                      @if (auth()->user()->role === 'member')
                         <th
                           class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                           scope="col">
@@ -163,7 +157,7 @@
                         Due Date
                       </th>
 
-                      @if (auth()->user()->role === "member")
+                      @if (auth()->user()->role === 'member')
                         <th
                           class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                           scope="col">
@@ -178,10 +172,13 @@
                     @foreach ($installments as $key => $installment)
                       @php
                         $isPaid = $installment->collected->count() > 0;
+
+                        // Update the format to match the 'Y-m-d' format from your database
                         $dueDate = \Carbon\Carbon::createFromFormat(
-                            "d-m-Y",
+                            'Y-m-d', // Corrected format
                             $installment->due_date,
                         );
+
                         $currentDate = \Carbon\Carbon::now();
 
                         // Check if the current date matches the due date
@@ -190,9 +187,7 @@
                         // Check if the due date is in the past (including any previous months of the current year, but not today)
                         $isDuePassed =
                             !$isSameDay &&
-                            $dueDate->isBefore(
-                                $currentDate->startOfMonth(),
-                            );
+                            $dueDate->isBefore($currentDate->startOfMonth());
 
                         // Ensure that we're considering dates that are not just in the past year, but in the past months of the current year
                         if ($dueDate->year < $currentDate->year) {
@@ -200,27 +195,26 @@
                         }
                       @endphp
 
-
                       <tr @class([
-                          "h-14 hover:bg-gray-100 dark:hover:bg-gray-700",
-                          "bg-green-50 dark:bg-green-900" =>
+                          'h-14 hover:bg-gray-100 dark:hover:bg-gray-700',
+                          'bg-green-50 dark:bg-green-900' =>
                               $isPaid &&
-                              auth()->user()->role !== "super" &&
-                              auth()->user()->role !== "admin",
-                          "bg-red-50 dark:bg-red-900" =>
+                              auth()->user()->role !== 'super' &&
+                              auth()->user()->role !== 'admin',
+                          'bg-red-50 dark:bg-red-900' =>
                               $isDuePassed &&
-                              auth()->user()->role !== "super" &&
-                              auth()->user()->role !== "admin",
+                              auth()->user()->role !== 'super' &&
+                              auth()->user()->role !== 'admin',
                       ])>
                         <td
                           class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
                           {{ $key + 1 }}
                         </td>
 
-                        @if (auth()->user()->role === "member")
+                        @if (auth()->user()->role === 'member')
                           <td
                             class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
-                            {{ $isPaid ? "Paid" : "Unpaid" }}
+                            {{ $isPaid ? 'Paid' : 'Unpaid' }}
                           </td>
                         @endif
 
@@ -230,7 +224,7 @@
                         </td>
 
                         <!-- Action Button (for non-super users) -->
-                        @if (auth()->user()->role === "member")
+                        @if (auth()->user()->role === 'member')
                           <td
                             class="p-4 text-base font-normal text-gray-500 truncate dark:text-gray-400">
                             @if ($isPaid)
@@ -247,9 +241,9 @@
                               <x-buttons.button
                                 class="inline-flex items-center px-3 py-2 text-sm text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                 id="installment-pay-btn" type="a"
-                                href='{{ route("installments.payView", $installment->id) }}'>
-                                <x-icon.icon class="w-4 h-4 mr-2"
-                                  fill="" icon="success" />
+                                href="{{ route('installments.payView', $installment->id) }}">
+                                <x-icon.icon class="w-4 h-4 mr-2" fill=""
+                                  icon="success" />
                                 Pay
                               </x-buttons.button>
                             @endif

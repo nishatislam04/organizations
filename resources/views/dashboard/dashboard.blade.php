@@ -6,51 +6,52 @@
 
       {{-- SUPER START --}}
       {{-- Super: top3 installment collection --}}
-      @can("is-super")
+      @can('is-super')
         <div
           class="col-start-1 col-end-6 row-start-1 row-end-6 px-3 bg-gray-100 rounded-lg shadow-lg">
           <p class="mb-2 text-lg font-semibold text-gray-800">Top3 Installment
             Collection</p>
 
-          <div
-            class="max-w-full overflow-auto border border-gray-300 max-h-96">
+          <div class="max-w-full overflow-auto border border-gray-300 max-h-96">
             <table
               class="w-full text-left bg-white border-collapse rounded-lg shadow table-auto">
               <thead class="text-gray-700 bg-gray-200">
                 <tr>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
-                    Susbs. Name</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
-                    Org. Name</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
-                    Per Price</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">Subs.
+                    Name</th>
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">Org.
+                    Name</th>
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">Per
+                    Price</th>
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Collected Count</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($superUserData["topInstallmentCollections"] as $topInstallmentCollection)
+                @forelse ($superUserData["topInstallmentCollections"] as $topInstallmentCollection)
                   <tr class="hover:bg-gray-100">
-                    <td
-                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
-                      {{ $topInstallmentCollection->name }}</td>
-                    <td
-                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                    <td class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topInstallmentCollection->name }}
+                    </td>
+                    <td class="p-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $topInstallmentCollection->organization_name }}
                     </td>
-                    <td
-                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
-                      {{ $topInstallmentCollection->per_amount }}</td>
-                    <td
-                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                    <td class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                      {{ $topInstallmentCollection->per_amount }}
+                    </td>
+                    <td class="p-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $topInstallmentCollection->subscription_count }}
                     </td>
                   </tr>
-                @endforeach
+                @empty
+                  <tr>
+                    <td
+                      class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
+                      colspan="4">
+                      No Data Found
+                    </td>
+                  </tr>
+                @endforelse
               </tbody>
             </table>
           </div>
@@ -62,60 +63,56 @@
           <p class="mb-2 text-lg font-semibold text-gray-800">Last10
             Installment Collection Log</p>
 
-          <div
-            class="max-w-full overflow-auto border border-gray-300 max-h-80">
+          <div class="max-w-full overflow-auto border border-gray-300 max-h-80">
             <table
               class="w-full text-left bg-white border-collapse rounded-lg shadow table-auto">
               <thead class="text-gray-700 bg-gray-200">
                 <tr>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Subs. Name</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Org. Name</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Paid</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Username</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Pay Date</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($superUserData["lastInstallmentCollections"] as $lastInstallmentCollection)
+                @forelse ($superUserData['lastInstallmentCollections'] as $lastInstallmentCollection)
                   <tr class="hover:bg-gray-100">
-                    <td
-                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                    <td class="p-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $lastInstallmentCollection->subscription_name }}
                     </td>
-                    <td
-                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                    <td class="p-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $lastInstallmentCollection->organization_name }}
                     </td>
-                    <td
-                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                    <td class="p-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $lastInstallmentCollection->subscription_per_amount }}
                     </td>
-                    <td
-                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                    <td class="p-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $lastInstallmentCollection->username }}</td>
-                    <td
-                      class="p-2 text-sm text-gray-800 border-b border-gray-200">
+                    <td class="p-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $lastInstallmentCollection->created_at }}</td>
                   </tr>
-                @endforeach
+                @empty
+                  <tr>
+                    <td
+                      class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
+                      colspan="4">
+                      No Data Found
+                    </td>
+                  </tr>
+                @endforelse
               </tbody>
             </table>
           </div>
         </div>
 
         {{-- super: latest subscription --}}
-        <div
-          class="col-start-1 col-end-6 row-start-6 p-1 mt-1 bg-gray-100 row-end-9">
+        <div class="col-start-1 col-end-6 row-start-6 p-1 mt-1 bg-gray-100 row-end-9">
           <p class="mb-1 text-lg font-semibold text-gray-800">Latest
             Subscription</p>
 
@@ -124,41 +121,31 @@
               class="w-full text-left bg-white border-collapse rounded-lg shadow table-auto">
               <thead class="text-gray-700 bg-gray-200">
                 <tr>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Name</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Type</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Count</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Amount</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Start</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="hover:bg-gray-100">
-                  <td
-                    class="p-3 text-sm text-gray-800 border-b border-gray-200">
-                    {{ $superUserData["latestSubscription"]->name }}.</td>
-                  <td
-                    class="p-3 text-sm text-gray-800 border-b border-gray-200">
-                    {{ $superUserData["latestSubscription"]->type }}.</td>
-                  <td
-                    class="p-3 text-sm text-gray-800 border-b border-gray-200">
-                    {{ $superUserData["latestSubscription"]->total }}.</td>
-                  <td
-                    class="p-3 text-sm text-gray-800 border-b border-gray-200">
-                    {{ $superUserData["latestSubscription"]->per_amount }}.
+                  <td class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    {{ $superUserData['latestSubscription']->name }}.</td>
+                  <td class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    {{ $superUserData['latestSubscription']->type }}.</td>
+                  <td class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    {{ $superUserData['latestSubscription']->total }}.</td>
+                  <td class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    {{ $superUserData['latestSubscription']->per_amount }}.
                   </td>
-                  <td
-                    class="p-3 text-sm text-gray-800 border-b border-gray-200">
-                    {{ $superUserData["latestSubscription"]->start }}.</td>
+                  <td class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    {{ $superUserData['latestSubscription']->start }}.</td>
                 </tr>
               </tbody>
             </table>
@@ -166,37 +153,39 @@
         </div>
 
         {{-- super: latest 10 complete subscription --}}
-        <div
-          class="col-start-6 col-end-10 row-start-1 bg-gray-100 row-end-9">
+        <div class="col-start-6 col-end-10 row-start-1 bg-gray-100 row-end-9">
           <p class="mb-2 text-lg font-semibold text-gray-800">Latest10
             complete subscription</p>
-
           <div
             class="max-w-full overflow-auto border border-gray-300 rounded-lg max-h-[23rem]">
             <table
               class="w-full text-left bg-white border-collapse rounded-lg shadow table-auto">
               <thead class="text-gray-700 bg-gray-200">
                 <tr>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Subs. Name</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Org. Name</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach ($superUserData["latestCompleteSubscriptions"] as $latest)
+                @forelse ($superUserData['latestCompleteSubscriptions'] as $latest)
                   <tr class="hover:bg-gray-100">
-                    <td
-                      class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    <td class="p-3 text-sm text-gray-800 border-b border-gray-200">
                       {{ $latest->name }}.</td>
-                    <td
-                      class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    <td class="p-3 text-sm text-gray-800 border-b border-gray-200">
                       {{ $latest->organization->name }}.
                     </td>
                   </tr>
-                @endforeach
+                @empty
+                  <tr>
+                    <td
+                      class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
+                      colspan="4">
+                      No Data Found
+                    </td>
+                  </tr>
+                @endforelse
               </tbody>
             </table>
           </div>
@@ -210,30 +199,33 @@
 
           <div
             class="h-full min-h-[550px] max-w-full overflow-auto border border-gray-300">
-            <table
-              class="w-full text-left bg-white border-collapse shadow table-auto">
+            <table class="w-full text-left bg-white border-collapse shadow table-auto">
               <thead class="text-gray-700 bg-gray-200">
                 <tr>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Name</th>
-                  <th
-                    class="p-3 text-sm font-semibold border-b border-gray-300">
+                  <th class="p-3 text-sm font-semibold border-b border-gray-300">
                     Org. Name</th>
 
                 </tr>
               </thead>
               <tbody>
-                @foreach ($superUserData["userJoiningRequests"] as $userJoiningRequest)
+                @forelse ($superUserData['userJoiningRequests'] as $userJoiningRequest)
                   <tr class="hover:bg-gray-100">
-                    <td
-                      class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    <td class="p-3 text-sm text-gray-800 border-b border-gray-200">
                       {{ $userJoiningRequest->username }}.</td>
-                    <td
-                      class="p-3 text-sm text-gray-800 border-b border-gray-200">
+                    <td class="p-3 text-sm text-gray-800 border-b border-gray-200">
                       {{ $userJoiningRequest->organization->name }}.</td>
                   </tr>
-                @endforeach
+                @empty
+                  <tr>
+                    <td
+                      class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
+                      colspan="4">
+                      No Data Found
+                    </td>
+                  </tr>
+                @endforelse
               </tbody>
             </table>
           </div>
@@ -241,19 +233,16 @@
       @endcan
       {{-- SUPER END --}}
 
-
       {{-- ADMIN START --}}
-      @can("is-admin")
+      @can('is-admin')
         {{-- listing latest 3 subscription --}}
         <div
           class="col-start-1 col-end-7 row-start-7 bg-gray-100 rounded-lg shadow-md row-end-12">
           <p class="mb-4 text-xl font-bold text-gray-700">Last5 Installment
             Pay</p>
 
-          <div
-            class="overflow-auto border border-gray-300 rounded-lg max-h-[12rem]">
-            <table
-              class="min-w-full text-left bg-white rounded-lg shadow-sm ">
+          <div class="overflow-auto border border-gray-300 rounded-lg max-h-[12rem]">
+            <table class="min-w-full text-left bg-white rounded-lg shadow-sm ">
               <thead class="text-gray-700 bg-gray-100">
                 <tr>
                   <th
@@ -272,9 +261,8 @@
               </thead>
 
               <tbody>
-                @foreach ($adminUserData["lastInstallmentCollections"] as $lastInstallmentCollection)
-                  <tr
-                    class="transition duration-150 ease-in-out hover:bg-gray-50">
+                @forelse ($adminUserData['lastInstallmentCollections'] as $lastInstallmentCollection)
+                  <tr class="transition duration-150 ease-in-out hover:bg-gray-50">
                     <td
                       class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $lastInstallmentCollection->user->username }}</td>
@@ -290,7 +278,15 @@
                       class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $lastInstallmentCollection->created_at }}</td>
                   </tr>
-                @endforeach
+                @empty
+                  <tr>
+                    <td
+                      class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
+                      colspan="4">
+                      No Data Found
+                    </td>
+                  </tr>
+                @endforelse
               </tbody>
             </table>
           </div>
@@ -303,23 +299,21 @@
             Overview</p>
 
           <div class="space-y-2">
-            <div
-              class="flex items-center justify-between p-3 rounded-md bg-blue-50">
+            <div class="flex items-center justify-between p-3 rounded-md bg-blue-50">
               <p class="font-medium text-gray-600">Total Members</p>
               <p class="text-xl font-semibold text-blue-600">
-                {{ $adminUserData["overview"]->total_members }}</p>
+                {{ $adminUserData['overview']->total_members }}</p>
             </div>
-            <div
-              class="flex items-center justify-between p-3 rounded-md bg-green-50">
+            <div class="flex items-center justify-between p-3 rounded-md bg-green-50">
               <p class="font-medium text-gray-600">Total Subscriptions</p>
               <p class="text-xl font-semibold text-green-600">
-                {{ $adminUserData["overview"]->total_subscriptions }}</p>
+                {{ $adminUserData['overview']->total_subscriptions }}</p>
             </div>
             <div
               class="flex items-center justify-between p-3 rounded-md bg-yellow-50">
               <p class="font-medium text-gray-600">Total Installments</p>
               <p class="text-xl font-semibold text-yellow-600">
-                {{ $adminUserData["overview"]->total_installments }}</p>
+                {{ $adminUserData['overview']->total_installments }}</p>
             </div>
           </div>
         </div>
@@ -333,13 +327,13 @@
           <p class="mt-10 text-xl font-bold text-gray-800">
             Created on:
             <span
-              class="text-gray-600">{{ $adminUserData["organizationActiveSince"]->created_at->format("F, d, Y") }}</span>
+              class="text-gray-600">{{ $adminUserData['organizationActiveSince']->created_at->format('F, d, Y') }}</span>
           </p>
 
           <p class="mt-4 text-xl font-bold text-gray-800">
             Active for:
             <span
-              class="text-green-600">{{ round($adminUserData["organizationActiveSince"]->created_at->diffInDays(today())) }}
+              class="text-green-600">{{ round($adminUserData['organizationActiveSince']->created_at->diffInDays(today())) }}
               days</span>
           </p>
         </div>
@@ -350,8 +344,7 @@
           <p class="mb-4 text-lg font-bold text-gray-700">Most Penalty
             Charged Users</p>
 
-          <div
-            class="overflow-auto border border-gray-300 rounded-lg max-h-80">
+          <div class="overflow-auto border border-gray-300 rounded-lg max-h-80">
             <table
               class="min-w-full text-left bg-white border-collapse shadow-sm table-auto">
               <thead class="text-gray-700 bg-gray-200">
@@ -365,7 +358,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($adminUserData["mostPenaltyChargedUsers"] as $user)
+                @forelse ($adminUserData['mostPenaltyChargedUsers'] as $user)
                   <tr class="hover:bg-gray-100">
                     <td
                       class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
@@ -374,7 +367,15 @@
                       class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $user->penalty_charges }}</td>
                   </tr>
-                @endforeach
+                @empty
+                  <tr>
+                    <td
+                      class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
+                      colspan="4">
+                      No Data Found
+                    </td>
+                  </tr>
+                @endforelse
               </tbody>
             </table>
           </div>
@@ -386,8 +387,7 @@
           <p class="mb-2 text-2xl font-bold text-gray-800">Top 5
             Subscriptions Overview</p>
 
-          <div
-            class="overflow-auto border border-gray-300 rounded-lg max-h-96">
+          <div class="overflow-auto border border-gray-300 rounded-lg max-h-96">
             <table
               class="min-w-full text-left bg-white rounded-lg shadow-sm h-[15rem]">
               <thead class="text-gray-700 bg-gray-100">
@@ -415,9 +415,8 @@
 
               <!-- Table Body -->
               <tbody>
-                @foreach ($adminUserData["topSubscriptions"] as $topSubscription)
-                  <tr
-                    class="transition duration-150 ease-in-out hover:bg-gray-50">
+                @forelse ($adminUserData['topSubscriptions'] as $topSubscription)
+                  <tr class="transition duration-150 ease-in-out hover:bg-gray-50">
                     <td
                       class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $topSubscription->name }}</td>
@@ -437,7 +436,15 @@
                       class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $topSubscription->end }}</td>
                   </tr>
-                @endforeach
+                @empty
+                  <tr>
+                    <td
+                      class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
+                      colspan="4">
+                      No Data Found
+                    </td>
+                  </tr>
+                @endforelse
               </tbody>
             </table>
           </div>
@@ -446,16 +453,15 @@
       {{-- ADMN END --}}
 
       {{-- MEMBER START --}}
-      @can("is-member")
+      @can('is-member')
         {{-- organization overview --}}
         <div
           class="col-start-1 col-end-8 row-start-1 px-8 pt-8 rounded-lg shadow-md row-end-8 bg-gradient-to-r from-gray-100 to-gray-50">
           <div class="space-y-5 text-left">
-            <p
-              class="mb-2 text-4xl font-bold tracking-wide text-left text-gray-700">
+            <p class="mb-2 text-4xl font-bold tracking-wide text-left text-gray-700">
               Organization Name</p>
             <p class="mt-4 text-6xl font-semibold text-indigo-700">
-              {{ $memberUserData["organization"]->name }}</p>
+              {{ $memberUserData['organization']->name }}</p>
           </div>
         </div>
 
@@ -463,7 +469,7 @@
         <div
           class="flex items-center justify-center col-start-10 col-end-13 p-6 rounded-lg shadow-md row-start-10 row-end-13 bg-gray-50">
           <a class="px-5 py-2 text-lg font-medium text-gray-700 transition-colors duration-200 bg-gray-200 rounded-md shadow-md hover:bg-gray-300 hover:text-gray-800"
-            href="{{ "http://nio.com/subscriptions/" . $memberUserData["organization"]->id }}"
+            href="{{ 'http://nio.com/subscriptions/' . $memberUserData['organization']->id }}"
             style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
             Go to Subscription Page
           </a>
@@ -475,10 +481,8 @@
           <p class="mb-2 text-2xl font-semibold text-gray-700">Top5
             Subscriptions</p>
 
-          <div
-            class="overflow-auto border border-gray-300 rounded-lg max-h-[12rem]">
-            <table
-              class="min-w-full text-left bg-white rounded-lg shadow-sm ">
+          <div class="overflow-auto border border-gray-300 rounded-lg max-h-[12rem]">
+            <table class="min-w-full text-left bg-white rounded-lg shadow-sm ">
               <thead class="text-gray-700 bg-gray-100">
                 <tr>
                   <th
@@ -497,9 +501,8 @@
               </thead>
 
               <tbody>
-                @foreach ($memberUserData["topSubscriptions"] as $topSubscription)
-                  <tr
-                    class="transition duration-150 ease-in-out hover:bg-gray-50">
+                @forelse ($memberUserData['topSubscriptions'] as $topSubscription)
+                  <tr class="transition duration-150 ease-in-out hover:bg-gray-50">
                     <td
                       class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $topSubscription->name }}</td>
@@ -515,7 +518,15 @@
                       class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
                       {{ $topSubscription->penalty_amount }}</td>
                   </tr>
-                @endforeach
+                @empty
+                  <tr>
+                    <td
+                      class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
+                      colspan="4">
+                      No Data Found
+                    </td>
+                  </tr>
+                @endforelse
               </tbody>
             </table>
           </div>
@@ -540,8 +551,7 @@
 
           <div
             class="overflow-auto border border-gray-300 rounded-lg max-h-[26rem] shadow-md">
-            <table
-              class="min-w-full text-left bg-white rounded-lg shadow-sm">
+            <table class="min-w-full text-left bg-white rounded-lg shadow-sm">
               <thead class="text-gray-700 bg-gray-200">
                 <tr>
                   <th
@@ -560,9 +570,8 @@
               </thead>
 
               <tbody>
-                @foreach ($memberUserData["allPaymentHistories"] as $allPaymentHistory)
-                  <tr
-                    class="transition duration-200 ease-in-out hover:bg-gray-100">
+                @forelse ($memberUserData['allPaymentHistories'] as $allPaymentHistory)
+                  <tr class="transition duration-200 ease-in-out hover:bg-gray-100">
                     <td
                       class="px-6 py-3 text-sm text-gray-800 border-b border-gray-200">
                       {{ $allPaymentHistory->subscription->name }}
@@ -573,10 +582,18 @@
                     </td>
                     <td
                       class="px-6 py-3 text-sm text-gray-800 border-b border-gray-200">
-                      {{ $allPaymentHistory->created_at->format("d-m-Y") }}
+                      {{ $allPaymentHistory->created_at->format('d-m-Y') }}
                     </td>
                   </tr>
-                @endforeach
+                @empty
+                  <tr>
+                    <td
+                      class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
+                      colspan="4">
+                      No Data Found
+                    </td>
+                  </tr>
+                @endforelse
               </tbody>
             </table>
           </div>

@@ -108,12 +108,13 @@ class SubscriptionController extends Controller {
                 $year++;
             }
 
-            $due_date = (int)$day . "-" . (int) $month + 1 . "-" . (int) $year;
+            $due_date = (int) $year . "-" . (int) $month + 1 . "-" . (int)$day;
             $all_installments[] = [
                 'organization_id' => $data['organization_id'],
                 "subscription_id" => $data['subscription_id'],
                 "due_date" => $due_date,
-                "created_at" => date("d-m-Y")
+                "created_at" => date("Y-m-d"),
+                "updated_at" =>  date("Y-m-d")
             ];
 
             $month++;

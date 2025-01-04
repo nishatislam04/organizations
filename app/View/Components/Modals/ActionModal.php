@@ -16,7 +16,8 @@ class ActionModal extends Component {
         public string $header,
         public string $type,
         public string $confirm = "Yes, I am sure", // confirm btn text
-        public string $cancel = "No, cancel" // cancel btn text
+        public string $cancel = "No, cancel", // cancel btn text
+        public string $action
     ) {
         //
     }

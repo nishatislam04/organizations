@@ -164,6 +164,7 @@ class OrganizationController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Organization $organization) {
+        // dd($organization);
         return view("organizations.edit", compact("organization"));
     }
 
@@ -205,19 +206,20 @@ class OrganizationController extends Controller {
     public function destroy(Organization $organization) {
 
         $user_id = $organization->user_id;
-        $organization->delete();
 
         if (is_null($user_id)) {
+            $organization->delete();
             return redirect()->route("organizations.index")->with("success", "organization delete success");
         }
 
-        $role =  User::find($user_id)->role;
-        if ($role === "admin") {
-            $user = User::find($user_id);
-            $user->status = null;
-            $user->organization_id = null;
-            $user->save();
-            return redirect()->route("organizations.index")->with("success", "organization and user  profile updated");
+        $user =  User::find($user_id);
+        if ($user->role === "admin") {
+            // $user->status = null;
+            // $user->organization_id = null;
+            // $user->save();
+            $user->delete();
+            $organization->delete();
+            return redirect()->route("organizations.index")->with("success", "organization delete sucess");
         }
     }
 }

@@ -13,18 +13,18 @@
             <x-modals.flash />
 
             <div class="">
-              @can("is-super")
-                <x-buttons.bread-crumb class="mb-10" :links='[
-                    "home" => "dashboard.index",
-                    "organizations" => "organizations.index",
-                    "organization" => "",
-                ]' />
+              @can('is-super')
+                <x-buttons.bread-crumb class="mb-10" :links="[
+                    'home' => 'dashboard.index',
+                    'organizations' => 'organizations.index',
+                    'organization' => '',
+                ]" />
               @endcan
-              @can("is-member")
-                <x-buttons.bread-crumb class="mb-10" :links='[
-                    "home" => "dashboard.index",
-                    "organization" => "",
-                ]' />
+              @can('is-member')
+                <x-buttons.bread-crumb class="mb-10" :links="[
+                    'home' => 'dashboard.index',
+                    'organization' => '',
+                ]" />
               @endcan
               {{-- <x-buttons.bread-crumb class="mb-10" /> --}}
 
@@ -37,26 +37,30 @@
 
               <x-search.search-result />
 
-              @can("is-super")
+              @can('is-super')
                 <x-buttons.button
                   class="absolute right-0 bottom-0 text-white ml-auto bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-                  type="a" :href='route(
-                      "subscriptions.create",
-                      "$organization->organizationId",
-                  )'>
+                  type="a"
+                  href="{{ route('subscriptions.create', $organization->organizationId) }}">
                   Create a new Subscription
                 </x-buttons.button>
               @endcan
 
-
-              @if (auth()->user()->role === "member" &&
-                      !is_null(auth()->user()->organization_id))
+              @if (auth()->user()->role === 'member' && !is_null(auth()->user()->organization_id))
                 <x-buttons.button
                   class="absolute right-0 bottom-0 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900 text-sm px-5 py-2.5  focus:outline-none"
-                  id="organization-leave-btn"
-                  data-o-id="{{ $organization->id }}" type="button">
+                  id="organization-leave-btn" data-o-id="{{ $organization->id }}"
+                  type="button">
                   Leave Organization
                 </x-buttons.button>
+
+                {{-- leave org --}}
+                <x-modals.action-modal name="leave-organization" type="warning"
+                  method="POST" header="Leave Organization"
+                  action="{{ route('organizations.leave', $organization->id) }}"
+                  confirm="Yes, I am sure" cancel="No, cancel">
+                  Are you sure you want to leave this organization?
+                </x-modals.action-modal>
               @endif
 
             </div>
@@ -75,8 +79,7 @@
                   <div class="col-start-1 col-end-8">
                     <h2 class="text-2xl font-semibold text-blue-500">
                       {{ $organization->name }}</h2>
-                    <p
-                      class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
                       ID: {{ $organization->organizationId }}</p>
 
                     <!-- Max Members -->
@@ -102,7 +105,7 @@
                       <p class="font-medium text-gray-400">Created At:</p>
                       <p
                         class="text-lg font-semibold text-gray-500 dark:text-gray-300">
-                        {{ $organization->created_at->format("d-m-Y") }}
+                        {{ $organization->created_at->format('d-m-Y') }}
                       </p>
                     </div>
 
@@ -111,12 +114,10 @@
                       <h3 class="text-lg font-semibold text-blue-500">Total
                         Subscriptions</h3>
                       @if ($organization->subscriptions->count() < 1)
-                        <p
-                          class="text-sm text-gray-500 dark:text-gray-400">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
                           No subscriptions were found</p>
                       @else
-                        <p
-                          class="text-sm text-gray-500 dark:text-gray-400">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
                           {{ $organization->subscriptions->count() }}
                           Subscriptions</p>
                       @endif
@@ -142,19 +143,12 @@
         @else
           <x-buttons.button
             class="border border-b-gray-600 absolute bottom-2 px-5 py-3 ml-auto text-sm text-white transform -translate-x-1/2 bg-blue-800 left-[48%] hover:bg-blue-700 focus:ring-4 focus:ring-blue-500 dark:bg-gray-900 dark:hover:bg-gray-800 focus:outline-none dark:focus:ring-gray-700"
-            type="a" :href='route(
-                "subscriptions.index",
-                $organization->organizationId,
-            )'>
+            type="a"
+            href="{{ route('subscriptions.index', $organization->organizationId) }}">
             Show All Subscriptions
           </x-buttons.button>
         @endif
 
-        {{-- leave org --}}
-        <x-modals.action-modal name="leave-organization" type="warning"
-          method="POST" header="Leave Organization">
-          Are you sure you want to leave this organization?
-        </x-modals.action-modal>
       </main>
     </div>
 
