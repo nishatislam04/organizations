@@ -12,14 +12,14 @@ class DatabaseSeeder extends Seeder {
      * Seed the application's database.
      */
     public function run(): void {
-        // User::factory(1)->create([
-        //     'username' => "nio",
-        //     'email' => "nishatislam3108@gmail.com",
-        //     'password' => "1234",
-        //     "role" => "super",
-        // ]);
-        // Organization::factory(5)->create();
-        // Subscription::factory(3)->create();
+        User::factory(1)->create([
+            'username' => "nio",
+            'email' => "nishatislam3108@gmail.com",
+            'password' => "1234",
+            "role" => "super",
+        ]);
+        Organization::factory(5)->create();
+        Subscription::factory(3)->create();
         // Generate 15 unique users with specified attributes
         for ($i = 0; $i < 15; $i++) {
             User::factory()->create([
@@ -38,6 +38,6 @@ class DatabaseSeeder extends Seeder {
             ]);
         }
 
-        // Organization::factory(5)->create();
+        Organization::factory(5)->create();
     }
 }
