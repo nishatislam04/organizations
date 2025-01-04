@@ -21,14 +21,14 @@ class AppServiceProvider extends ServiceProvider {
      * Bootstrap any application services.
      */
     public function boot(): void {
-        View::composer("*", function ($view) {
-            $query = request()->query("query", "");
-            $view->with("query", $query);
-        });
+        // View::composer("*", function ($view) {
+        //     $query = request()->query("query", "");
+        //     $view->with("query", $query);
+        // });
 
-        $superUser = User::where("role", "super")->first();
-        $superName = $superUser ? $superUser->username : null;
-        View::share('superName', $superName);
-        View::share('super', $superUser);
+        // $superUser = User::where("role", "super")->first();
+        // $superName = $superUser ? $superUser->username : null;
+        // View::share('superName', $superName);
+        // View::share('super', $superUser);
     }
 }

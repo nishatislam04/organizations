@@ -26,7 +26,6 @@ export default defineConfig({
             host: 'nio.com', // Ensure Hot Module Replacement works with your custom domain
         },
         port: 5714,
-        cors: true,
 
     },
     build: {
