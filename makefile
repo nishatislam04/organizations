@@ -1,4 +1,7 @@
-# Dockerized Laravel Operations
+# clear
+clear:
+	docker exec -it laravel_app php artisan config:clear
+	docker exec -it laravel_app php artisan cache:clear
 
 # Run Artisan commands
 artisan:

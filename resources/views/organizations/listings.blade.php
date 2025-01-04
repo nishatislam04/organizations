@@ -3,8 +3,8 @@
   <x-layouts.container search_route="organizations.index">
 
     <div id="main-content" @class([
-        "lg:ml-64" => Auth::check(),
-        "relative w-full h-full overflow-y-auto bg-gray-50 dark:bg-gray-900",
+        'lg:ml-64' => Auth::check(),
+        'relative w-full h-full overflow-y-auto bg-gray-50 dark:bg-gray-900',
     ])>
       <main>
         @if ($showListings === false)
@@ -56,7 +56,7 @@
                         scope="col">
                         Created By
                       </th>
-                      @cannot("is-admin-or-super")
+                      @cannot('is-admin-or-super')
                         <th
                           class="p-4 text-xs font-medium text-left text-gray-500 uppercase dark:text-gray-400"
                           scope="col">
@@ -67,21 +67,19 @@
                     </tr>
                   </thead>
 
-
                   <tbody
                     class="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
 
                     @foreach ($organizations as $organization)
-                      @if (in_array($organization->id, session()->get("hide-organization") ?? []))
+                      @if (in_array($organization->id, session()->get('hide-organization') ?? []))
                         @continue
                       @endif
-                      <tr
-                        class="h-14 hover:bg-gray-100 dark:hover:bg-gray-700">
+                      <tr class="h-14 hover:bg-gray-100 dark:hover:bg-gray-700">
 
                         <td
                           class="p-4 text-sm font-normal text-gray-500 whitespace-nowrap dark:text-gray-400">
                           <a class="text-base font-semibold text-gray-900 dark:text-white hover:underline"
-                            href='{{ route("organizations.show", $organization->id) }}'>{{ $organization->name }}
+                            href='{{ route('organizations.show', $organization->id) }}'>{{ $organization->name }}
                           </a>
                         </td>
 
@@ -93,7 +91,7 @@
                         @if (
                             !is_null($organization->user) &&
                                 $organization->user->username &&
-                                $organization->user->role === "admin")
+                                $organization->user->role === 'admin')
                           <td
                             class="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
                             {{ $organization->user->username }}
@@ -105,28 +103,40 @@
                           </td>
                         @endif
 
-                        @cannot("is-admin-or-super")
-                          <td class="flex gap-5 p-2"
-                            id="organizations-actions">
+                        @cannot('is-admin-or-super')
+                          <td class="flex gap-5 p-2" id="organizations-actions">
                             <x-buttons.button
                               class="inline-flex items-start px-3 py-2 text-sm text-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                               id="join-organization-btn"
-                              data-item-id="{{ $organization->id }}"
-                              type="button">
-                              <x-icon.icon class="w-4 h-4 mr-2"
-                                fill="white" icon="join" />
+                              data-item-id="{{ $organization->id }}" type="button">
+                              <x-icon.icon class="w-4 h-4 mr-2" fill="white"
+                                icon="join" />
                               Join
                             </x-buttons.button>
+
+                            <x-modals.action-modal name="join-organization"
+                              type="warning"
+                              action="{{ route('members.join', $organization->id) }}"
+                              method="POST" header="Join Organization"
+                              confirm="Yes, I am sure" cancel="No, Cancel">
+                              Are you sure you want to join this organization?
+                            </x-modals.action-modal>
 
                             <x-buttons.button
                               class="inline-flex items-center px-3 py-2 text-sm text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:focus:ring-red-900"
                               id="hide-organization-btn"
-                              data-item-id="{{ $organization->id }}"
-                              type="button">
-                              <x-icon.icon class="w-4 h-4 mr-2"
-                                fill="white" icon="hide-organization" />
+                              data-item-id="{{ $organization->id }}" type="button">
+                              <x-icon.icon class="w-4 h-4 mr-2" fill="white"
+                                icon="hide-organization" />
                               Hide
                             </x-buttons.button>
+                            <x-modals.action-modal name="hide-organization"
+                              type="warning" method="POST"
+                              action="{{ route('members.hide', $organization->id) }}"
+                              header="Hide Organization" confirm="Yes, I am sure"
+                              cancel="No, Cancel">
+                              Are you sure you want to hide this organization?
+                            </x-modals.action-modal>
                           </td>
                         @endcannot
 
@@ -139,19 +149,8 @@
           </div>
         @endif
 
-
-        <x-modals.action-modal name="join-organization" type="warning"
-          method="POST" header="Join Organization">
-          Are you sure you want to join this organization?
-        </x-modals.action-modal>
-
-        <x-modals.action-modal name="hide-organization" type="warning"
-          method="POST" header="Hide Organization">
-          Are you sure you want to hide this organization?
-        </x-modals.action-modal>
-
         @if ($organizations instanceof Illuminate\Pagination\Paginator)
-          {!! $organizations->appends(["query" => request("query")])->links() !!}
+          {!! $organizations->appends(['query' => request('query')])->links() !!}
         @endif
       </main>
     </div>

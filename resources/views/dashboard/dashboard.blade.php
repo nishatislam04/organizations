@@ -455,149 +455,158 @@
       {{-- MEMBER START --}}
       @can('is-member')
         {{-- organization overview --}}
-        <div
-          class="col-start-1 col-end-8 row-start-1 px-8 pt-8 rounded-lg shadow-md row-end-8 bg-gradient-to-r from-gray-100 to-gray-50">
-          <div class="space-y-5 text-left">
-            <p class="mb-2 text-4xl font-bold tracking-wide text-left text-gray-700">
-              Organization Name</p>
-            <p class="mt-4 text-6xl font-semibold text-indigo-700">
-              {{ $memberUserData['organization']->name }}</p>
-          </div>
-        </div>
-
-        {{-- Go To susbcription page --}}
-        <div
-          class="flex items-center justify-center col-start-10 col-end-13 p-6 rounded-lg shadow-md row-start-10 row-end-13 bg-gray-50">
-          <a class="px-5 py-2 text-lg font-medium text-gray-700 transition-colors duration-200 bg-gray-200 rounded-md shadow-md hover:bg-gray-300 hover:text-gray-800"
-            href="{{ 'http://nio.com/subscriptions/' . $memberUserData['organization']->id }}"
-            style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
-            Go to Subscription Page
-          </a>
-        </div>
-
-        {{-- top5 susbscription --}}
-        <div
-          class="col-start-1 col-end-7 bg-gray-100 rounded-lg shadow-md row-start-8 row-end-13">
-          <p class="mb-2 text-2xl font-semibold text-gray-700">Top5
-            Subscriptions</p>
-
-          <div class="overflow-auto border border-gray-300 rounded-lg max-h-[12rem]">
-            <table class="min-w-full text-left bg-white rounded-lg shadow-sm ">
-              <thead class="text-gray-700 bg-gray-100">
-                <tr>
-                  <th
-                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
-                    Name</th>
-                  <th
-                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
-                    Type</th>
-                  <th
-                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
-                    Pay Amount</th>
-                  <th
-                    class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
-                    penalty Amount</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                @forelse ($memberUserData['topSubscriptions'] as $topSubscription)
-                  <tr class="transition duration-150 ease-in-out hover:bg-gray-50">
-                    <td
-                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
-                      {{ $topSubscription->name }}</td>
-                    <td
-                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
-                      {{ $topSubscription->type }}
-                    </td>
-                    <td
-                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
-                      {{ $topSubscription->per_amount }}
-                    </td>
-                    <td
-                      class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
-                      {{ $topSubscription->penalty_amount }}</td>
-                  </tr>
-                @empty
-                  <tr>
-                    <td
-                      class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
-                      colspan="4">
-                      No Data Found
-                    </td>
-                  </tr>
-                @endforelse
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        {{-- show penalty charges amount  --}}
-        <div
-          class="col-start-7 col-end-10 p-6 border-l-4 border-red-600 rounded-lg shadow-md row-start-10 row-end-13 bg-red-50">
-          <p class="mb-2 text-3xl font-bold text-red-700">Penalty Amount</p>
+        @if ($memberUserData['user']->status === 'pending')
           <p
-            class="flex items-center pt-2 space-x-1 text-4xl font-semibold text-red-800">
-            <span class="text-4xl">৳</span>
-            <span>{{ auth()->user()->penalty_charges }}</span>
+            class="col-span-12 p-6 mt-10 text-2xl font-medium text-center text-gray-400 bg-gray-100 rounded-lg ">
+            Your joining request is still being processed. Please wait some time.
           </p>
-        </div>
-
-        {{-- show all payment history --}}
-        <div
-          class="col-start-8 col-end-13 row-start-1 px-3 bg-gray-100 rounded-lg shadow-lg row-end-10">
-          <p class="mb-2 text-2xl font-semibold text-gray-700">All Payment
-            History</p>
-
+        @else
           <div
-            class="overflow-auto border border-gray-300 rounded-lg max-h-[26rem] shadow-md">
-            <table class="min-w-full text-left bg-white rounded-lg shadow-sm">
-              <thead class="text-gray-700 bg-gray-200">
-                <tr>
-                  <th
-                    class="px-6 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
-                    Subscription Name
-                  </th>
-                  <th
-                    class="px-6 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
-                    Payment Amount
-                  </th>
-                  <th
-                    class="px-6 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
-                    Payment Date
-                  </th>
-                </tr>
-              </thead>
-
-              <tbody>
-                @forelse ($memberUserData['allPaymentHistories'] as $allPaymentHistory)
-                  <tr class="transition duration-200 ease-in-out hover:bg-gray-100">
-                    <td
-                      class="px-6 py-3 text-sm text-gray-800 border-b border-gray-200">
-                      {{ $allPaymentHistory->subscription->name }}
-                    </td>
-                    <td
-                      class="px-6 py-3 text-sm font-semibold text-green-600 border-b border-gray-200">
-                      ৳{{ number_format($allPaymentHistory->subscription->per_amount, 2) }}
-                    </td>
-                    <td
-                      class="px-6 py-3 text-sm text-gray-800 border-b border-gray-200">
-                      {{ $allPaymentHistory->created_at->format('d-m-Y') }}
-                    </td>
-                  </tr>
-                @empty
-                  <tr>
-                    <td
-                      class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
-                      colspan="4">
-                      No Data Found
-                    </td>
-                  </tr>
-                @endforelse
-              </tbody>
-            </table>
+            class="col-start-1 col-end-8 row-start-1 px-8 pt-8 rounded-lg shadow-md row-end-8 bg-gradient-to-r from-gray-100 to-gray-50">
+            <div class="space-y-5 text-left">
+              <p
+                class="mb-2 text-4xl font-bold tracking-wide text-left text-gray-700">
+                Organization Name</p>
+              <p class="mt-4 text-6xl font-semibold text-indigo-700">
+                {{ $memberUserData['organization']->name }}</p>
+            </div>
           </div>
-        </div>
+
+          {{-- Go To susbcription page --}}
+          <div
+            class="flex items-center justify-center col-start-10 col-end-13 p-6 rounded-lg shadow-md row-start-10 row-end-13 bg-gray-50">
+            <a class="px-5 py-2 text-lg font-medium text-gray-700 transition-colors duration-200 bg-gray-200 rounded-md shadow-md hover:bg-gray-300 hover:text-gray-800"
+              href="{{ 'http://nio.com/subscriptions/' . $memberUserData['organization']->id }}"
+              style="text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
+              Go to Subscription Page
+            </a>
+          </div>
+
+          {{-- top5 susbscription --}}
+          <div
+            class="col-start-1 col-end-7 bg-gray-100 rounded-lg shadow-md row-start-8 row-end-13">
+            <p class="mb-2 text-2xl font-semibold text-gray-700">Top5
+              Subscriptions</p>
+
+            <div
+              class="overflow-auto border border-gray-300 rounded-lg max-h-[12rem]">
+              <table class="min-w-full text-left bg-white rounded-lg shadow-sm ">
+                <thead class="text-gray-700 bg-gray-100">
+                  <tr>
+                    <th
+                      class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                      Name</th>
+                    <th
+                      class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                      Type</th>
+                    <th
+                      class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                      Pay Amount</th>
+                    <th
+                      class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                      penalty Amount</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  @forelse ($memberUserData['topSubscriptions'] as $topSubscription)
+                    <tr class="transition duration-150 ease-in-out hover:bg-gray-50">
+                      <td
+                        class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                        {{ $topSubscription->name }}</td>
+                      <td
+                        class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                        {{ $topSubscription->type }}
+                      </td>
+                      <td
+                        class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                        {{ $topSubscription->per_amount }}
+                      </td>
+                      <td
+                        class="px-4 py-2 text-sm text-gray-800 border-b border-gray-200">
+                        {{ $topSubscription->penalty_amount }}</td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td
+                        class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
+                        colspan="4">
+                        No Data Found
+                      </td>
+                    </tr>
+                  @endforelse
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {{-- show penalty charges amount  --}}
+          <div
+            class="col-start-7 col-end-10 p-6 border-l-4 border-red-600 rounded-lg shadow-md row-start-10 row-end-13 bg-red-50">
+            <p class="mb-2 text-3xl font-bold text-red-700">Penalty Amount</p>
+            <p
+              class="flex items-center pt-2 space-x-1 text-4xl font-semibold text-red-800">
+              <span class="text-4xl">৳</span>
+              <span>{{ auth()->user()->penalty_charges }}</span>
+            </p>
+          </div>
+
+          {{-- show all payment history --}}
+          <div
+            class="col-start-8 col-end-13 row-start-1 px-3 bg-gray-100 rounded-lg shadow-lg row-end-10">
+            <p class="mb-2 text-2xl font-semibold text-gray-700">All Payment
+              History</p>
+
+            <div
+              class="overflow-auto border border-gray-300 rounded-lg max-h-[26rem] shadow-md">
+              <table class="min-w-full text-left bg-white rounded-lg shadow-sm">
+                <thead class="text-gray-700 bg-gray-200">
+                  <tr>
+                    <th
+                      class="px-6 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                      Subscription Name
+                    </th>
+                    <th
+                      class="px-6 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                      Payment Amount
+                    </th>
+                    <th
+                      class="px-6 py-3 text-xs font-semibold tracking-wide text-gray-600 uppercase border-b border-gray-300">
+                      Payment Date
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  @forelse ($memberUserData['allPaymentHistories'] as $allPaymentHistory)
+                    <tr class="transition duration-200 ease-in-out hover:bg-gray-100">
+                      <td
+                        class="px-6 py-3 text-sm text-gray-800 border-b border-gray-200">
+                        {{ $allPaymentHistory->subscription->name }}
+                      </td>
+                      <td
+                        class="px-6 py-3 text-sm font-semibold text-green-600 border-b border-gray-200">
+                        ৳{{ number_format($allPaymentHistory->subscription->per_amount, 2) }}
+                      </td>
+                      <td
+                        class="px-6 py-3 text-sm text-gray-800 border-b border-gray-200">
+                        {{ $allPaymentHistory->created_at->format('d-m-Y') }}
+                      </td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td
+                        class="p-3 text-sm italic font-semibold text-center text-gray-400 border-b border-gray-200 bg-gray-50"
+                        colspan="4">
+                        No Data Found
+                      </td>
+                    </tr>
+                  @endforelse
+                </tbody>
+              </table>
+            </div>
+          </div>
+        @endif
 
       @endcan
       {{-- MEMBER END --}}

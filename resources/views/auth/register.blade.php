@@ -14,7 +14,7 @@
           Create a Free Account
         </h2>
 
-        <form class="mt-8 space-y-6" action="{{ route("auth.register") }}"
+        <form class="mt-8 space-y-6" action="{{ route('auth.register') }}"
           method="POST" enctype="multipart/form-data">
           @csrf
 
@@ -24,8 +24,7 @@
               for="username">Your Username</x-forms.label>
             <x-forms.input
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              id="username" name="username" value="username"
-              placeholder="Enter Username" required />
+              id="username" name="username" placeholder="Enter Username" required />
             <x-forms.input-error key="username" />
           </div>
 
@@ -35,20 +34,18 @@
               for="email">Your Email</x-forms.label>
             <x-forms.input
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              id="email" name="email" value="email"
-              placeholder="Enter Email" required />
+              id="email" name="email" placeholder="Enter Email" required />
             <x-forms.input-error key="email" />
           </div>
 
-          @if (!session()->has("joining_org"))
+          @if (!session()->has('joining_org'))
             <div>
               <x-forms.label
                 class="block mb-2 text-sm font-medium text-gray-900 cursor-pointer dark:text-white"
                 for="organization-listings">Select A Organization to
                 join</x-forms.label>
 
-              <x-forms.form-select id="organization-listings"
-                name="organization_id">
+              <x-forms.form-select id="organization-listings" name="organization_id">
                 <option selected>Choose a Organization</option>
 
                 @foreach ($organizations as $organization)
@@ -87,8 +84,8 @@
               for="password-confirmation">Confirm password</x-forms.label>
             <input
               class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              id="password-confirmation" name="password_confirmation"
-              type="text" placeholder="Enter Password again" required>
+              id="password-confirmation" name="password_confirmation" type="text"
+              placeholder="Enter Password again" required>
           </div>
 
           <div class="flex items-center">
@@ -103,11 +100,10 @@
           <button
             class="w-full px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             type="submit">Create account</button>
-          <div
-            class="text-sm font-medium text-gray-500 dark:text-gray-400">
+          <div class="text-sm font-medium text-gray-500 dark:text-gray-400">
             Already have an account? <a
               class="text-primary-700 hover:underline dark:text-primary-500"
-              href="{{ route("auth.login") }}">Login here</a>
+              href="{{ route('auth.login') }}">Login here</a>
           </div>
         </form>
 

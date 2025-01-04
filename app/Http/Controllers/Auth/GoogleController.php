@@ -7,6 +7,7 @@ use App\Models\Auth\User as AuthUser;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class GoogleController extends Controller {
     /**
@@ -23,6 +24,7 @@ class GoogleController extends Controller {
      * Handle the callback from Google after the user logs in.
      */
     public function handleGoogleCallback() {
+
         try {
             // Get the user information from Google
             $googleUser = Socialite::driver('google')->stateless()->user();

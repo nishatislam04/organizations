@@ -142,10 +142,11 @@ class UserController extends Controller {
     }
 
     function reject(User $user) {
-        $user->status = null;
-        $user->organization_id = null;
-        $user->save();
-        Mail::to($user->email)->queue(new UserRejectedMail());
+        // $user->status = null;
+        // $user->organization_id = null;
+        // $user->save();
+        // Mail::to($user->email)->queue(new UserRejectedMail());
+        $user->delete();
 
         return redirect()->route("users.index")->with("success", "user reject success");
     }

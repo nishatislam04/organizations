@@ -37,10 +37,12 @@ class DashboardController extends Controller {
                 "adminUserData" => $adminUserData
             ]);
 
-        if ($user->role === "member")
+        if ($user->role === "member") {
+            // dd($memberUserData);
             return view("dashboard.dashboard", [
                 "memberUserData" => $memberUserData
             ]);
+        }
 
 
         if ($user->status === "passed" && !is_null($user->organization_id)) {
@@ -146,6 +148,7 @@ class DashboardController extends Controller {
         $allPaymentHistory = InstallmentCollections::where("user_id", Auth::id())->with("subscription")->orderBy("created_at", "desc")->get();
 
         return [
+            "user" => Auth::user(),
             "organization" => $organization,
             "topSubscriptions" => $topSubscriptions,
             "allPaymentHistories" => $allPaymentHistory
