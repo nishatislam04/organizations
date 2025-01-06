@@ -25,9 +25,9 @@
 
               <x-search.search-result />
 
-              @can("is-member")
+              @can('is-member')
                 <p class="mt-1 text-sm text-gray-500 ">Today is :
-                  {{ date("d-m-Y") }}</p>
+                  {{ date('d-m-Y') }}</p>
               @endcan
             </div>
           </div>
@@ -37,34 +37,29 @@
           <div class="flex flex-col justify-center gap-4 ml-4">
             <h2 class="mb-3 text-4xl font-semibold text-gray-200">
               Installment Paying Details</h2>
-            <p
-              class="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Organization Name:
               <span class="font-normal text-gray-600 dark:text-gray-400">
                 {{ $details->organizationName }}
               </span>
             </p>
 
-            <p
-              class="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Paying Amount:
               <span class="font-normal text-gray-600 dark:text-gray-400">
                 {{ number_format($details->installmentPerAmount) }}
-                <x-icon.icon class="inline w-5 h-5" fill="gray"
-                  icon="taka" />
+                <x-icon.icon class="inline w-5 h-5" fill="gray" icon="taka" />
               </span>
             </p>
 
-            <p
-              class="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Paying Date:
               <span class="font-normal text-gray-600 dark:text-gray-400">
-                {{ date("d-M-Y") }}
+                {{ date('d-M-Y') }}
               </span>
             </p>
 
-            <p
-              class="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            <p class="text-lg font-semibold text-gray-700 dark:text-gray-300">
               Paying By:
               <span class="font-normal text-gray-600 dark:text-gray-400">
                 null
@@ -84,22 +79,21 @@
                   data-sub-id="{{ $details->subscriptionId }}"
                   data-org-id="{{ $details->organizationId }}"
                   data-ins-id="{{ $installmentId }}" type="button">
-                  <x-icon.icon class="w-4 h-4 mr-2" fill=""
-                    icon="success" />
+                  <x-icon.icon class="w-4 h-4 mr-2" fill="" icon="success" />
                   <span class="text-xl">Pay</span>
                 </x-buttons.button>
+                {{-- pay modal --}}
+                <x-modals.action-modal name="installment-pay" type="warning"
+                  {{-- action="{{ route('installments.pay', [$details->organizationId, $details->subscriptionId, $installmentId]) }}" --}} action="" method="POST"
+                  header="Installment Pay Confirm" confirm="Yes, I am sure"
+                  cancel="No, Cancel">
+                  Are you sure you want to confirm the payment?
+                </x-modals.action-modal>
               </div>
             </div>
           </div>
 
-
         </div>
-
-        {{-- pay modal --}}
-        <x-modals.action-modal name="installment-pay" type="warning"
-          method="POST" header="Installment Pay Confirm">
-          Are you sure you want to confirm the payment?
-        </x-modals.action-modal>
 
       </main>
     </div>

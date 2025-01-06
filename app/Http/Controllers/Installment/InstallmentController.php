@@ -51,7 +51,7 @@ class InstallmentController extends Controller {
         $lastPenaltyDate = Auth::user()->last_penalty_date ? Carbon::createFromFormat("d-m-Y", Auth::user()->last_penalty_date) : null;
 
         foreach ($installments as $installment) {
-            $dueDate = Carbon::createFromFormat("d-m-Y", $installment->due_date);
+            $dueDate = Carbon::createFromFormat("Y-m-d", $installment->due_date);
             // check current installment id exist on installment colections
             $isInstallmentExist = InstallmentCollections::where("installment_id", $installment->id)->where("user_id", Auth::id())
                 ->first();
@@ -72,17 +72,6 @@ class InstallmentController extends Controller {
                         $user->last_penalty_date = $dueDate;
                         $user->save();
                     }
-
-
-
-
-                    // if () {
-                    //     $user = Auth::user();
-
-                    //     $user->increment('penalty_charges', $penaltyCharge);
-                    //     $user->last_penalty_date = $dueDate;
-                    //     $user->save();
-                    // }
                 }
             }
         }
